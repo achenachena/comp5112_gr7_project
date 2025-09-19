@@ -1,0 +1,1761 @@
+{
+  "queries": [
+    {
+      "query": "iPhone case",
+      "products_count": 8,
+      "algorithms": {
+        "keyword_matching": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.125,
+            "f1@1": 0.2222222222222222,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.375,
+            "f1@3": 0.5454545454545454,
+            "ndcg@3": 1.0,
+            "precision@5": 1.0,
+            "recall@5": 0.625,
+            "f1@5": 0.7692307692307693,
+            "ndcg@5": 1.0,
+            "precision@10": 0.8,
+            "recall@10": 1.0,
+            "f1@10": 0.888888888888889,
+            "ndcg@10": 1.0
+          },
+          "search_time": 0.00011205673217773438,
+          "results_count": 8,
+          "results": [
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 1.9837056812223248,
+              "matched_terms": [
+                "iphone",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 1.7793349923176986,
+              "matched_terms": [
+                "iphone",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 1.0820212806667227,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 1.0379287687835808,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 7,
+              "title": "iPad Air 5th Gen Case - Folio",
+              "description": "Premium folio case for iPad Air 5th generation with auto sleep/wake",
+              "category": "Tablet Cases",
+              "price": {
+                "value": "49.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/ipad-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tablet_pro"
+              },
+              "location": "Denver",
+              "relevance_score": 0.9339639977115487,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            }
+          ],
+          "stats": {
+            "query": "iPhone case",
+            "query_tokens": [
+              "iphone",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "keyword_matching",
+            "parameters": {
+              "case_sensitive": false,
+              "exact_match_weight": 2.0,
+              "stop_words_count": 63
+            }
+          }
+        },
+        "tfidf": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.125,
+            "f1@1": 0.2222222222222222,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.375,
+            "f1@3": 0.5454545454545454,
+            "ndcg@3": 1.0,
+            "precision@5": 1.0,
+            "recall@5": 0.625,
+            "f1@5": 0.7692307692307693,
+            "ndcg@5": 1.0,
+            "precision@10": 0.8,
+            "recall@10": 1.0,
+            "f1@10": 0.888888888888889,
+            "ndcg@10": 1.0
+          },
+          "search_time": 0.00015997886657714844,
+          "results_count": 8,
+          "results": [
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.19445428051927283,
+              "matched_terms": [
+                "iphone",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.18612420711459,
+              "matched_terms": [
+                "iphone",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 3,
+              "title": "iPhone 15 Screen Protector - Tempered Glass",
+              "description": "9H hardness tempered glass screen protector for iPhone 15 with easy installation",
+              "category": "Screen Protectors",
+              "price": {
+                "value": "12.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/screen-protector",
+              "condition": "NEW",
+              "seller": {
+                "username": "accessories_pro"
+              },
+              "location": "Chicago",
+              "relevance_score": 0.11775159999070184,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 4,
+              "title": "Wireless Charger Pad - Fast Charging",
+              "description": "Universal wireless charging pad compatible with iPhone and Android phones",
+              "category": "Chargers",
+              "price": {
+                "value": "19.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/wireless-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_gadgets"
+              },
+              "location": "Miami",
+              "relevance_score": 0.08698811650668062,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 0.02914923908702401,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            }
+          ],
+          "stats": {
+            "query": "iPhone case",
+            "query_tokens": [
+              "iphone",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "tfidf",
+            "is_fitted": true,
+            "vocabulary_size": 67,
+            "document_count": 8,
+            "parameters": {
+              "min_df": 1,
+              "max_df": 0.95,
+              "case_sensitive": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "query": "Samsung phone case",
+      "products_count": 8,
+      "algorithms": {
+        "keyword_matching": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.25,
+            "f1@1": 0.4,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.75,
+            "f1@3": 0.8571428571428571,
+            "ndcg@3": 1.0,
+            "precision@5": 0.8,
+            "recall@5": 1.0,
+            "f1@5": 0.888888888888889,
+            "ndcg@5": 1.0572763773176963,
+            "precision@10": 0.4,
+            "recall@10": 1.0,
+            "f1@10": 0.5714285714285715,
+            "ndcg@10": 1.1100154472443744
+          },
+          "search_time": 5.1975250244140625e-05,
+          "results_count": 8,
+          "results": [
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 1.5629196276297106,
+              "matched_terms": [
+                "samsung",
+                "phone",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 1.4992304437985058,
+              "matched_terms": [
+                "samsung",
+                "phone",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 1.0820212806667227,
+              "matched_terms": [
+                "phone",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.9705463594460175,
+              "matched_terms": [
+                "phone",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 7,
+              "title": "iPad Air 5th Gen Case - Folio",
+              "description": "Premium folio case for iPad Air 5th generation with auto sleep/wake",
+              "category": "Tablet Cases",
+              "price": {
+                "value": "49.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/ipad-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tablet_pro"
+              },
+              "location": "Denver",
+              "relevance_score": 0.6226426651410325,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            }
+          ],
+          "stats": {
+            "query": "Samsung phone case",
+            "query_tokens": [
+              "samsung",
+              "phone",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "keyword_matching",
+            "parameters": {
+              "case_sensitive": false,
+              "exact_match_weight": 2.0,
+              "stop_words_count": 63
+            }
+          }
+        },
+        "tfidf": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.25,
+            "f1@1": 0.4,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.75,
+            "f1@3": 0.8571428571428571,
+            "ndcg@3": 1.0,
+            "precision@5": 0.8,
+            "recall@5": 1.0,
+            "f1@5": 0.888888888888889,
+            "ndcg@5": 1.0572763773176963,
+            "precision@10": 0.4,
+            "recall@10": 1.0,
+            "f1@10": 0.5714285714285715,
+            "ndcg@10": 1.1100154472443744
+          },
+          "search_time": 6.818771362304688e-05,
+          "results_count": 6,
+          "results": [
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 0.3837008160312556,
+              "matched_terms": [
+                "samsung",
+                "phone",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 0.33625465408088934,
+              "matched_terms": [
+                "samsung",
+                "phone",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.060244589543050626,
+              "matched_terms": [
+                "phone",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.05766381913373655,
+              "matched_terms": [
+                "phone",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 7,
+              "title": "iPad Air 5th Gen Case - Folio",
+              "description": "Premium folio case for iPad Air 5th generation with auto sleep/wake",
+              "category": "Tablet Cases",
+              "price": {
+                "value": "49.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/ipad-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tablet_pro"
+              },
+              "location": "Denver",
+              "relevance_score": 0.01007969904932555,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            }
+          ],
+          "stats": {
+            "query": "Samsung phone case",
+            "query_tokens": [
+              "samsung",
+              "phone",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "tfidf",
+            "is_fitted": true,
+            "vocabulary_size": 67,
+            "document_count": 8,
+            "parameters": {
+              "min_df": 1,
+              "max_df": 0.95,
+              "case_sensitive": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "query": "wireless charger",
+      "products_count": 8,
+      "algorithms": {
+        "keyword_matching": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.5,
+            "f1@1": 0.6666666666666666,
+            "ndcg@1": 1.0,
+            "precision@3": 0.6666666666666666,
+            "recall@3": 1.0,
+            "f1@3": 0.8,
+            "ndcg@3": 1.0,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "f1@5": 0.5714285714285715,
+            "ndcg@5": 1.0,
+            "precision@10": 0.2,
+            "recall@10": 1.0,
+            "f1@10": 0.33333333333333337,
+            "ndcg@10": 1.0
+          },
+          "search_time": 3.695487976074219e-05,
+          "results_count": 2,
+          "results": [
+            {
+              "id": 4,
+              "title": "Wireless Charger Pad - Fast Charging",
+              "description": "Universal wireless charging pad compatible with iPhone and Android phones",
+              "category": "Chargers",
+              "price": {
+                "value": "19.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/wireless-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_gadgets"
+              },
+              "location": "Miami",
+              "relevance_score": 1.4770774922754202,
+              "matched_terms": [
+                "wireless",
+                "charger"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.4043943164358406,
+              "matched_terms": [
+                "wireless"
+              ],
+              "algorithm": "keyword_matching"
+            }
+          ],
+          "stats": {
+            "query": "wireless charger",
+            "query_tokens": [
+              "wireless",
+              "charger"
+            ],
+            "total_products": 8,
+            "algorithm": "keyword_matching",
+            "parameters": {
+              "case_sensitive": false,
+              "exact_match_weight": 2.0,
+              "stop_words_count": 63
+            }
+          }
+        },
+        "tfidf": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.5,
+            "f1@1": 0.6666666666666666,
+            "ndcg@1": 1.0,
+            "precision@3": 0.6666666666666666,
+            "recall@3": 1.0,
+            "f1@3": 0.8,
+            "ndcg@3": 1.0,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "f1@5": 0.5714285714285715,
+            "ndcg@5": 1.0,
+            "precision@10": 0.2,
+            "recall@10": 1.0,
+            "f1@10": 0.33333333333333337,
+            "ndcg@10": 1.0
+          },
+          "search_time": 5.698204040527344e-05,
+          "results_count": 2,
+          "results": [
+            {
+              "id": 4,
+              "title": "Wireless Charger Pad - Fast Charging",
+              "description": "Universal wireless charging pad compatible with iPhone and Android phones",
+              "category": "Chargers",
+              "price": {
+                "value": "19.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/wireless-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_gadgets"
+              },
+              "location": "Miami",
+              "relevance_score": 0.41200499926531725,
+              "matched_terms": [
+                "wireless",
+                "charger"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.11263807213162107,
+              "matched_terms": [
+                "wireless"
+              ],
+              "algorithm": "tfidf"
+            }
+          ],
+          "stats": {
+            "query": "wireless charger",
+            "query_tokens": [
+              "wireless",
+              "charger"
+            ],
+            "total_products": 8,
+            "algorithm": "tfidf",
+            "is_fitted": true,
+            "vocabulary_size": 67,
+            "document_count": 8,
+            "parameters": {
+              "min_df": 1,
+              "max_df": 0.95,
+              "case_sensitive": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "query": "screen protector iPhone",
+      "products_count": 8,
+      "algorithms": {
+        "keyword_matching": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 1.0,
+            "f1@1": 1.0,
+            "ndcg@1": 1.0,
+            "precision@3": 0.3333333333333333,
+            "recall@3": 1.0,
+            "f1@3": 0.5,
+            "ndcg@3": 1.3769765845238193,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "f1@5": 0.33333333333333337,
+            "ndcg@5": 1.5205354372149504,
+            "precision@10": 0.1,
+            "recall@10": 1.0,
+            "f1@10": 0.18181818181818182,
+            "ndcg@10": 1.5205354372149504
+          },
+          "search_time": 4.482269287109375e-05,
+          "results_count": 7,
+          "results": [
+            {
+              "id": 3,
+              "title": "iPhone 15 Screen Protector - Tempered Glass",
+              "description": "9H hardness tempered glass screen protector for iPhone 15 with easy installation",
+              "category": "Screen Protectors",
+              "price": {
+                "value": "12.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/screen-protector",
+              "condition": "NEW",
+              "seller": {
+                "username": "accessories_pro"
+              },
+              "location": "Chicago",
+              "relevance_score": 2.0377396313706515,
+              "matched_terms": [
+                "screen",
+                "protector",
+                "iphone"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.7814598138148553,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.7009501484887904,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 4,
+              "title": "Wireless Charger Pad - Fast Charging",
+              "description": "Universal wireless charging pad compatible with iPhone and Android phones",
+              "category": "Chargers",
+              "price": {
+                "value": "19.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/wireless-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_gadgets"
+              },
+              "location": "Miami",
+              "relevance_score": 0.30772447755737925,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 8,
+              "title": "MacBook Pro 16-inch Case - Hard Shell",
+              "description": "Hard shell protective case for MacBook Pro 16-inch with precise cutouts",
+              "category": "Laptop Cases",
+              "price": {
+                "value": "79.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/macbook-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mac_accessories"
+              },
+              "location": "San Francisco",
+              "relevance_score": 0.11126940023177802,
+              "matched_terms": [],
+              "algorithm": "keyword_matching"
+            }
+          ],
+          "stats": {
+            "query": "screen protector iPhone",
+            "query_tokens": [
+              "screen",
+              "protector",
+              "iphone"
+            ],
+            "total_products": 8,
+            "algorithm": "keyword_matching",
+            "parameters": {
+              "case_sensitive": false,
+              "exact_match_weight": 2.0,
+              "stop_words_count": 63
+            }
+          }
+        },
+        "tfidf": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 1.0,
+            "f1@1": 1.0,
+            "ndcg@1": 1.0,
+            "precision@3": 0.3333333333333333,
+            "recall@3": 1.0,
+            "f1@3": 0.5,
+            "ndcg@3": 1.3769765845238193,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "f1@5": 0.33333333333333337,
+            "ndcg@5": 1.5205354372149504,
+            "precision@10": 0.1,
+            "recall@10": 1.0,
+            "f1@10": 0.18181818181818182,
+            "ndcg@10": 1.5205354372149504
+          },
+          "search_time": 6.29425048828125e-05,
+          "results_count": 4,
+          "results": [
+            {
+              "id": 3,
+              "title": "iPhone 15 Screen Protector - Tempered Glass",
+              "description": "9H hardness tempered glass screen protector for iPhone 15 with easy installation",
+              "category": "Screen Protectors",
+              "price": {
+                "value": "12.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/screen-protector",
+              "condition": "NEW",
+              "seller": {
+                "username": "accessories_pro"
+              },
+              "location": "Chicago",
+              "relevance_score": 0.618756542189041,
+              "matched_terms": [
+                "screen",
+                "protector",
+                "iphone"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.04120305820665796,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.03943799292528525,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 4,
+              "title": "Wireless Charger Pad - Fast Charging",
+              "description": "Universal wireless charging pad compatible with iPhone and Android phones",
+              "category": "Chargers",
+              "price": {
+                "value": "19.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/wireless-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_gadgets"
+              },
+              "location": "Miami",
+              "relevance_score": 0.021606995547442595,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "tfidf"
+            }
+          ],
+          "stats": {
+            "query": "screen protector iPhone",
+            "query_tokens": [
+              "screen",
+              "protector",
+              "iphone"
+            ],
+            "total_products": 8,
+            "algorithm": "tfidf",
+            "is_fitted": true,
+            "vocabulary_size": 67,
+            "document_count": 8,
+            "parameters": {
+              "min_df": 1,
+              "max_df": 0.95,
+              "case_sensitive": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "query": "iPad case",
+      "products_count": 8,
+      "algorithms": {
+        "keyword_matching": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.16666666666666666,
+            "f1@1": 0.2857142857142857,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.5,
+            "f1@3": 0.6666666666666666,
+            "ndcg@3": 1.0,
+            "precision@5": 1.0,
+            "recall@5": 0.8333333333333334,
+            "f1@5": 0.9090909090909091,
+            "ndcg@5": 1.0,
+            "precision@10": 0.6,
+            "recall@10": 1.0,
+            "f1@10": 0.7499999999999999,
+            "ndcg@10": 1.0
+          },
+          "search_time": 3.62396240234375e-05,
+          "results_count": 7,
+          "results": [
+            {
+              "id": 7,
+              "title": "iPad Air 5th Gen Case - Folio",
+              "description": "Premium folio case for iPad Air 5th generation with auto sleep/wake",
+              "category": "Tablet Cases",
+              "price": {
+                "value": "49.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/ipad-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tablet_pro"
+              },
+              "location": "Denver",
+              "relevance_score": 1.7830221774493202,
+              "matched_terms": [
+                "ipad",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.9918528406111624,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 0.9918528406111624,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 0.9514347047182824,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 8,
+              "title": "MacBook Pro 16-inch Case - Hard Shell",
+              "description": "Hard shell protective case for MacBook Pro 16-inch with precise cutouts",
+              "category": "Laptop Cases",
+              "price": {
+                "value": "79.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/macbook-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mac_accessories"
+              },
+              "location": "San Francisco",
+              "relevance_score": 0.9179725519121686,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            }
+          ],
+          "stats": {
+            "query": "iPad case",
+            "query_tokens": [
+              "ipad",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "keyword_matching",
+            "parameters": {
+              "case_sensitive": false,
+              "exact_match_weight": 2.0,
+              "stop_words_count": 63
+            }
+          }
+        },
+        "tfidf": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.16666666666666666,
+            "f1@1": 0.2857142857142857,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.5,
+            "f1@3": 0.6666666666666666,
+            "ndcg@3": 1.0,
+            "precision@5": 1.0,
+            "recall@5": 0.8333333333333334,
+            "f1@5": 0.9090909090909091,
+            "ndcg@5": 1.0,
+            "precision@10": 0.6,
+            "recall@10": 1.0,
+            "f1@10": 0.7499999999999999,
+            "ndcg@10": 1.0
+          },
+          "search_time": 5.984306335449219e-05,
+          "results_count": 6,
+          "results": [
+            {
+              "id": 7,
+              "title": "iPad Air 5th Gen Case - Folio",
+              "description": "Premium folio case for iPad Air 5th generation with auto sleep/wake",
+              "category": "Tablet Cases",
+              "price": {
+                "value": "49.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/ipad-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tablet_pro"
+              },
+              "location": "Denver",
+              "relevance_score": 0.40304263385696804,
+              "matched_terms": [
+                "ipad",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 0.010420783930467206,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.010215105136408055,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.009777508312128336,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 0.009132211737348789,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            }
+          ],
+          "stats": {
+            "query": "iPad case",
+            "query_tokens": [
+              "ipad",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "tfidf",
+            "is_fitted": true,
+            "vocabulary_size": 67,
+            "document_count": 8,
+            "parameters": {
+              "min_df": 1,
+              "max_df": 0.95,
+              "case_sensitive": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "query": "MacBook case",
+      "products_count": 8,
+      "algorithms": {
+        "keyword_matching": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.16666666666666666,
+            "f1@1": 0.2857142857142857,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.5,
+            "f1@3": 0.6666666666666666,
+            "ndcg@3": 1.0,
+            "precision@5": 1.0,
+            "recall@5": 0.8333333333333334,
+            "f1@5": 0.9090909090909091,
+            "ndcg@5": 1.0,
+            "precision@10": 0.6,
+            "recall@10": 1.0,
+            "f1@10": 0.7499999999999999,
+            "ndcg@10": 1.0
+          },
+          "search_time": 3.504753112792969e-05,
+          "results_count": 6,
+          "results": [
+            {
+              "id": 8,
+              "title": "MacBook Pro 16-inch Case - Hard Shell",
+              "description": "Hard shell protective case for MacBook Pro 16-inch with precise cutouts",
+              "category": "Laptop Cases",
+              "price": {
+                "value": "79.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/macbook-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mac_accessories"
+              },
+              "location": "San Francisco",
+              "relevance_score": 1.752493053650504,
+              "matched_terms": [
+                "macbook",
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.9918528406111624,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 0.9918528406111624,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 0.9514347047182824,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 7,
+              "title": "iPad Air 5th Gen Case - Folio",
+              "description": "Premium folio case for iPad Air 5th generation with auto sleep/wake",
+              "category": "Tablet Cases",
+              "price": {
+                "value": "49.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/ipad-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tablet_pro"
+              },
+              "location": "Denver",
+              "relevance_score": 0.9339639977115487,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "keyword_matching"
+            }
+          ],
+          "stats": {
+            "query": "MacBook case",
+            "query_tokens": [
+              "macbook",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "keyword_matching",
+            "parameters": {
+              "case_sensitive": false,
+              "exact_match_weight": 2.0,
+              "stop_words_count": 63
+            }
+          }
+        },
+        "tfidf": {
+          "metrics": {
+            "map": 1.0,
+            "mrr": 1.0,
+            "precision@1": 1.0,
+            "recall@1": 0.16666666666666666,
+            "f1@1": 0.2857142857142857,
+            "ndcg@1": 1.0,
+            "precision@3": 1.0,
+            "recall@3": 0.5,
+            "f1@3": 0.6666666666666666,
+            "ndcg@3": 1.0,
+            "precision@5": 1.0,
+            "recall@5": 0.8333333333333334,
+            "f1@5": 0.9090909090909091,
+            "ndcg@5": 1.0,
+            "precision@10": 0.6,
+            "recall@10": 1.0,
+            "f1@10": 0.7499999999999999,
+            "ndcg@10": 1.0
+          },
+          "search_time": 5.412101745605469e-05,
+          "results_count": 6,
+          "results": [
+            {
+              "id": 8,
+              "title": "MacBook Pro 16-inch Case - Hard Shell",
+              "description": "Hard shell protective case for MacBook Pro 16-inch with precise cutouts",
+              "category": "Laptop Cases",
+              "price": {
+                "value": "79.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/macbook-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mac_accessories"
+              },
+              "location": "San Francisco",
+              "relevance_score": 0.39750559366328175,
+              "matched_terms": [
+                "macbook",
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 6,
+              "title": "Samsung Galaxy S23 Case - Clear",
+              "description": "Transparent case for Samsung Galaxy S23 with anti-yellowing technology",
+              "category": "Phone Cases",
+              "price": {
+                "value": "18.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/s23-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "samsung_store"
+              },
+              "location": "Austin",
+              "relevance_score": 0.010420783930467206,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 5,
+              "title": "iPhone 14 Pro Case - Silicone",
+              "description": "Soft silicone case for iPhone 14 Pro with MagSafe compatibility",
+              "category": "Phone Cases",
+              "price": {
+                "value": "39.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone14-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "apple_accessories"
+              },
+              "location": "Seattle",
+              "relevance_score": 0.010215105136408055,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 1,
+              "title": "iPhone 15 Pro Max Case - Clear Transparent",
+              "description": "Premium clear case for iPhone 15 Pro Max with wireless charging support and drop protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "29.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/iphone-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_store"
+              },
+              "location": "New York",
+              "relevance_score": 0.009777508312128336,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            },
+            {
+              "id": 2,
+              "title": "Samsung Galaxy S24 Ultra Case - Black",
+              "description": "Protective case for Samsung Galaxy S24 Ultra with kickstand and camera protection",
+              "category": "Phone Cases",
+              "price": {
+                "value": "24.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/samsung-case",
+              "condition": "NEW",
+              "seller": {
+                "username": "mobile_shop"
+              },
+              "location": "Los Angeles",
+              "relevance_score": 0.009132211737348789,
+              "matched_terms": [
+                "case"
+              ],
+              "algorithm": "tfidf"
+            }
+          ],
+          "stats": {
+            "query": "MacBook case",
+            "query_tokens": [
+              "macbook",
+              "case"
+            ],
+            "total_products": 8,
+            "algorithm": "tfidf",
+            "is_fitted": true,
+            "vocabulary_size": 67,
+            "document_count": 8,
+            "parameters": {
+              "min_df": 1,
+              "max_df": 0.95,
+              "case_sensitive": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "aggregated": {
+    "algorithms": {
+      "keyword_matching": {
+        "metrics": {
+          "precision@1": 1.0,
+          "recall@1": 0.3680555555555555,
+          "f1@1": 0.47671957671957665,
+          "ndcg@1": 1.0,
+          "precision@3": 0.8333333333333334,
+          "recall@3": 0.6875,
+          "f1@3": 0.6726551226551226,
+          "ndcg@3": 1.0628294307539699,
+          "precision@5": 0.7333333333333334,
+          "recall@5": 0.8819444444444443,
+          "f1@5": 0.7301772301772301,
+          "ndcg@5": 1.0963019690887743,
+          "precision@10": 0.45,
+          "recall@10": 1.0,
+          "f1@10": 0.5792448292448292,
+          "ndcg@10": 1.1050918140765542,
+          "map": 1.0,
+          "mrr": 1.0
+        },
+        "avg_search_time": 5.284945170084635e-05,
+        "total_results": 38
+      },
+      "tfidf": {
+        "metrics": {
+          "precision@1": 1.0,
+          "recall@1": 0.3680555555555555,
+          "f1@1": 0.47671957671957665,
+          "ndcg@1": 1.0,
+          "precision@3": 0.8333333333333334,
+          "recall@3": 0.6875,
+          "f1@3": 0.6726551226551226,
+          "ndcg@3": 1.0628294307539699,
+          "precision@5": 0.7333333333333334,
+          "recall@5": 0.8819444444444443,
+          "f1@5": 0.7301772301772301,
+          "ndcg@5": 1.0963019690887743,
+          "precision@10": 0.45,
+          "recall@10": 1.0,
+          "f1@10": 0.5792448292448292,
+          "ndcg@10": 1.1050918140765542,
+          "map": 1.0,
+          "mrr": 1.0
+        },
+        "avg_search_time": 7.700920104980469e-05,
+        "total_results": 32
+      }
+    },
+    "total_queries": 6
+  },
+  "summary": {
+    "best_algorithms": {
+      "map": {
+        "algorithm": "keyword_matching",
+        "score": 1.0
+      },
+      "mrr": {
+        "algorithm": "keyword_matching",
+        "score": 1.0
+      },
+      "f1@5": {
+        "algorithm": "keyword_matching",
+        "score": 0.7301772301772301
+      },
+      "ndcg@10": {
+        "algorithm": "keyword_matching",
+        "score": 1.1050918140765542
+      }
+    },
+    "performance_ranking": [
+      "keyword_matching",
+      "tfidf"
+    ],
+    "key_insights": [
+      "Fastest algorithm: keyword_matching (0.0001s average)",
+      "Best MAP score: keyword_matching (1.0000)",
+      "Performance gap: 0.0000 between best and second-best algorithms"
+    ]
+  }
+}
