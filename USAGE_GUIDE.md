@@ -294,7 +294,7 @@ from evaluation.metrics import SearchMetrics
 
 # Calculate custom metrics
 metrics = SearchMetrics.calculate_comprehensive_metrics(
-    relevant_items, retrieved_items, 
+    relevant_items, retrieved_items,
     k_values=[1, 5, 10, 20],
     relevance_scores=custom_scores
 )

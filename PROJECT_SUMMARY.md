@@ -196,12 +196,12 @@ comp5112_gr7_project/
 
 ## 🏆 Project Achievements
 
-✅ **Complete Implementation**: Both search algorithms fully implemented and tested  
-✅ **Comprehensive Evaluation**: Multiple metrics and comparison framework  
-✅ **User Interfaces**: Both CLI and GUI prototypes for easy testing  
-✅ **Data Integration**: eBay API integration for real-world data collection  
-✅ **Documentation**: Extensive documentation for research methodology and usage  
-✅ **Reproducibility**: All code, data, and results available for replication  
+✅ **Complete Implementation**: Both search algorithms fully implemented and tested
+✅ **Comprehensive Evaluation**: Multiple metrics and comparison framework
+✅ **User Interfaces**: Both CLI and GUI prototypes for easy testing
+✅ **Data Integration**: eBay API integration for real-world data collection
+✅ **Documentation**: Extensive documentation for research methodology and usage
+✅ **Reproducibility**: All code, data, and results available for replication
 
 ## 🎯 Conclusion
 

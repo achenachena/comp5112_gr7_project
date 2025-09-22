@@ -15,15 +15,15 @@ import math
 class KeywordSearch:
     """
     Traditional keyword matching search algorithm.
-    
+
     This algorithm performs exact and partial keyword matching against product data,
     ranking results based on keyword frequency and exact matches.
     """
-    
+
     def __init__(self, case_sensitive: bool = False, exact_match_weight: float = 2.0):
         """
         Initialize the keyword search algorithm.
-        
+
         Args:
             case_sensitive: Whether to perform case-sensitive matching
             exact_match_weight: Weight multiplier for exact keyword matches
@@ -40,101 +40,103 @@ class KeywordSearch:
             'who', 'its', 'now', 'find', 'long', 'down', 'day', 'did', 'get',
             'come', 'made', 'may', 'part'
         }
-    
+
     def preprocess_text(self, text: str) -> List[str]:
         """
         Preprocess text by tokenizing, removing punctuation, and filtering stop words.
-        
+
         Args:
             text: Input text to preprocess
-            
+
         Returns:
             List of cleaned tokens
         """
         if not text:
             return []
-        
+
         # Convert to lowercase if not case sensitive
         if not self.case_sensitive:
             text = text.lower()
-        
+
         # Remove punctuation and split into tokens
         text = re.sub(r'[^\w\s]', ' ', text)
         tokens = text.split()
-        
+
         # Remove stop words
         tokens = [token for token in tokens if token not in self.stop_words]
-        
+
         return tokens
-    
+
     def calculate_keyword_score(self, query_tokens: List[str], product_tokens: List[str]) -> float:
         """
         Calculate relevance score based on keyword matching.
-        
+
         Args:
             query_tokens: List of query terms
             product_tokens: List of product text tokens
-            
+
         Returns:
             Relevance score (higher is more relevant)
         """
         if not query_tokens or not product_tokens:
             return 0.0
-        
+
         # Count token frequencies
         query_counter = Counter(query_tokens)
         product_counter = Counter(product_tokens)
-        
+
         score = 0.0
         total_query_weight = 0.0
-        
+
         for query_token, query_freq in query_counter.items():
             # Weight based on query frequency
             query_weight = query_freq
-            
+
             # Check for exact matches
             if query_token in product_counter:
                 exact_matches = product_counter[query_token]
                 score += exact_matches * query_weight * self.exact_match_weight
-            
+
             # Check for partial matches (substring matching)
             partial_matches = 0
             for product_token in product_counter:
                 if query_token in product_token or product_token in query_token:
-                    partial_matches += product_counter[product_token] * 0.5  # Lower weight for partial matches
-            
+                    # Lower weight for partial matches
+                    partial_matches += product_counter[product_token] * 0.5
+
             score += partial_matches * query_weight
             total_query_weight += query_weight
-        
+
         # Normalize by query weight and product length
         if total_query_weight > 0:
             score = score / (total_query_weight * math.log(len(product_tokens) + 1))
-        
+
         return score
-    
-    def search(self, query: str, products: List[Dict[str, Any]], limit: int = 10) -> List[Dict[str, Any]]:
+
+    def search(self, query: str, products: List[Dict[str, Any]], 
+               limit: int = 10) -> List[Dict[str, Any]]:
         """
         Search products using keyword matching algorithm.
-        
+
         Args:
             query: Search query string
             products: List of product dictionaries
             limit: Maximum number of results to return
-            
+
         Returns:
             List of products sorted by relevance score
         """
         if not query or not products:
             return []
-        
+
         # Preprocess query
         query_tokens = self.preprocess_text(query)
         if not query_tokens:
             return []
-        
+
         # Calculate scores for each product
         scored_products = []
-        
+
         for product in products:
             # Combine title and description for search
             searchable_text = ""
@@ -144,23 +146,23 @@ class KeywordSearch:
                 searchable_text += product.get('description', '') + " "
             if 'category' in product:
                 searchable_text += product.get('category', '') + " "
-            
+
             # Preprocess product text
             product_tokens = self.preprocess_text(searchable_text)
-            
+
             # Calculate relevance score
             score = self.calculate_keyword_score(query_tokens, product_tokens)
-            
+
             if score > 0:
                 scored_products.append({
                     'product': product,
                     'score': score,
                     'matched_terms': [token for token in query_tokens if token in product_tokens]
                 })
-        
+
         # Sort by score (descending) and return top results
         scored_products.sort(key=lambda x: x['score'], reverse=True)
-        
+
         # Return formatted results
         results = []
         for item in scored_products[:limit]:
@@ -169,22 +171,22 @@ class KeywordSearch:
             result['matched_terms'] = item['matched_terms']
             result['algorithm'] = 'keyword_matching'
             results.append(result)
-        
+
         return results
-    
+
     def get_search_stats(self, query: str, products: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
         Get statistics about the search operation.
-        
+
         Args:
             query: Search query
             products: List of products searched
-            
+
         Returns:
             Dictionary containing search statistics
         """
         query_tokens = self.preprocess_text(query)
-        
+
         stats = {
             'query': query,
             'query_tokens': query_tokens,
@@ -196,7 +198,7 @@ class KeywordSearch:
                 'stop_words_count': len(self.stop_words)
             }
         }
-        
+
         return stats
 
 
@@ -207,7 +209,8 @@ def demo_keyword_search():
         {
             'id': 1,
             'title': 'iPhone 15 Pro Max Case - Clear Transparent',
-            'description': 'Premium clear case for iPhone 15 Pro Max with wireless charging support',
+            'description': ('Premium clear case for iPhone 15 Pro Max with wireless charging '
+                            'support'),
             'category': 'Phone Cases',
             'price': {'value': '29.99', 'currency': 'USD'}
         },
@@ -233,10 +236,10 @@ def demo_keyword_search():
             'price': {'value': '19.99', 'currency': 'USD'}
         }
     ]
-    
+
     # Initialize search algorithm
     keyword_search = KeywordSearch()
-    
+
     # Test search queries
     test_queries = [
         "iPhone case",
@@ -244,16 +247,16 @@ def demo_keyword_search():
         "wireless charger",
         "screen protector iPhone"
     ]
-    
+
     print("Keyword Matching Search Algorithm Demo")
     print("=" * 50)
-    
+
     for query in test_queries:
         print(f"\nQuery: '{query}'")
         print("-" * 30)
-        
+
         results = keyword_search.search(query, sample_products, limit=3)
-        
+
         if results:
             for i, product in enumerate(results, 1):
                 print(f"{i}. {product['title']}")
@@ -262,7 +265,7 @@ def demo_keyword_search():
                 print()
         else:
             print("No results found.")
-    
+
     # Get search statistics
     stats = keyword_search.get_search_stats("iPhone case", sample_products)
     print(f"\nSearch Statistics:")
