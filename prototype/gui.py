@@ -325,11 +325,11 @@ class SearchGUI:
         self.algorithms = {
             'keyword_matching': KeywordSearch(
                 case_sensitive=False,
-                exact_match_weight=3.0  # Higher weight for exact matches
+                exact_match_weight=25.0  # Very high weight for exact matches
             ),
             'tfidf': TFIDFSearch(
                 min_df=2,        # Require terms to appear in at least 2 documents
-                max_df=0.8,      # Exclude terms that appear in more than 80% of documents
+                max_df=0.6,      # Exclude terms that appear in more than 60% of documents
                 case_sensitive=False
             )
         }
@@ -395,7 +395,17 @@ class SearchGUI:
                     "magnetic charging case",         # Feature-based
                     "S Pen replacement",              # Brand-specific accessory
                     "multi device charger",           # Descriptive, multi-word
-                    "tempered glass protector"        # Material + function
+                    "tempered glass protector",       # Material + function
+                    "clear transparent case",          # Descriptive, specific
+                    "fast charging pad",              # Feature-based
+                    "iPhone 15 Pro Max",              # Specific model
+                    "Galaxy S24 Ultra",              # Specific model
+                    "MacBook Pro case",               # Laptop case
+                    "protective case",                # Generic term
+                    "charging stand",                 # Specific feature
+                    "lens protector",                 # Technical term
+                    "case iPhone",                    # Reversed order
+                    "charger wireless"                # Reversed order
                 ]
 
                 # Create synthetic relevance judgments

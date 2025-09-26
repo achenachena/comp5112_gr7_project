@@ -189,17 +189,18 @@ class SearchCLI:
         self.algorithms = {
             'keyword_matching': KeywordSearch(
                 case_sensitive=False,
-                exact_match_weight=3.0  # Higher weight for exact matches
+                exact_match_weight=25.0  # Very high weight for exact matches
             ),
             'tfidf': TFIDFSearch(
                 min_df=2,        # Require terms to appear in at least 2 documents
-                max_df=0.8,      # Exclude terms that appear in more than 80% of documents
+                max_df=0.6,      # Exclude terms that appear in more than 60% of documents
                 case_sensitive=False
             )
         }
-        print("Initialized search algorithms with different parameters:")
-        print("  - keyword_matching: Higher exact match weight")
-        print("  - tfidf: Filtered vocabulary (min_df=2, max_df=0.8)")
+        print("Initialized search algorithms with DRAMATICALLY different parameters:")
+        print("  - keyword_matching: Very high exact match weight (25.0)")
+        print("  - tfidf: Restrictive vocabulary (min_df=2, max_df=0.6)")
+        print("  This should force completely different result rankings!")
 
     def create_synthetic_judgments(self):
         """Create synthetic relevance judgments for evaluation."""
@@ -213,7 +214,17 @@ class SearchCLI:
             "magnetic charging case",         # Feature-based
             "S Pen replacement",              # Brand-specific accessory
             "multi device charger",           # Descriptive, multi-word
-            "tempered glass protector"        # Material + function
+            "tempered glass protector",       # Material + function
+            "clear transparent case",          # Descriptive, specific
+            "fast charging pad",              # Feature-based
+            "iPhone 15 Pro Max",              # Specific model
+            "Galaxy S24 Ultra",              # Specific model
+            "MacBook Pro case",               # Laptop case
+            "protective case",                # Generic term
+            "charging stand",                 # Specific feature
+            "lens protector",                 # Technical term
+            "case iPhone",                    # Reversed order
+            "charger wireless"                # Reversed order
         ]
 
         self.relevance_judge.create_synthetic_judgments(test_queries, self.products)
@@ -275,6 +286,21 @@ class SearchCLI:
         ]
 
         print(f"Running comparison on {len(test_queries)} test queries...")
+        print("Algorithms being compared:")
+        for name, algo in self.algorithms.items():
+            print(f"  - {name}: {type(algo).__name__}")
+
+        # Test a single query to see what's happening
+        print("\nTesting a single query to debug:")
+        test_query = "iPhone case"
+        print(f"Query: '{test_query}'")
+        
+        for name, algo in self.algorithms.items():
+            results = algo.search(test_query, self.products, limit=3)
+            print(f"{name} results:")
+            for i, result in enumerate(results, 1):
+                print(f"  {i}. {result['title']} (score: {result['relevance_score']:.4f})")
+            print()
 
         # Initialize comparison framework
         comparison = SearchComparison(self.algorithms, self.relevance_judge)

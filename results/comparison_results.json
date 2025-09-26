@@ -25,7 +25,7 @@
             "f1@10": 0.9473684210526316,
             "ndcg@10": 1.0
           },
-          "search_time": 0.0001480579376220703,
+          "search_time": 6.699562072753906e-05,
           "results_count": 10,
           "results": [
             {
@@ -43,7 +43,7 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 2.3919674167785074,
+              "relevance_score": 16.42484292854575,
               "matched_terms": [
                 "iphone",
                 "case"
@@ -65,7 +65,7 @@
                 "username": "magnetic_accessories"
               },
               "location": "Portland",
-              "relevance_score": 1.989363473501863,
+              "relevance_score": 13.406579930121252,
               "matched_terms": [
                 "iphone",
                 "case"
@@ -87,7 +87,7 @@
                 "username": "premium_accessories"
               },
               "location": "Boston",
-              "relevance_score": 1.809283387553718,
+              "relevance_score": 12.192996742209838,
               "matched_terms": [
                 "iphone",
                 "case"
@@ -109,7 +109,7 @@
                 "username": "mobile_shop"
               },
               "location": "Los Angeles",
-              "relevance_score": 1.3584930875804344,
+              "relevance_score": 8.830205069272823,
               "matched_terms": [
                 "case"
               ],
@@ -130,7 +130,7 @@
                 "username": "tablet_pro"
               },
               "location": "Denver",
-              "relevance_score": 1.2735872696066572,
+              "relevance_score": 8.745299251299047,
               "matched_terms": [
                 "case"
               ],
@@ -147,7 +147,7 @@
             "algorithm": "keyword_matching",
             "parameters": {
               "case_sensitive": false,
-              "exact_match_weight": 3.0,
+              "exact_match_weight": 25.0,
               "stop_words_count": 63
             }
           }
@@ -173,7 +173,7 @@
             "f1@10": 0.9473684210526316,
             "ndcg@10": 0.9108401543470311
           },
-          "search_time": 0.00017690658569335938,
+          "search_time": 9.393692016601562e-05,
           "results_count": 9,
           "results": [
             {
@@ -298,7 +298,7 @@
             "document_count": 12,
             "parameters": {
               "min_df": 2,
-              "max_df": 0.8,
+              "max_df": 0.6,
               "case_sensitive": false
             }
           }
@@ -330,7 +330,7 @@
             "f1@10": 0.5714285714285715,
             "ndcg@10": 1.2764705889334447
           },
-          "search_time": 6.818771362304688e-05,
+          "search_time": 7.605552673339844e-05,
           "results_count": 10,
           "results": [
             {
@@ -348,7 +348,7 @@
                 "username": "mobile_shop"
               },
               "location": "Los Angeles",
-              "relevance_score": 2.0377396313706515,
+              "relevance_score": 14.490592934191302,
               "matched_terms": [
                 "samsung",
                 "phone",
@@ -371,7 +371,7 @@
                 "username": "magnetic_accessories"
               },
               "location": "Portland",
-              "relevance_score": 1.3262423156679088,
+              "relevance_score": 8.937719953414168,
               "matched_terms": [
                 "phone",
                 "case"
@@ -393,7 +393,7 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 1.275715955615204,
+              "relevance_score": 8.292153711498827,
               "matched_terms": [
                 "phone",
                 "case"
@@ -415,7 +415,7 @@
                 "username": "premium_accessories"
               },
               "location": "Boston",
-              "relevance_score": 1.206188925035812,
+              "relevance_score": 8.128664494806559,
               "matched_terms": [
                 "phone",
                 "case"
@@ -437,7 +437,7 @@
                 "username": "tablet_pro"
               },
               "location": "Denver",
-              "relevance_score": 0.8490581797377715,
+              "relevance_score": 5.830199500866032,
               "matched_terms": [
                 "case"
               ],
@@ -455,7 +455,7 @@
             "algorithm": "keyword_matching",
             "parameters": {
               "case_sensitive": false,
-              "exact_match_weight": 3.0,
+              "exact_match_weight": 25.0,
               "stop_words_count": 63
             }
           }
@@ -481,7 +481,7 @@
             "f1@10": 0.5714285714285715,
             "ndcg@10": 1.269313602309762
           },
-          "search_time": 8.416175842285156e-05,
+          "search_time": 8.702278137207031e-05,
           "results_count": 9,
           "results": [
             {
@@ -587,7 +587,7 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 0.2275957917199025,
+              "relevance_score": 0.22759579171990255,
               "matched_terms": [
                 "phone",
                 "case"
@@ -609,7 +609,7 @@
             "document_count": 12,
             "parameters": {
               "min_df": 2,
-              "max_df": 0.8,
+              "max_df": 0.6,
               "case_sensitive": false
             }
           }
@@ -641,7 +641,7 @@
             "f1@10": 0.6666666666666666,
             "ndcg@10": 1.0
           },
-          "search_time": 5.507469177246094e-05,
+          "search_time": 5.793571472167969e-05,
           "results_count": 6,
           "results": [
             {
@@ -659,7 +659,7 @@
                 "username": "tech_gadgets"
               },
               "location": "Miami",
-              "relevance_score": 2.030981551878703,
+              "relevance_score": 14.21687086315092,
               "matched_terms": [
                 "wireless",
                 "charger"
@@ -681,7 +681,7 @@
                 "username": "multi_device_tech"
               },
               "location": "Atlanta",
-              "relevance_score": 0.8525771588023902,
+              "relevance_score": 5.020732157391853,
               "matched_terms": [
                 "wireless"
               ],
@@ -702,7 +702,7 @@
                 "username": "charging_solutions"
               },
               "location": "Dallas",
-              "relevance_score": 0.7385387461377101,
+              "relevance_score": 4.800501849895116,
               "matched_terms": [
                 "wireless"
               ],
@@ -723,7 +723,7 @@
                 "username": "magnetic_accessories"
               },
               "location": "Portland",
-              "relevance_score": 0.6054584484570887,
+              "relevance_score": 4.411197267330218,
               "matched_terms": [
                 "wireless"
               ],
@@ -744,7 +744,7 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 0.5581257305816517,
+              "relevance_score": 4.066344608523463,
               "matched_terms": [
                 "wireless"
               ],
@@ -761,7 +761,7 @@
             "algorithm": "keyword_matching",
             "parameters": {
               "case_sensitive": false,
-              "exact_match_weight": 3.0,
+              "exact_match_weight": 25.0,
               "stop_words_count": 63
             }
           }
@@ -787,7 +787,7 @@
             "f1@10": 0.6666666666666666,
             "ndcg@10": 1.0
           },
-          "search_time": 7.200241088867188e-05,
+          "search_time": 7.486343383789062e-05,
           "results_count": 5,
           "results": [
             {
@@ -826,7 +826,7 @@
                 "username": "multi_device_tech"
               },
               "location": "Atlanta",
-              "relevance_score": 0.2428704846288511,
+              "relevance_score": 0.24287048462885114,
               "matched_terms": [
                 "wireless"
               ],
@@ -909,7 +909,7 @@
             "document_count": 12,
             "parameters": {
               "min_df": 2,
-              "max_df": 0.8,
+              "max_df": 0.6,
               "case_sensitive": false
             }
           }
@@ -941,7 +941,7 @@
             "f1@10": 0.18181818181818182,
             "ndcg@10": 1.8793332131069163
           },
-          "search_time": 6.29425048828125e-05,
+          "search_time": 6.413459777832031e-05,
           "results_count": 10,
           "results": [
             {
@@ -959,7 +959,7 @@
                 "username": "accessories_pro"
               },
               "location": "Chicago",
-              "relevance_score": 2.8301939324592387,
+              "relevance_score": 20.264188556408147,
               "matched_terms": [
                 "screen",
                 "protector",
@@ -982,7 +982,49 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 0.9036321352274361,
+              "relevance_score": 5.581257305816518,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 10,
+              "title": "Multi-Device Wireless Charging Pad",
+              "description": "Charge iPhone, Samsung, and AirPods simultaneously with fast charging",
+              "category": "Chargers",
+              "price": {
+                "value": "89.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/multi-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "multi_device_tech"
+              },
+              "location": "Atlanta",
+              "relevance_score": 3.2208470443645854,
+              "matched_terms": [
+                "iphone"
+              ],
+              "algorithm": "keyword_matching"
+            },
+            {
+              "id": 4,
+              "title": "Wireless Charger Pad - Fast Charging",
+              "description": "Universal wireless charging pad compatible with iPhone and Android phones",
+              "category": "Chargers",
+              "price": {
+                "value": "19.99",
+                "currency": "USD"
+              },
+              "url": "https://example.com/wireless-charger",
+              "condition": "NEW",
+              "seller": {
+                "username": "tech_gadgets"
+              },
+              "location": "Miami",
+              "relevance_score": 3.1387896710852683,
               "matched_terms": [
                 "iphone"
               ],
@@ -1003,51 +1045,9 @@
                 "username": "magnetic_accessories"
               },
               "location": "Portland",
-              "relevance_score": 0.5189643843917904,
+              "relevance_score": 3.056123596973877,
               "matched_terms": [
                 "iphone"
-              ],
-              "algorithm": "keyword_matching"
-            },
-            {
-              "id": 5,
-              "title": "Premium Leather Wallet Case for iPhone 15 Pro Max with Card Slots",
-              "description": "Handcrafted genuine leather case with RFID blocking technology and multiple card slots",
-              "category": "Phone Cases & Accessories",
-              "price": {
-                "value": "79.99",
-                "currency": "USD"
-              },
-              "url": "https://example.com/leather-wallet-case",
-              "condition": "NEW",
-              "seller": {
-                "username": "premium_accessories"
-              },
-              "location": "Boston",
-              "relevance_score": 0.4719869706661873,
-              "matched_terms": [
-                "iphone"
-              ],
-              "algorithm": "keyword_matching"
-            },
-            {
-              "id": 6,
-              "title": "Samsung Galaxy S24 Ultra Camera Lens Protector Kit",
-              "description": "Tempered glass lens protectors for all camera modules with precise cutouts",
-              "category": "Camera Accessories",
-              "price": {
-                "value": "15.99",
-                "currency": "USD"
-              },
-              "url": "https://example.com/camera-protector",
-              "condition": "NEW",
-              "seller": {
-                "username": "camera_pro"
-              },
-              "location": "Phoenix",
-              "relevance_score": 0.44507760092711207,
-              "matched_terms": [
-                "protector"
               ],
               "algorithm": "keyword_matching"
             }
@@ -1063,7 +1063,7 @@
             "algorithm": "keyword_matching",
             "parameters": {
               "case_sensitive": false,
-              "exact_match_weight": 3.0,
+              "exact_match_weight": 25.0,
               "stop_words_count": 63
             }
           }
@@ -1089,7 +1089,7 @@
             "f1@10": 0.18181818181818182,
             "ndcg@10": 1.8793332131069163
           },
-          "search_time": 7.724761962890625e-05,
+          "search_time": 7.987022399902344e-05,
           "results_count": 7,
           "results": [
             {
@@ -1192,7 +1192,7 @@
                 "username": "multi_device_tech"
               },
               "location": "Atlanta",
-              "relevance_score": 0.06937796019968254,
+              "relevance_score": 0.06937796019968255,
               "matched_terms": [
                 "iphone"
               ],
@@ -1213,7 +1213,7 @@
             "document_count": 12,
             "parameters": {
               "min_df": 2,
-              "max_df": 0.8,
+              "max_df": 0.6,
               "case_sensitive": false
             }
           }
@@ -1245,7 +1245,7 @@
             "f1@10": 0.0,
             "ndcg@10": 0.0
           },
-          "search_time": 5.1975250244140625e-05,
+          "search_time": 5.507469177246094e-05,
           "results_count": 9,
           "results": [
             {
@@ -1263,7 +1263,7 @@
                 "username": "tablet_pro"
               },
               "location": "Denver",
-              "relevance_score": 2.4622687212395373,
+              "relevance_score": 17.405692684624317,
               "matched_terms": [
                 "ipad",
                 "case"
@@ -1285,7 +1285,7 @@
                 "username": "magnetic_accessories"
               },
               "location": "Portland",
-              "relevance_score": 1.297410960979476,
+              "relevance_score": 8.908888598725735,
               "matched_terms": [
                 "case"
               ],
@@ -1306,7 +1306,7 @@
                 "username": "mobile_shop"
               },
               "location": "Los Angeles",
-              "relevance_score": 1.2735872696066572,
+              "relevance_score": 8.745299251299047,
               "matched_terms": [
                 "case"
               ],
@@ -1327,7 +1327,7 @@
                 "username": "mac_accessories"
               },
               "location": "San Francisco",
-              "relevance_score": 1.2517807526075027,
+              "relevance_score": 8.595561167904853,
               "matched_terms": [
                 "case"
               ],
@@ -1348,7 +1348,7 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 1.1959837083892537,
+              "relevance_score": 8.212421464272875,
               "matched_terms": [
                 "case"
               ],
@@ -1365,7 +1365,7 @@
             "algorithm": "keyword_matching",
             "parameters": {
               "case_sensitive": false,
-              "exact_match_weight": 3.0,
+              "exact_match_weight": 25.0,
               "stop_words_count": 63
             }
           }
@@ -1391,7 +1391,7 @@
             "f1@10": 0.0,
             "ndcg@10": 0.0
           },
-          "search_time": 6.914138793945312e-05,
+          "search_time": 7.295608520507812e-05,
           "results_count": 6,
           "results": [
             {
@@ -1513,7 +1513,7 @@
             "document_count": 12,
             "parameters": {
               "min_df": 2,
-              "max_df": 0.8,
+              "max_df": 0.6,
               "case_sensitive": false
             }
           }
@@ -1545,7 +1545,7 @@
             "f1@10": 0.0,
             "ndcg@10": 0.0
           },
-          "search_time": 5.1021575927734375e-05,
+          "search_time": 6.771087646484375e-05,
           "results_count": 7,
           "results": [
             {
@@ -1563,7 +1563,7 @@
                 "username": "mac_accessories"
               },
               "location": "San Francisco",
-              "relevance_score": 2.420109455041172,
+              "relevance_score": 17.10767028563587,
               "matched_terms": [
                 "macbook",
                 "case"
@@ -1585,7 +1585,7 @@
                 "username": "magnetic_accessories"
               },
               "location": "Portland",
-              "relevance_score": 1.297410960979476,
+              "relevance_score": 8.908888598725735,
               "matched_terms": [
                 "case"
               ],
@@ -1606,7 +1606,7 @@
                 "username": "mobile_shop"
               },
               "location": "Los Angeles",
-              "relevance_score": 1.2735872696066572,
+              "relevance_score": 8.745299251299047,
               "matched_terms": [
                 "case"
               ],
@@ -1627,7 +1627,7 @@
                 "username": "tablet_pro"
               },
               "location": "Denver",
-              "relevance_score": 1.2735872696066572,
+              "relevance_score": 8.745299251299047,
               "matched_terms": [
                 "case"
               ],
@@ -1648,7 +1648,7 @@
                 "username": "tech_store"
               },
               "location": "New York",
-              "relevance_score": 1.1959837083892537,
+              "relevance_score": 8.212421464272875,
               "matched_terms": [
                 "case"
               ],
@@ -1665,7 +1665,7 @@
             "algorithm": "keyword_matching",
             "parameters": {
               "case_sensitive": false,
-              "exact_match_weight": 3.0,
+              "exact_match_weight": 25.0,
               "stop_words_count": 63
             }
           }
@@ -1691,7 +1691,7 @@
             "f1@10": 0.0,
             "ndcg@10": 0.0
           },
-          "search_time": 6.67572021484375e-05,
+          "search_time": 7.104873657226562e-05,
           "results_count": 6,
           "results": [
             {
@@ -1813,7 +1813,7 @@
             "document_count": 12,
             "parameters": {
               "min_df": 2,
-              "max_df": 0.8,
+              "max_df": 0.6,
               "case_sensitive": false
             }
           }
@@ -1844,7 +1844,7 @@
           "map": 0.6666666666666666,
           "mrr": 0.6666666666666666
         },
-        "avg_search_time": 7.287661234537761e-05,
+        "avg_search_time": 6.46511713663737e-05,
         "total_results": 52
       },
       "tfidf": {
@@ -1868,7 +1868,7 @@
           "map": 0.6583333333333333,
           "mrr": 0.6666666666666666
         },
-        "avg_search_time": 9.103616078694661e-05,
+        "avg_search_time": 7.994969685872395e-05,
         "total_results": 42
       }
     },
