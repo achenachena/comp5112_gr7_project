@@ -1,16 +1,18 @@
-# Research Methodology: Comparative Study of Search Algorithms in E-commerce
+# Research Methodology: Database-Based Comparative Study of Search Algorithms in E-commerce
 
 ## Research Question
 
-**How do keyword matching and TF-IDF search algorithms compare in terms of effectiveness for e-commerce product search?**
+**How do keyword matching and TF-IDF search algorithms compare in terms of effectiveness for large-scale e-commerce product search using real marketplace data?**
 
 ## Objectives
 
-1. **Primary Objective**: Compare the performance of keyword matching vs TF-IDF algorithms for e-commerce product search
+1. **Primary Objective**: Compare the performance of keyword matching vs TF-IDF algorithms for e-commerce product search using real API data
 2. **Secondary Objectives**:
-   - Evaluate search relevance and accuracy metrics
-   - Analyze performance differences across different product categories
-   - Provide insights for improving search algorithms in e-commerce applications
+   - Evaluate search relevance and accuracy metrics on large-scale datasets
+   - Analyze performance differences across different product categories and query types
+   - Demonstrate scalability with hundreds of thousands of products
+   - Provide insights for improving search algorithms in real-world e-commerce applications
+   - Establish a database-backed framework for large-scale search algorithm research
 
 ## Methodology
 
@@ -33,20 +35,50 @@
   - Cosine similarity for relevance scoring
   - Configurable min/max document frequency thresholds
 
-### 2. Evaluation Framework
+### 2. Database Architecture
+
+#### Database Schema
+- **Products Table**: Store e-commerce product data with indexing for fast search
+- **Search Queries Table**: Store test queries with categorization and difficulty assessment
+- **Search Results Table**: Store algorithm results with relevance scores and rankings
+- **Evaluation Metrics Table**: Store comprehensive performance metrics
+- **Data Collection Logs Table**: Track API collection activities and performance
+
+#### Scalability Features
+- **Indexed Fields**: Fast search on title, category, brand, price
+- **Batch Operations**: Efficient insertion of thousands of products
+- **Connection Pooling**: Optimized database access for concurrent operations
+- **Performance Tracking**: Monitor search times and result counts
+
+### 3. Real Data Collection
+
+#### API Integration
+- **Best Buy API**: Real electronics, appliances, and gaming products
+- **Target API**: Real retail products across multiple categories
+- **Shopify Stores**: Real e-commerce products from various stores
+- **Newegg API**: Real tech products and gaming equipment
+
+#### Data Quality Assurance
+- **Real Pricing**: Actual marketplace prices from live APIs
+- **Authentic Descriptions**: Genuine product descriptions and specifications
+- **Category Classification**: Real e-commerce category systems
+- **Brand Verification**: Authentic brand names and model numbers
+
+### 4. Evaluation Framework
 
 #### Metrics Used
-1. **Precision@K**: Accuracy of top-K results
-2. **Recall@K**: Coverage of relevant items in top-K
+1. **Precision@K**: Accuracy of top-K results (K=1,3,5,10)
+2. **Recall@K**: Coverage of relevant items in top-K results
 3. **F1-Score@K**: Harmonic mean of precision and recall
-4. **NDCG@K**: Normalized Discounted Cumulative Gain
+4. **NDCG@K**: Normalized Discounted Cumulative Gain for ranking quality
 5. **MAP**: Mean Average Precision across all queries
-6. **MRR**: Mean Reciprocal Rank
+6. **MRR**: Mean Reciprocal Rank for first relevant result timing
 
 #### Ground Truth Creation
 - **Synthetic Relevance Judgments**: Created using keyword overlap and exact match criteria
-- **Threshold-based Relevance**: Items with relevance score ≥ 0.5 considered relevant
+- **Threshold-based Relevance**: Items with relevance score ≥ 0.3 considered relevant
 - **Query-specific Judgments**: Individual relevance scores for each query-item pair
+- **Category-aware Scoring**: Relevance scoring considers product categories
 
 ### 3. Data Collection
 

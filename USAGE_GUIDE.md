@@ -1,6 +1,6 @@
-# Usage Guide: Search Algorithm Comparison Tool
+# Usage Guide: Database-Based E-commerce Search Algorithm Research
 
-## Quick Start
+## 🚀 Quick Start
 
 ### 1. Installation
 
@@ -13,7 +13,33 @@ cd comp5112_gr7_project
 pip install -r requirements.txt
 ```
 
-### 2. Basic Usage
+### 2. Database Setup
+
+```bash
+# Initialize SQL database
+python init_database.py
+```
+
+### 3. Collect Real Data
+
+```bash
+# Option A: Best Buy API (recommended)
+# Get free API key: https://developer.bestbuy.com/
+# Add to .env: BESTBUY_API_KEY=your_key_here
+python collect_to_database.py
+
+# Option B: Shopify stores (no API key needed)
+python collect_to_database.py
+```
+
+### 4. Run Search Evaluation
+
+```bash
+# Run comprehensive evaluation on database
+python run_database_search.py
+```
+
+### 5. Interactive Tools
 
 #### Command Line Interface (CLI)
 
@@ -38,7 +64,37 @@ python prototype/cli.py --data data/my_products.json
 python prototype/gui.py
 ```
 
-### 3. Using Custom Data
+## 📊 Database Usage
+
+### Database Schema
+
+The system uses **5 main tables** for comprehensive data storage:
+
+- **`products`** - Store e-commerce product data
+- **`search_queries`** - Store test queries for evaluation  
+- **`search_results`** - Store algorithm search results
+- **`evaluation_metrics`** - Store performance metrics
+- **`data_collection_logs`** - Track data collection activities
+
+### Database Operations
+
+```python
+from database.db_manager import get_db_manager
+from database.models import Product, SearchQuery, SearchResult
+
+# Get database manager
+db = get_db_manager()
+
+# Query products
+with db.get_session() as session:
+    products = session.query(Product).limit(1000).all()
+    
+# Get database statistics
+stats = db.get_database_info()
+print(f"Total products: {stats['stats']['products']}")
+```
+
+### Using Custom Data
 
 #### Prepare Your Data
 
@@ -115,48 +171,77 @@ The GUI application provides four main tabs:
 
 ### Programmatic Usage
 
-#### Using Individual Algorithms
+#### Database-Based Search
 
 ```python
+from database.db_manager import get_db_manager
+from database.models import Product
 from algorithms.keyword_matching import KeywordSearch
 from algorithms.tfidf_search import TFIDFSearch
 
-# Initialize algorithms
+# Initialize database and algorithms
+db = get_db_manager()
 keyword_search = KeywordSearch()
 tfidf_search = TFIDFSearch()
 
-# Load your product data
-products = [...]  # Your product data
+# Load products from database
+with db.get_session() as session:
+    products = session.query(Product).limit(1000).all()
+    # Convert to format expected by algorithms
+    product_dicts = [{
+        'id': p.external_id,
+        'title': p.title,
+        'description': p.description or '',
+        'category': p.category,
+        'price': {'value': str(p.price_value), 'currency': p.price_currency},
+        'brand': p.brand or '',
+        'model': p.model or '',
+        'condition': p.condition,
+        'seller': {'username': p.seller_name or ''},
+        'location': p.seller_location or '',
+        'url': p.product_url or '',
+        'image_url': p.image_url or '',
+    } for p in products]
 
 # Search with keyword matching
-results = keyword_search.search("iPhone case", products, limit=10)
+keyword_results = keyword_search.search("iPhone case", product_dicts, limit=10)
 
 # Search with TF-IDF
-results = tfidf_search.search("iPhone case", products, limit=10)
+tfidf_results = tfidf_search.search("iPhone case", product_dicts, limit=10)
 ```
 
-#### Running Comparisons
+#### Database-Based Evaluation
 
 ```python
-from evaluation.comparison import SearchComparison
-from evaluation.metrics import RelevanceJudgment
+from run_database_search import DatabaseSearchEvaluator
 
-# Create relevance judgments
-relevance_judge = RelevanceJudgment()
-relevance_judge.create_synthetic_judgments(queries, products)
+# Initialize evaluator
+evaluator = DatabaseSearchEvaluator()
 
-# Initialize comparison
-algorithms = {
-    'keyword_matching': KeywordSearch(),
-    'tfidf': TFIDFSearch()
-}
-comparison = SearchComparison(algorithms, relevance_judge)
+# Run full evaluation on database
+evaluator.run_full_evaluation(product_limit=10000)
 
-# Run comparison
-results = comparison.compare_multiple_queries(queries, products)
+# Generate comparison report
+report = evaluator.generate_comparison_report()
+```
 
-# Print results
-comparison.print_comparison_report()
+#### Real API Data Collection
+
+```python
+from collect_to_database import DatabaseEcommerceCollector
+
+# Initialize collector
+collector = DatabaseEcommerceCollector()
+
+# Collect from Best Buy API
+search_queries = ["iPhone", "Samsung Galaxy", "laptop", "gaming mouse"]
+products_collected = collector.collect_from_bestbuy_api(search_queries)
+
+print(f"Collected {products_collected} products from Best Buy")
+
+# Collect from Shopify stores
+shopify_collected = collector.collect_from_shopify_stores(search_queries[:2])
+print(f"Collected {shopify_collected} products from Shopify stores")
 ```
 
 #### Data Preprocessing

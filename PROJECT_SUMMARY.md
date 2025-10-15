@@ -1,26 +1,32 @@
-# Project Summary: Comparative Study of Search Algorithms in E-commerce
+# Project Summary: Database-Based Comparative Study of Search Algorithms in E-commerce
 
 ## 🎯 Project Overview
 
-This project implements a comprehensive research framework for comparing **Keyword Matching** vs **TF-IDF** search algorithms in e-commerce product search scenarios. The system provides both theoretical foundations and practical implementations for evaluating search algorithm effectiveness.
+This project implements a **large-scale, database-backed research framework** for comparing **Keyword Matching** vs **TF-IDF** search algorithms using **real e-commerce data** from multiple APIs. The system provides both theoretical foundations and practical implementations for evaluating search algorithm effectiveness at scale.
 
 ## 🏗️ System Architecture
 
 ### Core Components
 
-1. **Search Algorithms**
+1. **🗄️ Database Layer**
+   - `database/models.py` - SQLAlchemy models for products, queries, results, and metrics
+   - `database/db_manager.py` - Database connection management and utilities
+   - `data/ecommerce_research.db` - SQLite database for scalable data storage
+
+2. **🔍 Search Algorithms**
    - `algorithms/keyword_matching.py` - Traditional keyword-based search
    - `algorithms/tfidf_search.py` - TF-IDF statistical search algorithm
 
-2. **Evaluation Framework**
+3. **📊 Evaluation Framework**
    - `evaluation/metrics.py` - Comprehensive evaluation metrics (Precision, Recall, F1-Score, NDCG, MAP, MRR)
    - `evaluation/comparison.py` - Algorithm comparison framework
 
-3. **Data Processing**
-   - `data_collection/ebay_client.py` - eBay API integration for real data collection
-   - `utils/preprocessing.py` - Data cleaning and normalization utilities
+4. **🛒 Real Data Collection**
+   - `collect_to_database.py` - Real API data collection (Best Buy, Target, Shopify, Newegg)
+   - `run_database_search.py` - Database-based search evaluation
+   - `init_database.py` - Database initialization and setup
 
-4. **Prototype Interfaces**
+5. **🎛️ Prototype Interfaces**
    - `prototype/cli.py` - Command-line interface for testing and comparison
    - `prototype/gui.py` - Graphical user interface for interactive testing
 
@@ -39,10 +45,17 @@ This project implements a comprehensive research framework for comparing **Keywo
 - **MAP**: Mean Average Precision across all queries
 - **MRR**: Mean Reciprocal Rank for quick relevance detection
 
-### Data Collection & Processing
-- **eBay API Integration**: Real-time product data collection
-- **Data Preprocessing**: Text cleaning, normalization, metadata extraction
-- **Multiple Formats**: JSON and CSV support for data import/export
+### Database Architecture
+- **SQL Database**: Scalable storage for hundreds of thousands of products
+- **Indexed Fields**: Fast search on title, category, brand, price
+- **Relationship Tracking**: Links products to search results and metrics
+- **Performance Monitoring**: Tracks search times and collection statistics
+
+### Real Data Collection & Processing
+- **Multi-API Integration**: Best Buy, Target, Shopify, Newegg APIs
+- **Real Marketplace Data**: Actual prices, descriptions, and specifications
+- **Automated Collection**: Batch processing for large-scale data gathering
+- **Data Quality Assurance**: Validation and deduplication of collected data
 
 ### Prototype Interfaces
 - **CLI**: Command-line interface with demo, interactive, and comparison modes
