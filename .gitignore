@@ -14,9 +14,12 @@ PRIVATE_STORE_URLS.txt
 
 # Database files
 *.db
+*.db-shm
+*.db-wal
 *.sqlite
 *.sqlite3
-data/ecommerce_research.db
+data/ecommerce_research.db*
+data/*.db*
 
 # Python
 __pycache__/
