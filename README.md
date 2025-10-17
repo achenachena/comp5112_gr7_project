@@ -18,6 +18,7 @@ A comprehensive research project comparing **Keyword Matching** vs **TF-IDF** se
 - **🔍 Search Algorithms**: Keyword Matching vs TF-IDF comparison
 - **📊 Comprehensive Metrics**: Precision@K, Recall@K, F1@K, MAP, MRR, NDCG
 - **⚡ Performance Tracking**: Search times, result counts, algorithm efficiency
+- **🔒 Security First**: No sensitive data in repository, environment-based configuration
 - **📈 Scalable Evaluation**: Handle hundreds of thousands of products
 - **🎛️ Interactive Tools**: CLI and GUI interfaces for testing
 
@@ -34,8 +35,7 @@ A comprehensive research project comparing **Keyword Matching** vs **TF-IDF** se
 ├── evaluation/              # Performance evaluation tools
 │   ├── metrics.py          # Evaluation metrics (Precision, Recall, F1, etc.)
 │   └── comparison.py       # Algorithm comparison framework
-├── data_collection/         # API data collection
-│   └── ebay_client.py      # eBay API client (legacy)
+├── data_collection/         # API data collection (legacy directory)
 ├── prototype/               # Interactive testing interfaces
 │   ├── gui.py              # Graphical user interface
 │   └── cli.py              # Command-line interface
@@ -50,6 +50,17 @@ A comprehensive research project comparing **Keyword Matching** vs **TF-IDF** se
 └── requirements.txt         # Python dependencies
 ```
 
+## 🔒 Security & Privacy
+
+This repository is **security-first** and **publication-ready**:
+
+- ✅ **No sensitive data** in repository
+- ✅ **No API keys** or secrets in code
+- ✅ **Environment-based configuration** only
+- ✅ **Comprehensive .gitignore** protection
+- ✅ **Mock data only** for examples
+- ✅ **See [SECURITY_CHECKLIST.md](SECURITY_CHECKLIST.md)** for details
+
 ## 🚀 Quick Start
 
 ### **1. Install Dependencies**
@@ -57,16 +68,24 @@ A comprehensive research project comparing **Keyword Matching** vs **TF-IDF** se
 pip install -r requirements.txt
 ```
 
-### **2. Initialize Database**
+### **2. Set Up Environment Variables**
+```bash
+# Creates .env file from template
+python setup_environment.py
+
+# Edit .env file with your API keys:
+# BESTBUY_API_KEY=your_key_here
+# TARGET_API_KEY=your_key_here
+# NEWEGG_API_KEY=your_key_here
+```
+
+### **3. Initialize Database**
 ```bash
 python init_database.py
 ```
 
-### **3. Collect Real Data**
+### **4. Collect Real Data**
 ```bash
-# Option A: Get Best Buy API key (recommended)
-# Go to: https://developer.bestbuy.com/
-# Add to .env: BESTBUY_API_KEY=your_key_here
 python collect_to_database.py
 
 # Option B: Use Shopify stores (no API key needed)

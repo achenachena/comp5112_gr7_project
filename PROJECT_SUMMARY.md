@@ -144,13 +144,16 @@ comparison = SearchComparison({
 results = comparison.compare_multiple_queries(queries, products)
 ```
 
-### Data Collection
+### Real API Data Collection
 ```python
-from data_collection.ebay_client import EbayAPIClient
+from collect_to_database import DatabaseEcommerceCollector
 
-# Set up eBay API credentials in .env file
-client = EbayAPIClient()
-results = client.search_and_format("iPhone case", limit=100)
+# Initialize collector
+collector = DatabaseEcommerceCollector()
+
+# Collect from Best Buy API
+search_queries = ["iPhone", "Samsung Galaxy", "laptop"]
+products_collected = collector.collect_from_bestbuy_api(search_queries)
 ```
 
 ## 📋 Project Structure
@@ -163,8 +166,7 @@ comp5112_gr7_project/
 ├── evaluation/              # Performance evaluation tools
 │   ├── metrics.py
 │   └── comparison.py
-├── data_collection/         # eBay data collection
-│   └── ebay_client.py
+├── data_collection/         # Legacy API collection (deprecated)
 ├── prototype/               # Interactive interfaces
 │   ├── cli.py
 │   └── gui.py
@@ -210,11 +212,13 @@ comp5112_gr7_project/
 ## 🏆 Project Achievements
 
 ✅ **Complete Implementation**: Both search algorithms fully implemented and tested
+✅ **Database Architecture**: Scalable SQL database for large-scale data storage
+✅ **Real API Integration**: Multiple real e-commerce APIs (Best Buy, Target, Shopify, Newegg)
 ✅ **Comprehensive Evaluation**: Multiple metrics and comparison framework
 ✅ **User Interfaces**: Both CLI and GUI prototypes for easy testing
-✅ **Data Integration**: eBay API integration for real-world data collection
 ✅ **Documentation**: Extensive documentation for research methodology and usage
 ✅ **Reproducibility**: All code, data, and results available for replication
+✅ **Scalability**: Designed to handle hundreds of thousands of products
 
 ## 🎯 Conclusion
 

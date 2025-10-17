@@ -52,7 +52,7 @@ class DatabaseSearchEvaluator:
     
     def load_products_from_database(self, limit: int = None) -> List[Dict]:
         """Load products from database for search evaluation."""
-        logger.info(f"📦 Loading products from database...")
+        logger.info("📦 Loading products from database...")
         
         with self.db_manager.get_session() as session:
             query = session.query(Product)
@@ -69,7 +69,10 @@ class DatabaseSearchEvaluator:
                     'title': product.title,
                     'description': product.description or '',
                     'category': product.category,
-                    'price': {'value': str(product.price_value), 'currency': product.price_currency},
+                    'price': {
+                        'value': str(product.price_value), 
+                        'currency': product.price_currency
+                    },
                     'brand': product.brand or '',
                     'model': product.model or '',
                     'sku': product.sku or '',
@@ -84,7 +87,7 @@ class DatabaseSearchEvaluator:
                 }
                 product_dicts.append(product_dict)
             
-            logger.info(f"✅ Loaded {len(product_dicts)} products from database")
+            logger.info("✅ Loaded %d products from database", len(product_dicts))
             return product_dicts
     
     def load_search_queries_from_database(self) -> List[str]:
@@ -95,7 +98,7 @@ class DatabaseSearchEvaluator:
             queries = session.query(SearchQuery).all()
             query_texts = [query.query_text for query in queries]
             
-            logger.info(f"✅ Loaded {len(query_texts)} search queries")
+            logger.info("✅ Loaded %d search queries", len(query_texts))
             return query_texts
     
     def create_relevance_judgments(self, products: List[Dict], queries: List[str]):
@@ -105,7 +108,7 @@ class DatabaseSearchEvaluator:
         # Create synthetic relevance judgments
         self.relevance_judge.create_synthetic_judgments(queries, products)
         
-        logger.info(f"✅ Created relevance judgments for {len(queries)} queries")
+        logger.info("✅ Created relevance judgments for %d queries", len(queries))
     
     def run_search_algorithms(self, products: List[Dict], queries: List[str]):
         """Run search algorithms and store results in database."""
@@ -115,7 +118,7 @@ class DatabaseSearchEvaluator:
         
         with self.db_manager.get_session() as session:
             for query_text in queries:
-                logger.info(f"  Processing query: '{query_text}'")
+                logger.info("  Processing query: '%s'", query_text)
                 
                 for algo_name, algorithm in self.algorithms.items():
                     start_time = time.time()
@@ -151,13 +154,14 @@ class DatabaseSearchEvaluator:
                                     session.add(search_result)
                                     total_results += 1
                         
-                        logger.info(f"    {algo_name}: {len(results)} results in {search_time_ms:.2f}ms")
+                        logger.info("    %s: %d results in %.2fms", 
+                                   algo_name, len(results), search_time_ms)
                         
                     except Exception as e:
-                        logger.error(f"    Error with {algo_name}: {e}")
+                        logger.error("    Error with %s: %s", algo_name, e)
                         continue
         
-        logger.info(f"✅ Stored {total_results} search results in database")
+        logger.info("✅ Stored %d search results in database", total_results)
     
     def calculate_evaluation_metrics(self, queries: List[str]):
         """Calculate and store evaluation metrics in database."""
@@ -197,7 +201,10 @@ class DatabaseSearchEvaluator:
                     )
                     
                     # Calculate average search time
-                    avg_search_time = sum(sr.search_time_ms for sr in search_results) / len(search_results)
+                    avg_search_time = (
+                        sum(sr.search_time_ms for sr in search_results) / 
+                        len(search_results)
+                    )
                     
                     # Store metrics in database
                     evaluation_metrics = EvaluationMetrics(
@@ -253,12 +260,18 @@ class DatabaseSearchEvaluator:
             for algo_name, algo_metrics in algorithm_metrics.items():
                 report[algo_name] = {
                     'total_queries': len(algo_metrics),
-                    'avg_precision@5': sum(m.precision_at_5 for m in algo_metrics) / len(algo_metrics),
+                    'avg_precision@5': (
+                        sum(m.precision_at_5 for m in algo_metrics) / 
+                        len(algo_metrics)
+                    ),
                     'avg_recall@5': sum(m.recall_at_5 for m in algo_metrics) / len(algo_metrics),
                     'avg_f1@5': sum(m.f1_score_at_5 for m in algo_metrics) / len(algo_metrics),
                     'avg_map': sum(m.map_score for m in algo_metrics) / len(algo_metrics),
                     'avg_mrr': sum(m.mrr_score for m in algo_metrics) / len(algo_metrics),
-                    'avg_search_time_ms': sum(m.avg_search_time_ms for m in algo_metrics) / len(algo_metrics),
+                    'avg_search_time_ms': (
+                        sum(m.avg_search_time_ms for m in algo_metrics) / 
+                        len(algo_metrics)
+                    ),
                 }
             
             # Print report
@@ -347,7 +360,7 @@ def main():
         print("   sqlite3 data/ecommerce_research.db")
         
     except Exception as e:
-        logger.error(f"Evaluation failed: {e}")
+        logger.error("Evaluation failed: %s", e)
         print(f"\n❌ Error: {e}")
 
 

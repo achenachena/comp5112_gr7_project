@@ -85,7 +85,7 @@ def main():
                 print(f"   Error: {health['error']}")
         
     except Exception as e:
-        logger.error(f"Database initialization failed: {e}")
+        logger.error("Database initialization failed: %s", e)
         print(f"\n❌ Error: {e}")
         print(f"\nTroubleshooting:")
         print(f"1. Check if you have write permissions in the project directory")

@@ -237,7 +237,7 @@ def main():
             categories[cat] = categories.get(cat, 0) + 1
         
         summary_file = 'data/walmart_summary.txt'
-        with open(summary_file, 'w') as f:
+        with open(summary_file, 'w', encoding='utf-8') as f:
             f.write("Walmart API Data Collection Summary\n")
             f.write("="*50 + "\n\n")
             f.write(f"Total Products: {len(products)}\n")

@@ -45,7 +45,7 @@ class DatabaseManager:
         
         # Try SQLite (for development)
         sqlite_path = os.getenv('SQLITE_PATH', 'data/ecommerce_research.db')
-        logger.info(f"Using SQLite database at: {sqlite_path}")
+        logger.info("Using SQLite database at: %s", sqlite_path)
         
         # Ensure data directory exists
         os.makedirs(os.path.dirname(sqlite_path), exist_ok=True)
@@ -70,7 +70,7 @@ class DatabaseManager:
             logger.info("Database connection initialized successfully")
             
         except SQLAlchemyError as e:
-            logger.error(f"Failed to initialize database: {e}")
+            logger.error("Failed to initialize database: %s", e)
             raise
     
     @contextmanager
@@ -82,7 +82,7 @@ class DatabaseManager:
             session.commit()
         except Exception as e:
             session.rollback()
-            logger.error(f"Database session error: {e}")
+            logger.error("Database session error: %s", e)
             raise
         finally:
             session.close()
@@ -93,7 +93,7 @@ class DatabaseManager:
             Base.metadata.create_all(self.engine)
             logger.info("Database tables created successfully")
         except SQLAlchemyError as e:
-            logger.error(f"Failed to create tables: {e}")
+            logger.error("Failed to create tables: %s", e)
             raise
     
     def drop_tables(self):
@@ -102,7 +102,7 @@ class DatabaseManager:
             Base.metadata.drop_all(self.engine)
             logger.warning("All database tables dropped")
         except SQLAlchemyError as e:
-            logger.error(f"Failed to drop tables: {e}")
+            logger.error("Failed to drop tables: %s", e)
             raise
     
     def reset_database(self):
@@ -128,7 +128,7 @@ class DatabaseManager:
                     'tables_created': len(Base.metadata.tables)
                 }
         except Exception as e:
-            logger.error(f"Failed to get database info: {e}")
+            logger.error("Failed to get database info: %s", e)
             return {'error': str(e)}
     
     def _mask_database_url(self, url: str) -> str:
@@ -174,7 +174,7 @@ class DatabaseManager:
                     logger.info("PostgreSQL database optimized")
             
         except Exception as e:
-            logger.error(f"Failed to optimize database: {e}")
+            logger.error("Failed to optimize database: %s", e)
     
     def backup_database(self, backup_path: str):
         """Create a backup of the database."""
@@ -183,13 +183,13 @@ class DatabaseManager:
                 import shutil
                 db_path = self.database_url.replace('sqlite:///', '')
                 shutil.copy2(db_path, backup_path)
-                logger.info(f"SQLite database backed up to: {backup_path}")
+                logger.info("SQLite database backed up to: %s", backup_path)
             
             else:
                 logger.warning("Backup not implemented for this database type")
                 
         except Exception as e:
-            logger.error(f"Failed to backup database: {e}")
+            logger.error("Failed to backup database: %s", e)
     
     def check_database_health(self) -> Dict[str, Any]:
         """Check database health and performance."""
@@ -210,7 +210,9 @@ class DatabaseManager:
             from sqlalchemy import inspect
             inspector = inspect(self.engine)
             tables = inspector.get_table_names()
-            expected_tables = ['products', 'search_queries', 'search_results', 'evaluation_metrics']
+            expected_tables = [
+                'api_products', 'social_media_products', 'search_queries', 'search_results', 'evaluation_metrics'
+            ]
             health_info['tables_exist'] = all(table in tables for table in expected_tables)
             
             # Get basic performance metrics
@@ -218,12 +220,15 @@ class DatabaseManager:
                 stats = get_database_stats(session)
                 health_info['performance_metrics'] = stats
             
-            health_info['status'] = 'healthy' if health_info['connection_test'] and health_info['tables_exist'] else 'unhealthy'
+            health_info['status'] = (
+                'healthy' if health_info['connection_test'] and health_info['tables_exist'] 
+                else 'unhealthy'
+            )
             
         except Exception as e:
             health_info['status'] = 'error'
             health_info['error'] = str(e)
-            logger.error(f"Database health check failed: {e}")
+            logger.error("Database health check failed: %s", e)
         
         return health_info
 

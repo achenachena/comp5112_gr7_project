@@ -54,26 +54,29 @@ Look for: `data/ecommerce_research.db` (SQLite database)
 
 ## 💡 Tips
 
-- **Use sandbox first** to test (limited data but no quota usage)
-- **Switch to production** for real data (uses your API quota)
-- **Tokens expire** - regenerate when needed
-- **Default collection**: ~320 products across 16 categories
-- **Output location**: `data/ebay_products.json`
+- **Start with Best Buy API** - easiest to set up and has great data
+- **Use Shopify stores** if you don't want to get API keys
+- **Database scales** - can handle hundreds of thousands of products
+- **Real marketplace data** - actual prices and product descriptions
+- **Output location**: `data/ecommerce_research.db`
 
 ---
 
 ## 📊 After Collection
 
-Use your data in the comparison tool:
+Use your database for search algorithm research:
 
 ```bash
-# CLI mode
-python prototype/cli.py --mode compare --data data/ebay_products.json
+# Run comprehensive evaluation
+python run_database_search.py
+
+# CLI mode with sample data
+python prototype/cli.py --mode compare
 
 # GUI mode
 python prototype/gui.py
 ```
 
-Then load your custom data file in the GUI.
+Your real e-commerce data is now stored in the SQL database and ready for large-scale research!
 
 

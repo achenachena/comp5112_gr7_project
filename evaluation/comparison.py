@@ -56,13 +56,9 @@ class SearchComparison:
 
         # Test each algorithm
         for algo_name, algorithm in self.algorithms.items():
-            start_time = time.time()
-
             # Perform search
             search_results = algorithm.search(query, products, limit=max(k_values))
             retrieved_items = [item.get('id', item.get('item_id')) for item in search_results]
-
-            end_time = time.time()
 
             # Calculate metrics
             metrics = SearchMetrics.calculate_comprehensive_metrics(
@@ -71,7 +67,6 @@ class SearchComparison:
 
             results['algorithms'][algo_name] = {
                 'metrics': metrics,
-                'search_time': end_time - start_time,
                 'results_count': len(search_results),
                 'results': search_results[:5],  # Store top 5 results for inspection
                 'stats': (algorithm.get_search_stats(query, products) 
@@ -135,7 +130,6 @@ class SearchComparison:
         for algo_name in self.algorithms.keys():
             aggregated['algorithms'][algo_name] = {
                 'metrics': {},
-                'avg_search_time': 0.0,
                 'total_results': 0
             }
 
@@ -156,9 +150,10 @@ class SearchComparison:
                 for metric_name, value in algo_result['metrics'].items():
                     aggregated['algorithms'][algo_name]['metrics'][metric_name] += value
 
-                # Accumulate search time and result count
-                aggregated['algorithms'][algo_name]['avg_search_time'] += algo_result['search_time']
-                aggregated['algorithms'][algo_name]['total_results'] += algo_result['results_count']
+                # Accumulate result count
+                aggregated['algorithms'][algo_name]['total_results'] += (
+                    algo_result['results_count']
+                )
 
         # Calculate averages
         for algo_name in self.algorithms.keys():
@@ -167,9 +162,6 @@ class SearchComparison:
             # Average metrics
             for metric_name in aggregated['algorithms'][algo_name]['metrics']:
                 aggregated['algorithms'][algo_name]['metrics'][metric_name] /= query_count
-
-            # Average search time
-            aggregated['algorithms'][algo_name]['avg_search_time'] /= query_count
 
         return aggregated
 
@@ -218,13 +210,6 @@ class SearchComparison:
 
         # Generate insights
         insights = []
-
-        # Speed comparison
-        avg_times = [(name, data['avg_search_time'])
-                    for name, data in aggregated['algorithms'].items()]
-        avg_times.sort(key=lambda x: x[1])
-        fastest = avg_times[0][0]
-        insights.append(f"Fastest algorithm: {fastest} ({avg_times[0][1]:.4f}s average)")
 
         # MAP comparison
         map_scores = [(name, data['metrics']['map'])
@@ -275,9 +260,8 @@ class SearchComparison:
         # Performance metrics table
         print("Performance Metrics (Average across all queries):")
         print("-" * 60)
-        print(f"{'Algorithm':<20} {'MAP':<8} {'MRR':<8} {'F1@5':<8} "
-              f"{'NDCG@10':<10} {'Avg Time(s)':<12}")
-        print("-" * 60)
+        print(f"{'Algorithm':<20} {'MAP':<8} {'MRR':<8} {'F1@5':<8} {'NDCG@10':<10}")
+        print("-" * 55)
 
         for algo_name in summary['performance_ranking']:
             algo_data = aggregated['algorithms'][algo_name]
@@ -287,8 +271,7 @@ class SearchComparison:
                   f"{metrics['map']:<8.4f} "
                   f"{metrics['mrr']:<8.4f} "
                   f"{metrics['f1@5']:<8.4f} "
-                  f"{metrics['ndcg@10']:<10.4f} "
-                  f"{algo_data['avg_search_time']:<12.4f}")
+                  f"{metrics['ndcg@10']:<10.4f}")
 
         print()
 

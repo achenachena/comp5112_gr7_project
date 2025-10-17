@@ -345,8 +345,8 @@ class DataLoader:
         elif isinstance(data, dict):
             if 'products' in data:
                 return data['products']
-            elif 'itemSummaries' in data:  # eBay API format
-                return data['itemSummaries']
+            elif 'items' in data:  # Generic API format
+                return data['items']
             else:
                 return [data]
         else:
@@ -402,7 +402,7 @@ class DataLoader:
 
 def demo_preprocessing():
     """Demonstrate the data preprocessing utilities."""
-    # Sample raw data (similar to eBay API response)
+    # Sample raw data (similar to e-commerce API response)
     raw_products = [
         {
             'itemId': 'v1|1234567890|0',
@@ -411,7 +411,7 @@ def demo_preprocessing():
                             'support!!!'),
             'category': 'Phone Cases & Accessories',
             'price': {'value': '29.99', 'currency': 'USD'},
-            'itemHref': 'https://www.ebay.com/itm/1234567890',
+            'itemHref': 'https://www.example.com/itm/1234567890',
             'condition': 'NEW',
             'seller': {'username': 'tech_store_2024'},
             'location': 'New York, NY'

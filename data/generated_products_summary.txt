@@ -1,56 +1,51 @@
-Generated E-commerce Dataset Summary
-==================================================
+📊 E-commerce Dataset Summary
+========================================
 
 Total Products: 60
-Source: Generated Dataset
-File: data/generated_products.json
+Total Categories: 16
+Total Brands: 23
+Total Value: $2908.4
+Average Price: $48.47
 
 Categories:
-  - Audio: 3 products
-  - Audio Accessories: 1 products
-  - Camera Accessories: 6 products
-  - Car Accessories: 6 products
-  - Chargers: 4 products
-  - Computer Accessories: 6 products
-  - Fitness: 3 products
-  - Gaming: 6 products
-  - Laptop Accessories: 2 products
-  - Laptop Cases: 2 products
-  - Phone Cases: 7 products
-  - Screen Protectors: 3 products
-  - Smart Home: 5 products
-  - Tablet Accessories: 1 products
-  - Tablet Cases: 3 products
-  - Wearables: 2 products
+  Phone Cases: 7 products
+  Camera Accessories: 6 products
+  Car Accessories: 6 products
+  Gaming: 6 products
+  Computer Accessories: 6 products
+  Smart Home: 5 products
+  Chargers: 4 products
+  Screen Protectors: 3 products
+  Audio: 3 products
+  Fitness: 3 products
+  Tablet Cases: 3 products
+  Laptop Accessories: 2 products
+  Laptop Cases: 2 products
+  Wearables: 2 products
+  Audio Accessories: 1 products
+  Tablet Accessories: 1 products
 
 Brands:
-  - Apple: 6 products
-  - AudioPro: 3 products
-  - CameraPro: 3 products
-  - CarTech: 5 products
-  - ClimateControl: 1 products
-  - CoolTech: 1 products
-  - FitTech: 3 products
-  - GameTech: 6 products
-  - LaptopPro: 2 products
-  - LightTech: 2 products
-  - MonitorPro: 1 products
-  - NetworkPro: 1 products
-  - Samsung: 6 products
-  - SecureCam: 2 products
-  - SelfiePro: 1 products
-  - SmartHome: 2 products
-  - SmartWatch: 1 products
-  - StoragePro: 1 products
-  - TabletPro: 1 products
-  - TechHub: 1 products
-  - Universal: 5 products
-  - WebCamPro: 1 products
-  - iPhone: 5 products
-
-Conditions:
-  - New: 18 products
-  - Refurbished: 20 products
-  - Used - Like New: 22 products
-
-Search Queries: 41 predefined queries
+  Samsung: 6 products
+  GameTech: 6 products
+  Apple: 6 products
+  iPhone: 5 products
+  Universal: 5 products
+  CarTech: 5 products
+  AudioPro: 3 products
+  FitTech: 3 products
+  CameraPro: 3 products
+  LaptopPro: 2 products
+  SmartHome: 2 products
+  SecureCam: 2 products
+  LightTech: 2 products
+  TechHub: 1 products
+  CoolTech: 1 products
+  ClimateControl: 1 products
+  SmartWatch: 1 products
+  WebCamPro: 1 products
+  MonitorPro: 1 products
+  StoragePro: 1 products
+  NetworkPro: 1 products
+  TabletPro: 1 products
+  SelfiePro: 1 products

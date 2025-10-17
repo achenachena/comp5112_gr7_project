@@ -1,5 +1,22 @@
-# Environment variables
+# Environment variables and sensitive data
 .env
+.env.local
+.env.production
+*.env
+config/secrets.json
+secrets/
+*.key
+*.pem
+*.p12
+credentials*
+secure_stores_list.txt
+PRIVATE_STORE_URLS.txt
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/ecommerce_research.db
 
 # Python
 __pycache__/
@@ -23,17 +40,47 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environments
-venv/
-env/
-ENV/
+# Virtual environments (keep .venv for reproducibility)
+# venv/
+# env/
+# ENV/
+# .venv/  # Commented out to keep virtual environment in repo
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-*
 
 # OS
 .DS_Store
 Thumbs.db
+*.tmp
+*.log
+
+# Results and generated files
+results/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.csv
+*.json
+!data/mock_datasets/*.json
+!requirements.txt
+!env.template
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Documentation builds
+docs/_build/
+site/

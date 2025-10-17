@@ -1,4 +1,0 @@
-{
-  "error": "Request failed: 401 Client Error: Unauthorized for url: https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=iPhone+case&limit=5&offset=0&sort=PricePlusShippingLowest",
-  "status_code": 401
-}

@@ -80,11 +80,12 @@
 - **Query-specific Judgments**: Individual relevance scores for each query-item pair
 - **Category-aware Scoring**: Relevance scoring considers product categories
 
-### 3. Data Collection
+### 5. Data Collection (Legacy Information)
 
 #### Data Sources
-- **Primary**: eBay API for real e-commerce product data
+- **Primary**: Multiple real e-commerce APIs (Best Buy, Target, Shopify, Newegg)
 - **Secondary**: Synthetic product data for testing and validation
+- **Database Storage**: SQL database for scalable data management
 
 #### Data Preprocessing
 - Text cleaning and normalization
@@ -145,9 +146,9 @@
 ## Limitations
 
 1. **Data Limitations**:
-   - Limited to eBay product data
    - Synthetic relevance judgments may not reflect real user preferences
-   - Small dataset size for comprehensive evaluation
+   - Dependent on API availability and rate limits
+   - Product catalog variations across different e-commerce platforms
 
 2. **Algorithm Limitations**:
    - No semantic understanding (word embeddings, neural networks)

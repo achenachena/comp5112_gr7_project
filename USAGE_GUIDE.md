@@ -397,19 +397,29 @@ for dataset in datasets:
     comparison.export_results(f'results/{dataset}_comparison.json')
 ```
 
-### Integration with eBay API
+### Database Query Operations
 
 ```python
-from data_collection.ebay_client import EbayAPIClient
+from database.db_manager import get_db_manager
+from database.models import Product
 
-# Set up eBay API credentials in .env file
-client = EbayAPIClient()
+# Get database manager
+db = get_db_manager()
 
-# Collect real product data
-results = client.search_and_format("iPhone case", limit=100)
-
-# Use collected data for algorithm comparison
-products = results['products']
+# Query products by category
+with db.get_session() as session:
+    electronics = session.query(Product).filter_by(category='Electronics').limit(100).all()
+    
+# Query products by price range
+with db.get_session() as session:
+    affordable_products = session.query(Product).filter(
+        Product.price_value < 50.0
+    ).all()
+    
+# Get database statistics
+stats = db.get_database_info()
+print(f"Total products: {stats['stats']['products']}")
+print(f"Data sources: {stats['stats']['unique_sources']}")
 ```
 
-This guide provides comprehensive instructions for using the search algorithm comparison tool. For additional help or questions, refer to the source code documentation or create an issue in the repository.
+This guide provides comprehensive instructions for using the database-based search algorithm comparison tool. For additional help or questions, refer to the documentation in `DATABASE_SETUP_GUIDE.md` or `REAL_ECOMMERCE_SETUP.md`.

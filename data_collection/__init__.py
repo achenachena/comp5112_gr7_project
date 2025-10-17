@@ -1,1 +1,1 @@
-# Data collection package for eBay API integration
+# Data collection package for e-commerce API integration

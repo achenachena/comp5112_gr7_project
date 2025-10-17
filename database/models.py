@@ -5,7 +5,10 @@ This module defines the SQLAlchemy models for storing e-commerce product data,
 search queries, and algorithm evaluation results.
 """
 
-from sqlalchemy import create_engine, Column, Integer, String, Float, Text, DateTime, Boolean, ForeignKey, Index
+from sqlalchemy import (
+    create_engine, Column, Integer, String, Float, Text, 
+    DateTime, Boolean, ForeignKey, Index
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
@@ -15,9 +18,9 @@ Base = declarative_base()
 
 
 class Product(Base):
-    """Model for storing e-commerce products."""
+    """Model for storing API-based e-commerce products."""
     
-    __tablename__ = 'products'
+    __tablename__ = 'api_products'
     
     # Primary key
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -78,6 +81,56 @@ class Product(Base):
         return f"<Product(id={self.id}, title='{self.title[:50]}...', price=${self.price_value})>"
 
 
+class SocialMediaProduct(Base):
+    """Model for storing social media scraped product data."""
+    
+    __tablename__ = 'social_media_products'
+    
+    # Primary key
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    
+    # Social media identification
+    post_id = Column(String(100), unique=True, nullable=False, index=True)
+    platform = Column(String(50), nullable=False, index=True)  # reddit, twitter, instagram
+    subreddit = Column(String(100), index=True)  # for Reddit posts
+    
+    # Content information
+    title = Column(Text, nullable=False, index=True)
+    content = Column(Text, nullable=False)
+    author = Column(String(100), index=True)
+    post_date = Column(DateTime, index=True)
+    
+    # Product information (extracted from social media content)
+    product_name = Column(Text, index=True)
+    product_description = Column(Text)
+    brand = Column(String(100), index=True)
+    category = Column(String(100), index=True)
+    price_mentioned = Column(Float, index=True)
+    price_currency = Column(String(10), default='USD')
+    
+    # Social media metrics
+    upvotes = Column(Integer, default=0)
+    downvotes = Column(Integer, default=0)
+    comments_count = Column(Integer, default=0)
+    engagement_score = Column(Float, default=0.0)
+    
+    # Sentiment and quality
+    sentiment_score = Column(Float)  # -1 to 1
+    is_review = Column(Boolean, default=False)
+    is_recommendation = Column(Boolean, default=False)
+    is_complaint = Column(Boolean, default=False)
+    
+    # Metadata
+    url = Column(Text)
+    image_url = Column(Text)
+    tags = Column(Text)  # JSON string of extracted tags
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return (f"<SocialMediaProduct(id={self.id}, platform='{self.platform}', "
+                f"title='{self.title[:50]}...', product='{self.product_name[:30]}...')>")
+
+
 class SearchQuery(Base):
     """Model for storing search queries used in evaluation."""
     
@@ -104,7 +157,7 @@ class SearchResult(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     
     # Foreign keys
-    product_id = Column(Integer, ForeignKey('products.id'), nullable=False, index=True)
+    product_id = Column(Integer, ForeignKey('api_products.id'), nullable=False, index=True)
     query_id = Column(Integer, ForeignKey('search_queries.id'), nullable=False, index=True)
     
     # Algorithm information
@@ -134,7 +187,8 @@ class SearchResult(Base):
     )
     
     def __repr__(self):
-        return f"<SearchResult(product_id={self.product_id}, algorithm='{self.algorithm_name}', score={self.relevance_score})>"
+        return (f"<SearchResult(product_id={self.product_id}, "
+                f"algorithm='{self.algorithm_name}', score={self.relevance_score})>")
 
 
 class EvaluationMetrics(Base):
@@ -187,7 +241,8 @@ class EvaluationMetrics(Base):
     )
     
     def __repr__(self):
-        return f"<EvaluationMetrics(query_id={self.query_id}, algorithm='{self.algorithm_name}', map={self.map_score})>"
+        return (f"<EvaluationMetrics(query_id={self.query_id}, "
+                f"algorithm='{self.algorithm_name}', map={self.map_score})>")
 
 
 class DataCollectionLog(Base):
@@ -215,7 +270,8 @@ class DataCollectionLog(Base):
     collection_time_seconds = Column(Float)
     
     def __repr__(self):
-        return f"<DataCollectionLog(source='{self.api_source}', query='{self.search_query}', products={self.products_collected})>"
+        return (f"<DataCollectionLog(source='{self.api_source}', "
+                f"query='{self.search_query}', products={self.products_collected})>")
 
 
 # Database utility functions
@@ -251,8 +307,10 @@ def get_database_stats(session):
         stats['unique_sources'] = session.query(Product.source).distinct().count()
         stats['unique_categories'] = session.query(Product.category).distinct().count()
         stats['price_range'] = {
-            'min': session.query(Product.price_value).order_by(Product.price_value.asc()).first()[0],
-            'max': session.query(Product.price_value).order_by(Product.price_value.desc()).first()[0]
+            'min': (session.query(Product.price_value)
+                   .order_by(Product.price_value.asc()).first()[0]),
+            'max': (session.query(Product.price_value)
+                   .order_by(Product.price_value.desc()).first()[0])
         }
     
     return stats
