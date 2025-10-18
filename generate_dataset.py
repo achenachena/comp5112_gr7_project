@@ -179,7 +179,7 @@ def main():
     print("1. Test with search algorithms:")
     print("   python prototype/cli.py --mode compare")
     print("2. Run GUI interface:")
-    print("   python prototype/gui.py")
+    print("   python web_gui.py")
 
 
 if __name__ == "__main__":

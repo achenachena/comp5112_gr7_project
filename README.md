@@ -104,7 +104,7 @@ python run_database_search.py
 python prototype/cli.py
 
 # Graphical interface
-python prototype/gui.py
+python web_gui.py
 ```
 
 ## 💻 Usage Examples

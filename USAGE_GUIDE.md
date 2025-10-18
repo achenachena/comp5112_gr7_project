@@ -61,7 +61,7 @@ python prototype/cli.py --data data/my_products.json
 
 ```bash
 # Launch GUI application
-python prototype/gui.py
+python web_gui.py
 ```
 
 ## 📊 Database Usage

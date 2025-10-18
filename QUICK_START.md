@@ -74,7 +74,7 @@ python run_database_search.py
 python prototype/cli.py --mode compare
 
 # GUI mode
-python prototype/gui.py
+python web_gui.py
 ```
 
 Your real e-commerce data is now stored in the SQL database and ready for large-scale research!

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-commerce Search Algorithm Comparison</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>E-commerce Search Algorithm Comparison</h1>
+            <p>Comparative Analysis of Keyword Matching vs TF-IDF Search Algorithms</p>
+        </div>
+
+        <div class="section">
+            <h3>Data Management</h3>
+            <div class="controls">
+                <button class="btn" onclick="loadData()">Load Database Data</button>
+                <input type="number" id="limit" class="input" placeholder="Product limit (empty = all)" style="width: 200px;">
+                <span id="dataStatus"></span>
+            </div>
+            <div id="dataInfo"></div>
+        </div>
+
+        <div class="section">
+            <h3>Algorithm Comparison</h3>
+            <div class="controls">
+                <button class="btn" onclick="runComparison()" id="compareBtn">Run Comparison</button>
+                <span id="comparisonStatus"></span>
+            </div>
+            <div id="comparisonResults"></div>
+        </div>
+
+        <div class="section">
+            <h3>Interactive Search</h3>
+            <div class="controls">
+                <input type="text" id="searchQuery" class="input" placeholder="Enter search query..." style="width: 300px;">
+                <button class="btn" onclick="search()">Search</button>
+            </div>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

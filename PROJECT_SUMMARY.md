@@ -122,7 +122,7 @@ pip install -r requirements.txt
 python prototype/cli.py --mode demo
 
 # Launch GUI
-python prototype/gui.py
+python web_gui.py
 ```
 
 ### Programmatic Usage

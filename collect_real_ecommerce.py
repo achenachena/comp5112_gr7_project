@@ -602,7 +602,7 @@ def main():
         print("1. Test with your algorithms:")
         print(f"   python prototype/cli.py --mode compare --data {output_file}")
         print("2. Use in GUI:")
-        print("   python prototype/gui.py")
+        print("   python web_gui.py")
         print("3. Load your real e-commerce dataset in the GUI")
 
     else:

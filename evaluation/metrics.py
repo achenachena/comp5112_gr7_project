@@ -307,7 +307,15 @@ class RelevanceJudgment:
                 relevance = min(1.0, relevance)
 
                 if relevance > 0:
-                    self.add_judgment(query, product.get('id', product.get('item_id')), relevance)
+                    # Use product index as ID if no explicit ID is available
+                    product_id = product.get('id', product.get('item_id'))
+                    if product_id is None:
+                        # Find the index of this product in the products list
+                        try:
+                            product_id = products.index(product)
+                        except ValueError:
+                            product_id = len(products)  # Fallback to length
+                    self.add_judgment(query, product_id, relevance)
 
 
 def demo_metrics():

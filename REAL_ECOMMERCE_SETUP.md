@@ -167,7 +167,7 @@ python prototype/cli.py --mode compare --data data/real_ecommerce_products.json
 
 ### **Use in GUI:**
 ```bash
-python prototype/gui.py
+python web_gui.py
 # Then load: data/real_ecommerce_products.json
 ```
 
