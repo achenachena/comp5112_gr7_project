@@ -6,10 +6,11 @@ query terms directly against product titles and descriptions.
 """
 
 import re
-import string
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any
 from collections import Counter
 import math
+
+from ecommerce_search.config import AlgorithmConfig
 
 
 class KeywordSearch:
@@ -20,7 +21,7 @@ class KeywordSearch:
     ranking results based on keyword frequency and exact matches.
     """
 
-    def __init__(self, case_sensitive: bool = False, exact_match_weight: float = 2.0):
+    def __init__(self, case_sensitive: bool = None, exact_match_weight: float = None):
         """
         Initialize the keyword search algorithm.
 
@@ -28,16 +29,22 @@ class KeywordSearch:
             case_sensitive: Whether to perform case-sensitive matching
             exact_match_weight: Weight multiplier for exact keyword matches
         """
-        self.case_sensitive = case_sensitive
-        self.exact_match_weight = exact_match_weight
+        self.case_sensitive = (
+            case_sensitive if case_sensitive is not None 
+            else AlgorithmConfig.DEFAULT_CASE_SENSITIVE
+        )
+        self.exact_match_weight = (
+            exact_match_weight if exact_match_weight is not None 
+            else AlgorithmConfig.DEFAULT_EXACT_MATCH_WEIGHT
+        )
         self.stop_words = {
             'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
             'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
-            'to', 'was', 'will', 'with', 'for', 'this', 'but', 'they', 'have',
+            'to', 'was', 'will', 'with', 'this', 'but', 'they', 'have',
             'had', 'what', 'said', 'each', 'which', 'their', 'time', 'if',
             'up', 'out', 'many', 'then', 'them', 'can', 'only', 'other',
             'new', 'some', 'could', 'now', 'than', 'first', 'been', 'call',
-            'who', 'its', 'now', 'find', 'long', 'down', 'day', 'did', 'get',
+            'who', 'find', 'long', 'down', 'day', 'did', 'get',
             'come', 'made', 'may', 'part'
         }
 
@@ -102,7 +109,8 @@ class KeywordSearch:
             for product_token in product_counter:
                 if query_token in product_token or product_token in query_token:
                     # Lower weight for partial matches
-                    partial_matches += product_counter[product_token] * 0.5
+                    partial_match_weight = AlgorithmConfig.DEFAULT_PARTIAL_MATCH_WEIGHT
+                    partial_matches += product_counter[product_token] * partial_match_weight
 
             score += partial_matches * query_weight
             total_query_weight += query_weight
@@ -113,8 +121,8 @@ class KeywordSearch:
 
         return score
 
-    def search(self, query: str, products: List[Dict[str, Any]], 
-               limit: int = 10) -> List[Dict[str, Any]]:
+    def search(self, query: str, products: List[Dict[str, Any]],
+               limit: int = None) -> List[Dict[str, Any]]:
         """
         Search products using keyword matching algorithm.
 
@@ -128,6 +136,10 @@ class KeywordSearch:
         """
         if not query or not products:
             return []
+
+        # Get limit from config if not provided
+        if limit is None:
+            limit = AlgorithmConfig.DEFAULT_SEARCH_LIMIT
 
         # Preprocess query
         query_tokens = self.preprocess_text(query)
@@ -200,79 +212,3 @@ class KeywordSearch:
         }
 
         return stats
-
-
-def demo_keyword_search():
-    """Demonstrate the keyword search algorithm with sample data."""
-    # Sample product data
-    sample_products = [
-        {
-            'id': 1,
-            'title': 'iPhone 15 Pro Max Case - Clear Transparent',
-            'description': ('Premium clear case for iPhone 15 Pro Max with wireless charging '
-                            'support'),
-            'category': 'Phone Cases',
-            'price': {'value': '29.99', 'currency': 'USD'}
-        },
-        {
-            'id': 2,
-            'title': 'Samsung Galaxy S24 Ultra Case - Black',
-            'description': 'Protective case for Samsung Galaxy S24 Ultra with kickstand',
-            'category': 'Phone Cases',
-            'price': {'value': '24.99', 'currency': 'USD'}
-        },
-        {
-            'id': 3,
-            'title': 'iPhone 15 Screen Protector - Tempered Glass',
-            'description': '9H hardness tempered glass screen protector for iPhone 15',
-            'category': 'Screen Protectors',
-            'price': {'value': '12.99', 'currency': 'USD'}
-        },
-        {
-            'id': 4,
-            'title': 'Wireless Charger Pad - Fast Charging',
-            'description': 'Universal wireless charging pad compatible with iPhone and Android',
-            'category': 'Chargers',
-            'price': {'value': '19.99', 'currency': 'USD'}
-        }
-    ]
-
-    # Initialize search algorithm
-    keyword_search = KeywordSearch()
-
-    # Test search queries
-    test_queries = [
-        "iPhone case",
-        "Samsung phone",
-        "wireless charger",
-        "screen protector iPhone"
-    ]
-
-    print("Keyword Matching Search Algorithm Demo")
-    print("=" * 50)
-
-    for query in test_queries:
-        print(f"\nQuery: '{query}'")
-        print("-" * 30)
-
-        results = keyword_search.search(query, sample_products, limit=3)
-
-        if results:
-            for i, product in enumerate(results, 1):
-                print(f"{i}. {product['title']}")
-                print(f"   Score: {product['relevance_score']:.3f}")
-                print(f"   Matched Terms: {product['matched_terms']}")
-                print()
-        else:
-            print("No results found.")
-
-    # Get search statistics
-    stats = keyword_search.get_search_stats("iPhone case", sample_products)
-    print(f"\nSearch Statistics:")
-    print(f"Query tokens: {stats['query_tokens']}")
-    print(f"Total products: {stats['total_products']}")
-    print(f"Case sensitive: {stats['parameters']['case_sensitive']}")
-
-
-if __name__ == "__main__":
-    demo_keyword_search()

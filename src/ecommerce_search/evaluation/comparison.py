@@ -5,7 +5,6 @@ This module provides tools to compare different search algorithms and evaluate
 their performance using various metrics.
 """
 
-import time
 from typing import List, Dict, Any, Optional
 import json
 from .metrics import SearchMetrics, RelevanceJudgment
@@ -69,7 +68,7 @@ class SearchComparison:
                 'metrics': metrics,
                 'results_count': len(search_results),
                 'results': search_results[:5],  # Store top 5 results for inspection
-                'stats': (algorithm.get_search_stats(query, products) 
+                'stats': (algorithm.get_search_stats(query, products)
                           if hasattr(algorithm, 'get_search_stats') else {})
             }
 
@@ -240,150 +239,3 @@ class SearchComparison:
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.comparison_results, f, indent=2, ensure_ascii=False)
 
-    def print_comparison_report(self):
-        """
-        Print a formatted comparison report.
-        """
-        if not self.comparison_results:
-            print("No comparison results available. Run comparison first.")
-            return
-
-        aggregated = self.comparison_results['aggregated']
-        summary = self.comparison_results['summary']
-
-        print("Search Algorithm Comparison Report")
-        print("=" * 60)
-        print(f"Total Queries: {aggregated['total_queries']}")
-        print(f"Algorithms Compared: {', '.join(self.algorithms.keys())}")
-        print()
-
-        # Performance metrics table
-        print("Performance Metrics (Average across all queries):")
-        print("-" * 60)
-        print(f"{'Algorithm':<20} {'MAP':<8} {'MRR':<8} {'F1@5':<8} {'NDCG@10':<10}")
-        print("-" * 55)
-
-        for algo_name in summary['performance_ranking']:
-            algo_data = aggregated['algorithms'][algo_name]
-            metrics = algo_data['metrics']
-
-            print(f"{algo_name:<20} "
-                  f"{metrics['map']:<8.4f} "
-                  f"{metrics['mrr']:<8.4f} "
-                  f"{metrics['f1@5']:<8.4f} "
-                  f"{metrics['ndcg@10']:<10.4f}")
-
-        print()
-
-        # Best algorithms
-        print("Best Performing Algorithms:")
-        print("-" * 30)
-        for metric, info in summary['best_algorithms'].items():
-            print(f"{metric}: {info['algorithm']} ({info['score']:.4f})")
-
-        print()
-
-        # Key insights
-        print("Key Insights:")
-        print("-" * 15)
-        for insight in summary['key_insights']:
-            print(f"• {insight}")
-
-        print()
-
-        # Detailed metrics at different K values
-        print("Detailed Metrics at Different K Values:")
-        print("-" * 50)
-
-        k_values = [1, 3, 5, 10]
-        for k in k_values:
-            print(f"\nAt K={k}:")
-            print(f"{'Algorithm':<20} {'Precision':<10} {'Recall':<10} "
-                  f"{'F1-Score':<10} {'NDCG':<10}")
-            print("-" * 60)
-
-            for algo_name in summary['performance_ranking']:
-                algo_data = aggregated['algorithms'][algo_name]
-                metrics = algo_data['metrics']
-
-                print(f"{algo_name:<20} "
-                      f"{metrics[f'precision@{k}']:<10.4f} "
-                      f"{metrics[f'recall@{k}']:<10.4f} "
-                      f"{metrics[f'f1@{k}']:<10.4f} "
-                      f"{metrics[f'ndcg@{k}']:<10.4f}")
-
-
-def demo_comparison():
-    """Demonstrate the search algorithm comparison framework."""
-    # Import algorithms
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-    from algorithms.keyword_matching import KeywordSearch
-    from algorithms.tfidf_search import TFIDFSearch
-
-    # Sample data
-    sample_products = [
-        {
-            'id': 1,
-            'title': 'iPhone 15 Pro Max Case - Clear Transparent',
-            'description': ('Premium clear case for iPhone 15 Pro Max with wireless charging '
-                            'support'),
-            'category': 'Phone Cases',
-            'price': {'value': '29.99', 'currency': 'USD'}
-        },
-        {
-            'id': 2,
-            'title': 'Samsung Galaxy S24 Ultra Case - Black',
-            'description': 'Protective case for Samsung Galaxy S24 Ultra with kickstand',
-            'category': 'Phone Cases',
-            'price': {'value': '24.99', 'currency': 'USD'}
-        },
-        {
-            'id': 3,
-            'title': 'iPhone 15 Screen Protector - Tempered Glass',
-            'description': '9H hardness tempered glass screen protector for iPhone 15',
-            'category': 'Screen Protectors',
-            'price': {'value': '12.99', 'currency': 'USD'}
-        },
-        {
-            'id': 4,
-            'title': 'Wireless Charger Pad - Fast Charging',
-            'description': 'Universal wireless charging pad compatible with iPhone and Android',
-            'category': 'Chargers',
-            'price': {'value': '19.99', 'currency': 'USD'}
-        },
-        {
-            'id': 5,
-            'title': 'iPhone 14 Pro Case - Silicone',
-            'description': 'Soft silicone case for iPhone 14 Pro with MagSafe compatibility',
-            'category': 'Phone Cases',
-            'price': {'value': '39.99', 'currency': 'USD'}
-        }
-    ]
-
-    test_queries = ["iPhone case", "wireless charger", "Samsung phone"]
-
-    # Initialize algorithms
-    algorithms = {
-        'keyword_matching': KeywordSearch(),
-        'tfidf': TFIDFSearch()
-    }
-
-    # Create relevance judgments
-    relevance_judge = RelevanceJudgment()
-    relevance_judge.create_synthetic_judgments(test_queries, sample_products)
-
-    # Initialize comparison framework
-    comparison = SearchComparison(algorithms, relevance_judge)
-
-    # Run comparison
-    comparison.compare_multiple_queries(test_queries, sample_products)
-
-    # Print report
-    comparison.print_comparison_report()
-
-
-if __name__ == "__main__":
-    demo_comparison()

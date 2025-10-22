@@ -10,19 +10,20 @@ from flask import Flask
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from ecommerce_search.algorithms import KeywordSearch, TFIDFSearch
-from ecommerce_search.database import get_db_manager
-from ecommerce_search.evaluation import RelevanceJudgment, UltraSimpleComparison
+# Project imports
+from ecommerce_search.algorithms import KeywordSearch, TFIDFSearch  # pylint: disable=wrong-import-position
+from ecommerce_search.database import get_db_manager  # pylint: disable=wrong-import-position
+from ecommerce_search.evaluation import RelevanceJudgment, UltraSimpleComparison  # pylint: disable=wrong-import-position
 
 
-def create_app(config_name=None):
+def create_app():
     """Create and configure the Flask application."""
     app = Flask(__name__)
-    
+
     # Configure app
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
     app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-    
+
     # Initialize global variables
     app.products = []
     app.algorithms = {
@@ -31,12 +32,12 @@ def create_app(config_name=None):
     }
     app.relevance_judge = RelevanceJudgment()
     app.db_manager = get_db_manager()
-    
+
     # Register blueprints
     from ecommerce_search.web.routes import main_bp, api_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(api_bp, url_prefix='/api')
-    
+
     return app
 
 
@@ -47,5 +48,5 @@ if __name__ == '__main__':
     print("This web GUI avoids all tkinter/GIL issues!")
     print("Press Ctrl+C to stop the server")
     print()
-    
+
     app.run(debug=False, host='0.0.0.0', port=5000)

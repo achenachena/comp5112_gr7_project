@@ -53,10 +53,7 @@
 ### 3. Real Data Collection
 
 #### API Integration
-- **Best Buy API**: Real electronics, appliances, and gaming products
-- **Target API**: Real retail products across multiple categories
 - **Shopify Stores**: Real e-commerce products from various stores
-- **Newegg API**: Real tech products and gaming equipment
 
 #### Data Quality Assurance
 - **Real Pricing**: Actual marketplace prices from live APIs
@@ -83,7 +80,7 @@
 ### 5. Data Collection (Legacy Information)
 
 #### Data Sources
-- **Primary**: Multiple real e-commerce APIs (Best Buy, Target, Shopify, Newegg)
+- **Primary**: Shopify stores (200+ stores across multiple categories)
 - **Secondary**: Synthetic product data for testing and validation
 - **Database Storage**: SQL database for scalable data management
 

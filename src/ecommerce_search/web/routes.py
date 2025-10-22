@@ -4,6 +4,8 @@ Web application routes
 
 import time
 from flask import Blueprint, render_template, request, jsonify, current_app
+from ecommerce_search.database.models import Product, SocialMediaProduct
+from ecommerce_search.evaluation.algorithm_comparison import UltraSimpleComparison
 
 # Create blueprints
 main_bp = Blueprint('main', __name__)
@@ -23,16 +25,14 @@ def load_data():
         data = request.get_json()
         limit = data.get('limit', 1000)
         dataset = data.get('dataset', 'api')  # Default to API dataset
-        
+
         with current_app.db_manager.get_session() as session:
             if dataset == 'api':
-                from ecommerce_search.database.models import Product
-                
                 if limit:
                     db_products = session.query(Product).limit(limit).all()
                 else:
                     db_products = session.query(Product).all()
-                
+
                 products = []
                 for product in db_products:
                     products.append({
@@ -49,13 +49,11 @@ def load_data():
                         'source': product.source
                     })
             else:  # social media dataset
-                from ecommerce_search.database.models import SocialMediaProduct
-                
                 if limit:
                     db_products = session.query(SocialMediaProduct).limit(limit).all()
                 else:
                     db_products = session.query(SocialMediaProduct).all()
-                
+
                 products = []
                 for product in db_products:
                     products.append({
@@ -74,19 +72,19 @@ def load_data():
                         'comments_count': product.comments_count,
                         'post_date': product.post_date.isoformat() if product.post_date else None
                     })
-        
+
         current_app.products = products
         current_app.current_dataset = dataset
         db_info = current_app.db_manager.get_database_info()
-        
+
         return jsonify({
             'success': True,
             'count': len(products),
             'dataset': dataset,
             'db_info': db_info
         })
-    
-    except Exception as e:
+
+    except (ValueError, KeyError, AttributeError) as e:
         return jsonify({'success': False, 'error': str(e)})
 
 
@@ -95,8 +93,11 @@ def run_comparison():
     """Run algorithm comparison."""
     try:
         if not current_app.products:
-            return jsonify({'success': False, 'error': 'No products loaded. Please load data first.'})
-        
+            return jsonify({
+                'success': False, 
+                'error': 'No products loaded. Please load data first.'
+            })
+
         # Create test queries based on dataset
         dataset = getattr(current_app, 'current_dataset', 'api')
         if dataset == 'api':
@@ -120,28 +121,25 @@ def run_comparison():
                 "outstanding", "exceptional", "outstanding quality",
                 "highly rated", "customer choice"
             ]
-        
-        # Create relevance judgments for social media dataset
-        if dataset == 'social_media':
-            print("Creating synthetic relevance judgments for social media dataset...")
-            current_app.relevance_judge.create_synthetic_judgments(test_queries, current_app.products)
-        
+
+        # Create relevance judgments for both datasets
+        current_app.relevance_judge.create_synthetic_judgments(test_queries, current_app.products)
+
         # Run comparison
         start_time = time.time()
-        from ecommerce_search.evaluation.ultra_simple_comparison import UltraSimpleComparison
         comparison = UltraSimpleComparison(current_app.algorithms, current_app.relevance_judge)
         results = comparison.compare_simple(test_queries, current_app.products)
         end_time = time.time()
-        
+
         results['total_time'] = end_time - start_time
-        
+
         return jsonify({
             'success': True,
             'results': results,
             'time': results['total_time']
         })
-    
-    except Exception as e:
+
+    except (ValueError, KeyError, AttributeError) as e:
         return jsonify({'success': False, 'error': str(e)})
 
 
@@ -150,29 +148,32 @@ def search():
     """Perform search with algorithms."""
     try:
         if not current_app.products:
-            return jsonify({'success': False, 'error': 'No products loaded. Please load data first.'})
-        
+            return jsonify({
+                'success': False, 
+                'error': 'No products loaded. Please load data first.'
+            })
+
         data = request.get_json()
         query = data.get('query', '').strip()
-        
+
         if not query:
             return jsonify({'success': False, 'error': 'Empty query'})
-        
+
         results = {}
         for algo_name, algorithm in current_app.algorithms.items():
             start_time = time.time()
             search_results = algorithm.search(query, current_app.products, limit=10)
             search_time = time.time() - start_time
-            
+
             results[algo_name] = {
                 'results': search_results,
                 'search_time': search_time
             }
-        
+
         return jsonify({
             'success': True,
             'results': results
         })
-    
-    except Exception as e:
+
+    except (ValueError, KeyError, AttributeError) as e:
         return jsonify({'success': False, 'error': str(e)})

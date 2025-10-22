@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 ### Step 2: Initialize Database
 ```bash
-python scripts/utilities/init_database.py
+python scripts/utilities/database_initializer.py
 ```
 
 This creates an empty database with the correct schema.
@@ -48,7 +48,7 @@ The configuration file allows you to:
 - Organize by categories
 - Include metadata (subscriber count, description)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 ```bash
@@ -62,10 +62,11 @@ pip install -r requirements.txt
 ### 2. Database Setup
 ```bash
 # Initialize database
-python scripts/utilities/init_database.py
+python scripts/utilities/database_initializer.py
 
-# Generate sample data
-python scripts/utilities/generate_dataset.py
+# Collect real data (optional)
+python scripts/data_collection/ecommerce_api_collector.py
+python scripts/data_collection/social_media_scraper.py
 ```
 
 ### 3. Run the Application
@@ -162,23 +163,26 @@ results = metrics.evaluate_algorithms([keyword_search, tfidf_search], products)
 
 ## Data Collection
 
-### Generated Data
+### Real Data Collection
 ```bash
-python scripts/utilities/generate_dataset.py
+# Collect from Shopify stores (no API key needed)
+python scripts/data_collection/ecommerce_api_collector.py
+
+# Collect social media data (requires API keys)
+python scripts/data_collection/social_media_scraper.py
 ```
 
 ### Real API Data
 ```bash
 # Shopify Stores API (no API key required - public endpoints)
-python scripts/data_collection/collect_real_ecommerce.py
+python scripts/data_collection/ecommerce_api_collector.py
 
 # Social Media Data (requires API keys)
-python scripts/data_collection/real_social_media_scraper.py
+python scripts/data_collection/social_media_scraper.py
 ```
 
 ### Optional API Data (Not Currently Used)
 ```bash
-# Best Buy API (requires API key) - Available but not used in current dataset
 python scripts/data_collection/collect_real_ecommerce.py
 
 # Walmart API (requires API key) - Available but not used in current dataset
@@ -187,13 +191,14 @@ python scripts/data_collection/collect_real_ecommerce.py
 
 ### API Key Setup
 1. Get API keys from:
-   - Best Buy: https://developer.bestbuy.com/
-   - Target: https://developer.target.com/
+   - Reddit: https://www.reddit.com/prefs/apps
+   - Twitter: https://developer.twitter.com/
 
 2. Add to `.env` file:
 ```bash
-BEST_BUY_API_KEY=your_key_here
-TARGET_API_KEY=your_key_here
+REDDIT_CLIENT_ID_1=your_key_here
+REDDIT_CLIENT_SECRET_1=your_secret_here
+TWITTER_BEARER_TOKEN=your_token_here
 ```
 
 ## Configuration
@@ -234,8 +239,8 @@ tfidf_search = TFIDFSearch(
 ### Common Issues
 
 1. **Import errors**: Ensure virtual environment is activated
-2. **Database not found**: Run `python scripts/init_database.py`
-3. **No data**: Run `python scripts/generate_dataset.py`
+2. **Database not found**: Run `python scripts/utilities/database_initializer.py`
+3. **No data**: Run the data collection scripts to gather real data
 4. **Port already in use**: Change port in web app configuration
 
 ### Getting Help

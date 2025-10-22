@@ -283,16 +283,16 @@ class RelevanceJudgment:
             for product in products:
                 # Combine product text - handle social media data
                 product_text = ""
-                if 'title' in product:
-                    product_text += product['title'] + " "
-                if 'description' in product:
-                    product_text += product.get('description', '') + " "
-                if 'product_name' in product:
-                    product_text += product.get('product_name', '') + " "
-                if 'brand' in product:
-                    product_text += product.get('brand', '') + " "
-                if 'category' in product:
-                    product_text += product.get('category', '') + " "
+                if 'title' in product and product['title']:
+                    product_text += str(product['title']) + " "
+                if 'description' in product and product.get('description'):
+                    product_text += str(product.get('description', '')) + " "
+                if 'product_name' in product and product.get('product_name'):
+                    product_text += str(product.get('product_name', '')) + " "
+                if 'brand' in product and product.get('brand'):
+                    product_text += str(product.get('brand', '')) + " "
+                if 'category' in product and product.get('category'):
+                    product_text += str(product.get('category', '')) + " "
 
                 product_terms = set(re.findall(r'\w+', product_text.lower()))
 
@@ -306,7 +306,7 @@ class RelevanceJudgment:
                 # Add some variation based on exact matches
                 if query.lower() in product_text.lower():
                     relevance += 0.3
-                
+
                 # Boost for social media specific fields
                 if 'product_name' in product and query.lower() in product['product_name'].lower():
                     relevance += 0.4
@@ -330,59 +330,3 @@ class RelevanceJudgment:
                     self.add_judgment(query, product_id, relevance)
 
 
-def demo_metrics():
-    """Demonstrate the evaluation metrics with sample data."""
-    # Sample ground truth
-    relevant_items = {1, 3, 5, 7, 9}
-    retrieved_items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    relevance_scores = {1: 1.0, 2: 0.0, 3: 0.8, 4: 0.0, 5: 0.9,
-                       6: 0.0, 7: 0.7, 8: 0.0, 9: 0.6, 10: 0.0}
-
-    print("Search Evaluation Metrics Demo")
-    print("=" * 50)
-    print(f"Relevant items: {relevant_items}")
-    print(f"Retrieved items: {retrieved_items}")
-    print()
-
-    # Calculate metrics
-    metrics = SearchMetrics.calculate_comprehensive_metrics(
-        relevant_items, retrieved_items, [1, 3, 5, 10], relevance_scores
-    )
-
-    print("Evaluation Metrics:")
-    print("-" * 30)
-    print(f"Mean Average Precision (MAP): {metrics['map']:.4f}")
-    print(f"Mean Reciprocal Rank (MRR): {metrics['mrr']:.4f}")
-    print()
-
-    for k in [1, 3, 5, 10]:
-        print(f"At K={k}:")
-        print(f"  Precision@{k}: {metrics[f'precision@{k}']:.4f}")
-        print(f"  Recall@{k}: {metrics[f'recall@{k}']:.4f}")
-        print(f"  F1@{k}: {metrics[f'f1@{k}']:.4f}")
-        print(f"  NDCG@{k}: {metrics[f'ndcg@{k}']:.4f}")
-        print()
-
-    # Demonstrate relevance judgment
-    print("Relevance Judgment Demo:")
-    print("-" * 30)
-
-    relevance_judge = RelevanceJudgment()
-
-    # Sample queries and products
-    queries = ["iPhone case", "wireless charger"]
-    products = [
-        {'id': 1, 'title': 'iPhone 15 Case', 'description': 'Clear case for iPhone 15'},
-        {'id': 2, 'title': 'Samsung Case', 'description': 'Case for Samsung phone'},
-        {'id': 3, 'title': 'Wireless Charger', 'description': 'Fast wireless charging pad'},
-    ]
-
-    relevance_judge.create_synthetic_judgments(queries, products)
-
-    for query in queries:
-        relevant_items = relevance_judge.get_relevant_items(query, threshold=0.3)
-        print(f"Query: '{query}' -> Relevant items: {relevant_items}")
-
-
-if __name__ == "__main__":
-    demo_metrics()

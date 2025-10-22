@@ -17,7 +17,6 @@ This project implements a comprehensive framework for comparing search algorithm
 - MRR (Mean Reciprocal Rank)
 
 ### Data Sources
-- **Generated Data**: Synthetic e-commerce products for testing
 - **Real API Data**: 200+ Shopify stores (43,226 products)
 - **Social Media Data**: Reddit posts (9,000+ posts) with product discussions
 - **Database Storage**: SQLite database for scalable data management
@@ -34,7 +33,7 @@ This repository does not include:
 - API credentials (.env file)
 - Collected data checkpoints
 
-After cloning, run `python scripts/utilities/init_database.py` to create the database locally.
+After cloning, run `python scripts/utilities/database_initializer.py` to create the database locally.
 
 ## System Architecture
 
@@ -48,14 +47,10 @@ comp5112_gr7_project/
 │   └── cli.py                # Command line interface
 ├── scripts/                  # Organized scripts
 │   ├── data_collection/      # Data scraping scripts
-│   ├── analysis/             # Analysis and comparison scripts
-│   ├── testing/              # Testing and evaluation scripts
-│   └── utilities/             # Setup and utility scripts
+│   ├── utilities/            # Setup and utility scripts
+│   └── web/                  # Web application scripts
 ├── data/                     # Data storage
-│   ├── checkpoints/          # Scraping checkpoints
-│   ├── exports/              # Data exports
-│   └── results/              # Analysis results
-├── tests/                    # Test suite
+│   └── ecommerce_research.db # Main SQLite database
 └── docs/                     # Documentation
 ```
 
@@ -70,8 +65,11 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
 # Database setup
-python scripts/utilities/init_database.py
-python scripts/utilities/generate_dataset.py
+python scripts/utilities/database_initializer.py
+
+# Collect real data (optional)
+python scripts/data_collection/ecommerce_api_collector.py
+python scripts/data_collection/social_media_scraper.py
 
 # Run application
 python -c "

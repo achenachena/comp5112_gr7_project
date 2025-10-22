@@ -2,7 +2,7 @@
 
 A comprehensive framework for comparing search algorithms (Keyword Matching vs TF-IDF) using real e-commerce and social media data.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 ```bash
@@ -20,27 +20,19 @@ The database is not included in the repository. Initialize it locally:
 
 ```bash
 # Create database and tables
-python scripts/utilities/init_database.py
+python scripts/utilities/database_initializer.py
 ```
 
-### 2. Generate Sample Data (Optional)
-For testing without API keys:
-
-```bash
-# Generate synthetic product data
-python scripts/utilities/generate_dataset.py
-```
-
-### 3. Collect Real Data (Requires API Keys)
+### 2. Collect Real Data
 ```bash
 # Collect from Shopify stores (no API key needed)
-python scripts/data_collection/collect_real_ecommerce.py
+python scripts/data_collection/ecommerce_api_collector.py
 
 # Collect social media data (requires API keys)
-python scripts/data_collection/real_social_media_scraper.py
+python scripts/data_collection/social_media_scraper.py
 ```
 
-### 4. Environment Configuration
+### 3. Environment Configuration
 Copy the template and add your credentials:
 
 ```bash
@@ -50,47 +42,56 @@ cp env.template .env
 
 **Important**: Never commit the `.env` file or `data/*.db` files to the repository.
 
-### 5. Run the Application
-```bash
-# Web interface (recommended)
-python -c "
-import sys
-import os
-sys.path.append(os.getcwd())
-from src.ecommerce_search.web.app import create_app
-app = create_app()
-app.run(host='0.0.0.0', port=5000, debug=False)
-"
+### 4. Run the Application
 
-# Then open http://localhost:5000 in your browser
+#### Option A: Quick Start (Recommended)
+```bash
+# Use the startup script
+./scripts/web/start_web.sh
 ```
+
+#### Option B: Manual Start
+```bash
+# Development mode
+python scripts/web/run_web.py
+
+# Or using Flask CLI
+export FLASK_APP=scripts/web/run_web.py
+export FLASK_ENV=development
+flask run --host=127.0.0.1 --port=5000
+```
+
+#### Option C: Production Mode
+```bash
+# Using Gunicorn (install: pip install gunicorn)
+gunicorn -w 4 -b 127.0.0.1:5000 scripts.web.wsgi:application
+
+# Using Waitress (install: pip install waitress)
+waitress-serve --host=127.0.0.1 --port=5000 scripts.web.wsgi:application
+```
+
+**Then open http://127.0.0.1:5000 in your browser**
 
 ## 📁 Project Structure
 
 ```
 comp5112_gr7_project/
-├── 📊 data/                          # Data storage
-│   ├── ecommerce_research.db         # Main SQLite database
-│   ├── checkpoints/                  # Scraping checkpoints
-│   ├── exports/                      # Data exports
-│   └── results/                      # Analysis results
+├── data/                          # Data storage
+│   └── ecommerce_research.db         # Main SQLite database
 │
-├── 🔧 scripts/                       # Scripts organized by purpose
+├── scripts/                       # Scripts organized by purpose
 │   ├── data_collection/              # Data collection scripts
-│   │   ├── real_social_media_scraper.py
-│   │   ├── collect_real_ecommerce.py
-│   ├── analysis/                     # Analysis and comparison scripts
-│   │   ├── extract_product_info.py
-│   │   ├── compare_datasets.py
-│   │   └── run_database_search.py
-│   ├── testing/                      # Testing and evaluation scripts
-│   │   ├── simple_algorithm_comparison.py
-│   │   └── final_ndcg_test.py
-│   └── utilities/                    # Utility scripts
-│       ├── init_database.py
-│       └── generate_dataset.py
+│   │   ├── social_media_scraper.py
+│   │   └── ecommerce_api_collector.py
+│   ├── utilities/                    # Utility scripts
+│   │   └── database_initializer.py
+│   └── web/                          # Web application scripts
+│       ├── run_web.py                # Development server entry point
+│       ├── wsgi.py                   # Production WSGI entry point
+│       ├── start_web.sh              # Automated startup script
+│       └── start_web_simple.sh       # Simple startup script
 │
-├── 🏗️ src/ecommerce_search/          # Core application code
+├── src/ecommerce_search/          # Core application code
 │   ├── algorithms/                   # Search algorithms
 │   │   ├── keyword_matching.py
 │   │   └── tfidf_search.py
@@ -100,32 +101,26 @@ comp5112_gr7_project/
 │   ├── evaluation/                   # Evaluation metrics
 │   │   ├── comparison.py
 │   │   ├── metrics.py
-│   │   └── ultra_simple_comparison.py
+│   │   └── algorithm_comparison.py
 │   ├── utils/                        # Utilities
-│   │   ├── preprocessing.py
-│   │   └── visualizations.py
+│   │   ├── product_extractor.py
+│   │   ├── base_scraper.py
+│   │   └── database_operations.py
 │   ├── web/                          # Web interface
 │   │   ├── app.py
 │   │   ├── routes.py
 │   │   ├── static/
 │   │   └── templates/
-│   ├── cli.py
-│   ├── config.py
-│   └── logging_config.py
-│
-├── 🧪 tests/                         # Test files
-│   └── unit/
-│       └── test_algorithms.py
+│   └── cli.py
 │
 └── 📚 docs/                          # Documentation
     ├── PROJECT_SUMMARY.md
     ├── USAGE_GUIDE.md
-    ├── SOCIAL_MEDIA_SCRAPER_GUIDE.md
-    ├── WEB_GUI_GUIDE.md
+    ├── PRESENTATION_OUTLINE.md
     └── RESEARCH_METHODOLOGY.md
 ```
 
-## 🎯 Key Features
+## Key Features
 
 ### Search Algorithms
 - **Keyword Matching**: Exact and partial keyword matching with configurable weights
@@ -138,7 +133,6 @@ comp5112_gr7_project/
 - MRR (Mean Reciprocal Rank)
 
 ### Data Sources
-- **Generated Data**: Synthetic e-commerce products for testing
 - **Real API Data**: 200+ Shopify stores (43,226 products)
 - **Social Media Data**: Reddit posts (9,000+ posts) with product discussions
 - **Database Storage**: SQLite database for scalable data management
@@ -148,16 +142,10 @@ comp5112_gr7_project/
 - **Command Line**: Programmatic access and automation
 - **Python API**: Library for integration with other projects
 
-## 📊 Data Collection
-
-### Generated Data
-```bash
-python scripts/utilities/generate_dataset.py
-```
+## Data Collection
 
 ### Real API Data
 ```bash
-# Best Buy API (requires API key)
 python scripts/data_collection/collect_real_ecommerce.py
 
 ```
@@ -168,7 +156,7 @@ python scripts/data_collection/collect_real_ecommerce.py
 python scripts/data_collection/real_social_media_scraper.py
 ```
 
-## 🔍 Analysis and Testing
+## Analysis and Testing
 
 ### Extract Product Information
 ```bash
@@ -201,12 +189,11 @@ Access at: **http://localhost:5000**
 ## 📚 Documentation
 
 - **[Complete Setup and Usage Guide](docs/USAGE_GUIDE.md)** - Detailed setup and usage instructions
-- **[Social Media Scraper Guide](docs/SOCIAL_MEDIA_SCRAPER_GUIDE.md)** - How to collect social media data
-- **[Web GUI Guide](docs/WEB_GUI_GUIDE.md)** - Using the web interface
 - **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)** - Academic research approach
 - **[Project Summary](docs/PROJECT_SUMMARY.md)** - Comprehensive project overview
+- **[Presentation Outline](docs/PRESENTATION_OUTLINE.md)** - PowerPoint presentation structure
 
-## 🛠️ Configuration
+## Configuration
 
 ### Environment Variables
 Create a `.env` file with your configuration:
@@ -226,35 +213,29 @@ Key variables:
 
 ### API Keys (Optional)
 For real data collection, you'll need API keys:
-- **Best Buy**: https://developer.bestbuy.com/
-- **Target**: https://developer.target.com/
 - **Reddit**: https://www.reddit.com/prefs/apps
 - **Twitter**: https://developer.twitter.com/
 
 ## 🧪 Testing
 
 ```bash
-# Run tests
-pytest tests/
-
 # Check code quality
-flake8 src/ tests/
+flake8 src/
 ```
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
-1. **Database not found**: Run `python scripts/utilities/init_database.py`
-2. **No data**: Run `python scripts/utilities/generate_dataset.py`
+1. **Database not found**: Run `python scripts/utilities/database_initializer.py`
+2. **No data**: Run the data collection scripts to gather real data
 3. **Import errors**: Ensure virtual environment is activated
 4. **Port already in use**: Change port in web app configuration
 
 ### Getting Help
 
 - Check the logs in `logs/` directory
-- Run tests: `pytest tests/`
-- Check code quality: `flake8 src/ tests/`
+- Check code quality: `flake8 src/`
 
 ## 📈 Research Applications
 

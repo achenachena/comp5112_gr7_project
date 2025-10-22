@@ -10,7 +10,6 @@ import re
 import math
 from typing import List, Dict, Any
 from collections import Counter, defaultdict
-# import numpy as np  # Not used in current implementation
 
 
 class TFIDFSearch:
@@ -172,21 +171,21 @@ class TFIDFSearch:
         """
         if not tokens or not self.is_fitted_:
             return {}
-        
+
         # Count term frequencies
         term_counts = Counter(tokens)
         tfidf_scores = {}
-        
+
         for term, count in term_counts.items():
             if term in self.vocabulary_ and term in self.idf_:
                 # TF: 1 + log(count)
                 tf = 1 + math.log(count)
                 # TF-IDF = TF * IDF
                 tfidf_scores[term] = tf * self.idf_[term]
-        
+
         return tfidf_scores
 
-    def _cosine_similarity(self, query_tfidf: Dict[str, float], 
+    def _cosine_similarity(self, query_tfidf: Dict[str, float],
                            doc_tfidf: Dict[str, float]) -> float:
         """
         Calculate cosine similarity between query and document TF-IDF vectors.
@@ -227,7 +226,7 @@ class TFIDFSearch:
         similarity = dot_product / (math.sqrt(query_magnitude) * math.sqrt(doc_magnitude))
         return similarity
 
-    def search(self, query: str, products: List[Dict[str, Any]], 
+    def search(self, query: str, products: List[Dict[str, Any]],
                limit: int = 10) -> List[Dict[str, Any]]:
         """
         Search products using TF-IDF algorithm.
@@ -337,90 +336,3 @@ class TFIDFSearch:
         }
 
         return stats
-
-
-def demo_tfidf_search():
-    """Demonstrate the TF-IDF search algorithm with sample data."""
-    # Sample product data
-    sample_products = [
-        {
-            'id': 1,
-            'title': 'iPhone 15 Pro Max Case - Clear Transparent',
-            'description': ('Premium clear case for iPhone 15 Pro Max with wireless charging '
-                            'support and drop protection'),
-            'category': 'Phone Cases',
-            'price': {'value': '29.99', 'currency': 'USD'}
-        },
-        {
-            'id': 2,
-            'title': 'Samsung Galaxy S24 Ultra Case - Black',
-            'description': ('Protective case for Samsung Galaxy S24 Ultra with kickstand '
-                            'and camera protection'),
-            'category': 'Phone Cases',
-            'price': {'value': '24.99', 'currency': 'USD'}
-        },
-        {
-            'id': 3,
-            'title': 'iPhone 15 Screen Protector - Tempered Glass',
-            'description': ('9H hardness tempered glass screen protector for iPhone 15 '
-                            'with easy installation'),
-            'category': 'Screen Protectors',
-            'price': {'value': '12.99', 'currency': 'USD'}
-        },
-        {
-            'id': 4,
-            'title': 'Wireless Charger Pad - Fast Charging',
-            'description': ('Universal wireless charging pad compatible with iPhone '
-                            'and Android phones'),
-            'category': 'Chargers',
-            'price': {'value': '19.99', 'currency': 'USD'}
-        },
-        {
-            'id': 5,
-            'title': 'iPhone 14 Pro Case - Silicone',
-            'description': 'Soft silicone case for iPhone 14 Pro with MagSafe compatibility',
-            'category': 'Phone Cases',
-            'price': {'value': '39.99', 'currency': 'USD'}
-        }
-    ]
-
-    # Initialize search algorithm
-    tfidf_search = TFIDFSearch()
-
-    # Test search queries
-    test_queries = [
-        "iPhone case",
-        "Samsung phone",
-        "wireless charger",
-        "screen protector iPhone"
-    ]
-
-    print("TF-IDF Search Algorithm Demo")
-    print("=" * 50)
-
-    for query in test_queries:
-        print(f"\nQuery: '{query}'")
-        print("-" * 30)
-
-        results = tfidf_search.search(query, sample_products, limit=3)
-
-        if results:
-            for i, product in enumerate(results, 1):
-                print(f"{i}. {product['title']}")
-                print(f"   Score: {product['relevance_score']:.4f}")
-                print(f"   Matched Terms: {product['matched_terms']}")
-                print()
-        else:
-            print("No results found.")
-
-    # Get search statistics
-    stats = tfidf_search.get_search_stats("iPhone case", sample_products)
-    print("\nSearch Statistics:")
-    print(f"Query tokens: {stats['query_tokens']}")
-    print(f"Total products: {stats['total_products']}")
-    print(f"Vocabulary size: {stats['vocabulary_size']}")
-    print(f"Is fitted: {stats['is_fitted']}")
-
-
-if __name__ == "__main__":
-    demo_tfidf_search()

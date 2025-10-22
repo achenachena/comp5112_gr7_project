@@ -15,7 +15,7 @@ from .evaluation import SearchMetrics, RelevanceJudgment
 
 __all__ = [
     "KeywordSearch",
-    "TFIDFSearch", 
+    "TFIDFSearch",
     "get_db_manager",
     "SearchMetrics",
     "RelevanceJudgment"

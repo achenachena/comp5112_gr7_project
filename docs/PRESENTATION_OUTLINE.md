@@ -93,12 +93,12 @@ comp5112_gr7_project/
   - Electronics: Anker, Razer, Mous, Casetify
   - Outdoor: The North Face, Patagonia, REI, Backcountry
 - **Characteristics:** Structured, product-centric, real marketplace data
-- **Note:** No Walmart, Best Buy, or Target data in current dataset
+- **Note:** No Walmart data in current dataset
 
 #### Social Media Data
 - **Reddit:** Product discussions, reviews, recommendations (9,000+ posts)
 - **Twitter:** Product mentions, deals, real-time feedback (limited due to API changes)
-- **Target:** ~50,000 posts across both platforms
+- **Total:** ~50,000 posts across both platforms
 - **Method:** Multi-app Reddit scraping, Twitter API integration
 
 ### Collection Challenges
