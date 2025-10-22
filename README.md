@@ -1,192 +1,280 @@
-# Comparative Study of Search Algorithms in E-commerce
+# E-commerce Search Algorithm Comparison Project
 
-A comprehensive research project comparing **Keyword Matching** vs **TF-IDF** search algorithms using **real e-commerce data** from multiple APIs, stored in a **SQL database** for large-scale evaluation.
+A comprehensive framework for comparing search algorithms (Keyword Matching vs TF-IDF) using real e-commerce and social media data.
 
-## 🎯 Research Objectives
+## 🚀 Quick Start
 
-- **Compare effectiveness** of keyword matching vs TF-IDF algorithms on real e-commerce data
-- **Collect real product data** from multiple APIs (Best Buy, Target, Shopify, etc.)
-- **Store data in SQL database** for handling hundreds of thousands of products
-- **Evaluate comprehensive metrics**: Precision, Recall, F1-Score, MAP, MRR, NDCG
-- **Analyze performance differences** across different product categories and query types
-- **Provide insights** for improving search algorithms in real-world scenarios
+### 1. Installation
+```bash
+git clone <repository-url>
+cd comp5112_gr7_project
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-## 🚀 Features
+## Local Setup
 
-- **🗄️ Database Architecture**: SQL database for scalable data storage
-- **🛒 Real API Integration**: Best Buy, Target, Shopify, Newegg APIs
-- **🔍 Search Algorithms**: Keyword Matching vs TF-IDF comparison
-- **📊 Comprehensive Metrics**: Precision@K, Recall@K, F1@K, MAP, MRR, NDCG
-- **⚡ Performance Tracking**: Search times, result counts, algorithm efficiency
-- **🔒 Security First**: No sensitive data in repository, environment-based configuration
-- **📈 Scalable Evaluation**: Handle hundreds of thousands of products
-- **🎛️ Interactive Tools**: CLI and GUI interfaces for testing
+### 1. Database Initialization
+The database is not included in the repository. Initialize it locally:
+
+```bash
+# Create database and tables
+python scripts/utilities/init_database.py
+```
+
+### 2. Generate Sample Data (Optional)
+For testing without API keys:
+
+```bash
+# Generate synthetic product data
+python scripts/utilities/generate_dataset.py
+```
+
+### 3. Collect Real Data (Requires API Keys)
+```bash
+# Collect from Shopify stores (no API key needed)
+python scripts/data_collection/collect_real_ecommerce.py
+
+# Collect social media data (requires API keys)
+python scripts/data_collection/real_social_media_scraper.py
+```
+
+### 4. Environment Configuration
+Copy the template and add your credentials:
+
+```bash
+cp env.template .env
+# Edit .env with your API keys
+```
+
+**Important**: Never commit the `.env` file or `data/*.db` files to the repository.
+
+### 5. Run the Application
+```bash
+# Web interface (recommended)
+python -c "
+import sys
+import os
+sys.path.append(os.getcwd())
+from src.ecommerce_search.web.app import create_app
+app = create_app()
+app.run(host='0.0.0.0', port=5000, debug=False)
+"
+
+# Then open http://localhost:5000 in your browser
+```
 
 ## 📁 Project Structure
 
 ```
-├── database/                # SQL database models and management
-│   ├── models.py           # SQLAlchemy database models
-│   ├── db_manager.py       # Database connection and utilities
-│   └── __init__.py
-├── algorithms/              # Search algorithm implementations
-│   ├── keyword_matching.py # Keyword-based search algorithm
-│   └── tfidf_search.py     # TF-IDF search algorithm
-├── evaluation/              # Performance evaluation tools
-│   ├── metrics.py          # Evaluation metrics (Precision, Recall, F1, etc.)
-│   └── comparison.py       # Algorithm comparison framework
-├── data_collection/         # API data collection (legacy directory)
-├── prototype/               # Interactive testing interfaces
-│   ├── gui.py              # Graphical user interface
-│   └── cli.py              # Command-line interface
-├── utils/                   # Utility functions
-│   └── preprocessing.py    # Data preprocessing tools
-├── data/                    # Database and collected data
-│   └── ecommerce_research.db # SQLite database
-├── results/                 # Analysis results and reports
-├── collect_to_database.py   # Real API data collection script
-├── run_database_search.py   # Database-based search evaluation
-├── init_database.py         # Database initialization script
-└── requirements.txt         # Python dependencies
+comp5112_gr7_project/
+├── 📊 data/                          # Data storage
+│   ├── ecommerce_research.db         # Main SQLite database
+│   ├── checkpoints/                  # Scraping checkpoints
+│   ├── exports/                      # Data exports
+│   └── results/                      # Analysis results
+│
+├── 🔧 scripts/                       # Scripts organized by purpose
+│   ├── data_collection/              # Data collection scripts
+│   │   ├── real_social_media_scraper.py
+│   │   ├── collect_real_ecommerce.py
+│   ├── analysis/                     # Analysis and comparison scripts
+│   │   ├── extract_product_info.py
+│   │   ├── compare_datasets.py
+│   │   └── run_database_search.py
+│   ├── testing/                      # Testing and evaluation scripts
+│   │   ├── simple_algorithm_comparison.py
+│   │   └── final_ndcg_test.py
+│   └── utilities/                    # Utility scripts
+│       ├── init_database.py
+│       └── generate_dataset.py
+│
+├── 🏗️ src/ecommerce_search/          # Core application code
+│   ├── algorithms/                   # Search algorithms
+│   │   ├── keyword_matching.py
+│   │   └── tfidf_search.py
+│   ├── database/                     # Database management
+│   │   ├── db_manager.py
+│   │   └── models.py
+│   ├── evaluation/                   # Evaluation metrics
+│   │   ├── comparison.py
+│   │   ├── metrics.py
+│   │   └── ultra_simple_comparison.py
+│   ├── utils/                        # Utilities
+│   │   ├── preprocessing.py
+│   │   └── visualizations.py
+│   ├── web/                          # Web interface
+│   │   ├── app.py
+│   │   ├── routes.py
+│   │   ├── static/
+│   │   └── templates/
+│   ├── cli.py
+│   ├── config.py
+│   └── logging_config.py
+│
+├── 🧪 tests/                         # Test files
+│   └── unit/
+│       └── test_algorithms.py
+│
+└── 📚 docs/                          # Documentation
+    ├── PROJECT_SUMMARY.md
+    ├── USAGE_GUIDE.md
+    ├── SOCIAL_MEDIA_SCRAPER_GUIDE.md
+    ├── WEB_GUI_GUIDE.md
+    └── RESEARCH_METHODOLOGY.md
 ```
 
-## 🔒 Security & Privacy
+## 🎯 Key Features
 
-This repository is **security-first** and **publication-ready**:
+### Search Algorithms
+- **Keyword Matching**: Exact and partial keyword matching with configurable weights
+- **TF-IDF**: Term Frequency-Inverse Document Frequency with vector similarity
 
-- ✅ **No sensitive data** in repository
-- ✅ **No API keys** or secrets in code
-- ✅ **No database files** or generated data
-- ✅ **Environment-based configuration** only
-- ✅ **Comprehensive .gitignore** protection
-- ✅ **Mock data only** for examples
-- ✅ **See [SECURITY_CHECKLIST.md](SECURITY_CHECKLIST.md)** for details
+### Evaluation Metrics
+- Precision@K, Recall@K, F1@K
+- NDCG@K (Normalized Discounted Cumulative Gain)
+- MAP (Mean Average Precision)
+- MRR (Mean Reciprocal Rank)
 
-## 🚀 Quick Start
+### Data Sources
+- **Generated Data**: Synthetic e-commerce products for testing
+- **Real API Data**: 200+ Shopify stores (43,226 products)
+- **Social Media Data**: Reddit posts (9,000+ posts) with product discussions
+- **Database Storage**: SQLite database for scalable data management
 
-### **1. Install Dependencies**
+### User Interfaces
+- **Web Application**: Modern browser-based interface
+- **Command Line**: Programmatic access and automation
+- **Python API**: Library for integration with other projects
+
+## 📊 Data Collection
+
+### Generated Data
 ```bash
-pip install -r requirements.txt
+python scripts/utilities/generate_dataset.py
 ```
 
-### **2. Set Up Environment Variables**
+### Real API Data
 ```bash
-# Creates .env file from template
-python setup_environment.py
+# Best Buy API (requires API key)
+python scripts/data_collection/collect_real_ecommerce.py
 
-# Edit .env file with your API keys:
-# BESTBUY_API_KEY=your_key_here
-# TARGET_API_KEY=your_key_here
-# NEWEGG_API_KEY=your_key_here
 ```
 
-### **3. Initialize Database**
+### Social Media Data
 ```bash
-python init_database.py
+# Reddit and Twitter (requires API keys)
+python scripts/data_collection/real_social_media_scraper.py
 ```
 
-### **4. Collect Real Data**
+## 🔍 Analysis and Testing
+
+### Extract Product Information
 ```bash
-python collect_to_database.py
-
-# Option B: Use Shopify stores (no API key needed)
-python collect_to_database.py
+# Extract product info from social media posts
+python scripts/analysis/extract_product_info.py --update --limit 1000
 ```
 
-### **4. Run Search Evaluation**
+### Run Algorithm Comparison
 ```bash
-python run_database_search.py
+# Compare algorithms on different datasets
+python scripts/analysis/compare_datasets.py
 ```
 
-### **5. Use Interactive Tools**
+### Test Algorithms
 ```bash
-# Command-line interface
-python prototype/cli.py
-
-# Graphical interface
-python web_gui.py
+# Simple algorithm comparison
+python scripts/testing/simple_algorithm_comparison.py
 ```
 
-## 💻 Usage Examples
+## 🌐 Web Interface
 
-### **Database-Based Search**
-```python
-from database.db_manager import get_db_manager
-from algorithms.keyword_matching import KeywordSearch
-from algorithms.tfidf_search import TFIDFSearch
+The web interface provides:
+- **Data Management**: Load products from database
+- **Algorithm Comparison**: Run side-by-side algorithm comparisons
+- **Interactive Search**: Test search queries in real-time
+- **Performance Metrics**: View detailed evaluation results
 
-# Initialize database and algorithms
-db = get_db_manager()
-keyword_search = KeywordSearch()
-tfidf_search = TFIDFSearch()
-
-# Load products from database
-with db.get_session() as session:
-    products = session.query(Product).limit(1000).all()
-
-# Run search algorithms
-keyword_results = keyword_search.search("iPhone case", products)
-tfidf_results = tfidf_search.search("iPhone case", products)
-
-# Compare results
-print(f"Keyword Matching: {len(keyword_results)} results")
-print(f"TF-IDF: {len(tfidf_results)} results")
-```
-
-### **Real API Data Collection**
-```python
-from collect_to_database import DatabaseEcommerceCollector
-
-# Initialize collector
-collector = DatabaseEcommerceCollector()
-
-# Collect from Best Buy API
-search_queries = ["iPhone", "Samsung Galaxy", "laptop"]
-products_collected = collector.collect_from_bestbuy_api(search_queries)
-
-print(f"Collected {products_collected} products")
-```
-
-### **Performance Evaluation**
-```python
-from run_database_search import DatabaseSearchEvaluator
-
-# Run comprehensive evaluation
-evaluator = DatabaseSearchEvaluator()
-evaluator.run_full_evaluation(product_limit=10000)
-
-# Generate comparison report
-report = evaluator.generate_comparison_report()
-```
+Access at: **http://localhost:5000**
 
 ## 📚 Documentation
 
-- **[DATABASE_SETUP_GUIDE.md](DATABASE_SETUP_GUIDE.md)** - Complete database setup and configuration
-- **[REAL_ECOMMERCE_SETUP.md](REAL_ECOMMERCE_SETUP.md)** - Real e-commerce API integration guide
-- **[RESEARCH_METHODOLOGY.md](RESEARCH_METHODOLOGY.md)** - Research methodology and approach
-- **[USAGE_GUIDE.md](USAGE_GUIDE.md)** - Detailed usage instructions
-- **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Project overview and achievements
+- **[Complete Setup and Usage Guide](docs/USAGE_GUIDE.md)** - Detailed setup and usage instructions
+- **[Social Media Scraper Guide](docs/SOCIAL_MEDIA_SCRAPER_GUIDE.md)** - How to collect social media data
+- **[Web GUI Guide](docs/WEB_GUI_GUIDE.md)** - Using the web interface
+- **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)** - Academic research approach
+- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Comprehensive project overview
 
-## 🗂️ Key Components
+## 🛠️ Configuration
 
-- **`database/`** - SQL database models and management
-- **`algorithms/`** - Search algorithm implementations (Keyword Matching, TF-IDF)
-- **`evaluation/`** - Performance metrics and comparison tools
-- **`prototype/`** - Interactive CLI and GUI interfaces
-- **`collect_to_database.py`** - Real API data collection script
-- **`run_database_search.py`** - Database-based search evaluation
-- **`init_database.py`** - Database initialization script
+### Environment Variables
+Create a `.env` file with your configuration:
 
-## 🎓 Academic Context
+```bash
+# Copy the template
+cp env.template .env
 
-This repository is created for students in the **MSc Program in Computer Science** at **Lakehead University** for **COMP5112 Group 7's project**.
+# Edit with your settings
+nano .env
+```
 
-### **Research Scope:**
-- **Large-scale evaluation** with hundreds of thousands of products
-- **Real e-commerce data** from multiple API sources
-- **Comprehensive performance analysis** using industry-standard metrics
-- **Scalable architecture** for academic research and practical applications
+Key variables:
+- `DATABASE_URL`: Database connection string
+- `SECRET_KEY`: Web application secret key
+- `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
 
----
+### API Keys (Optional)
+For real data collection, you'll need API keys:
+- **Best Buy**: https://developer.bestbuy.com/
+- **Target**: https://developer.target.com/
+- **Reddit**: https://www.reddit.com/prefs/apps
+- **Twitter**: https://developer.twitter.com/
 
-**Ready for large-scale e-commerce search algorithm research!** 🚀
+## 🧪 Testing
+
+```bash
+# Run tests
+pytest tests/
+
+# Check code quality
+flake8 src/ tests/
+```
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+1. **Database not found**: Run `python scripts/utilities/init_database.py`
+2. **No data**: Run `python scripts/utilities/generate_dataset.py`
+3. **Import errors**: Ensure virtual environment is activated
+4. **Port already in use**: Change port in web app configuration
+
+### Getting Help
+
+- Check the logs in `logs/` directory
+- Run tests: `pytest tests/`
+- Check code quality: `flake8 src/ tests/`
+
+## 📈 Research Applications
+
+This system is designed for:
+- **Academic Research**: Algorithm comparison studies
+- **Industry Applications**: E-commerce search optimization
+- **Educational Purposes**: Learning about search algorithms
+- **Benchmarking**: Performance evaluation frameworks
+
+## 🏗️ Technical Specifications
+
+- **Python 3.8+**: Modern Python features
+- **Flask**: Web application framework
+- **SQLAlchemy**: Database ORM
+- **scikit-learn**: Machine learning algorithms
+
+## 📄 License
+
+MIT License - see LICENSE file for details.
+
+## 👥 Authors
+
+COMP5112 Group 7 - E-commerce Search Algorithm Comparison Project

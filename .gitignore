@@ -75,6 +75,11 @@ results/
 !requirements.txt
 !env.template
 
+# Data checkpoints (may contain sensitive info)
+data/checkpoints/*.json
+data/exports/*
+data/results/*
+
 # Jupyter Notebooks
 .ipynb_checkpoints/
 *.ipynb
