@@ -34,6 +34,20 @@ cp env.template .env
 - **Quick Start**: Generate synthetic data (no API keys needed)
 - **Real Data**: Follow API setup instructions below
 
+### Step 5: Customize Subreddit Configuration (Optional)
+The scraper uses a configuration file for subreddits. You can customize it:
+
+```bash
+# Copy the template and edit as needed
+cp config/subreddits.json.template config/subreddits.json
+# Edit config/subreddits.json to add/remove subreddits
+```
+
+The configuration file allows you to:
+- Add or remove subreddits
+- Organize by categories
+- Include metadata (subscriber count, description)
+
 ## 🚀 Quick Start
 
 ### 1. Installation

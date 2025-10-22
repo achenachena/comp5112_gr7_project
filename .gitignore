@@ -80,6 +80,9 @@ data/checkpoints/*.json
 data/exports/*
 data/results/*
 
+# Configuration files (users may customize)
+config/subreddits.json
+
 # Jupyter Notebooks
 .ipynb_checkpoints/
 *.ipynb
