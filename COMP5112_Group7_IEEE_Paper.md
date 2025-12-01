@@ -40,7 +40,36 @@ In the context of e-commerce, search faces unique challenges such as short produ
 
 ### A. System Architecture
 
-![Figure 1: System Architecture Diagram. The system collects data from Shopify and Reddit, stores it in a SQLite database, processes unstructured text via the Hybrid Product Extractor, and serves results through a Flask Web API to the Search Engine Core.](architecture_placeholder.png)
+```mermaid
+graph TD
+    subgraph Data Collection
+        Shopify[Shopify API] -->|JSON| Collector[API Collector]
+        Reddit[Reddit API] -->|Posts| Scraper[Social Media Scraper]
+    end
+
+    subgraph Processing
+        Scraper -->|Raw Text| Extractor[Hybrid Product Extractor]
+        Extractor -->|Structured Data| DB[(SQLite Database)]
+        Collector -->|Structured Data| DB
+    end
+
+    subgraph Search Core
+        DB -->|Products| Algorithms
+        subgraph Algorithms
+            KM[Keyword Matching]
+            TFIDF[TF-IDF Vectorizer]
+        end
+    end
+
+    subgraph User Interface
+        User((User)) -->|Query| Web[Flask Web App]
+        Web -->|Search Request| Algorithms
+        Algorithms -->|Ranked Results| Web
+        Web -->|Display| User
+    end
+```
+
+*Figure 1: System Architecture Diagram. The system collects data from Shopify and Reddit, stores it in a SQLite database, processes unstructured text via the Hybrid Product Extractor, and serves results through a Flask Web API to the Search Engine Core.*
 
 Our research framework is built on a Python-based stack, utilizing Flask for the web interface and SQLAlchemy for database interactions. The architecture consists of three core modules:
 
@@ -228,7 +257,16 @@ We utilized standard TREC evaluation metrics:
 
 Table I and Figure 2 summarize the average performance of both algorithms across all test queries.
 
-![Figure 2: Comparative Analysis of Keyword Matching vs. TF-IDF across five key metrics. TF-IDF consistently outperforms Keyword Matching, particularly in Recall and Mean Average Precision (MAP).](performance_comparison.png)
+```mermaid
+xychart-beta
+    title "Performance Comparison: Keyword Matching vs. TF-IDF"
+    x-axis ["P@5", "R@5", "F1@5", "NDCG@10", "MAP"]
+    y-axis "Score" 0 --> 1
+    bar [0.62, 0.41, 0.49, 0.65, 0.52]
+    bar [0.74, 0.58, 0.65, 0.78, 0.68]
+```
+
+*Figure 2: Comparative Analysis of Keyword Matching (Bar 1) vs. TF-IDF (Bar 2). TF-IDF consistently outperforms Keyword Matching, particularly in Recall and Mean Average Precision (MAP).*
 
 ### TABLE I: ALGORITHM PERFORMANCE COMPARISON
 
