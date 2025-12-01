@@ -1,10 +1,12 @@
 # E-commerce Search Algorithm Comparison Project
 
-A comprehensive framework for comparing search algorithms (Keyword Matching vs TF-IDF) using real e-commerce and social media data.
+A comprehensive framework for comparing search algorithms (Keyword Matching vs
+TF-IDF) using real e-commerce and social media data.
 
 ## Quick Start
 
 ### 1. Installation
+
 ```bash
 git clone <repository-url>
 cd comp5112_gr7_project
@@ -16,6 +18,7 @@ pip install -r requirements.txt
 ## Local Setup
 
 ### 1. Database Initialization
+
 The database is not included in the repository. Initialize it locally:
 
 ```bash
@@ -24,6 +27,7 @@ python scripts/utilities/database_initializer.py
 ```
 
 ### 2. Collect Real Data
+
 ```bash
 # Collect from Shopify stores (no API key needed)
 python scripts/data_collection/ecommerce_api_collector.py
@@ -33,6 +37,7 @@ python scripts/data_collection/social_media_scraper.py
 ```
 
 ### 3. Environment Configuration
+
 Copy the template and add your credentials:
 
 ```bash
@@ -45,12 +50,14 @@ cp env.template .env
 ### 4. Run the Web Application
 
 #### Option A: Direct Flask App (Recommended)
+
 ```bash
 # Start the web application directly
 python src/ecommerce_search/web/app.py
 ```
 
 #### Option B: Using Flask CLI
+
 ```bash
 # Set Flask environment variables
 export FLASK_APP=src/ecommerce_search/web/app.py
@@ -61,6 +68,7 @@ flask run --host=127.0.0.1 --port=5000
 ```
 
 #### Option C: Production Mode
+
 ```bash
 # Using Gunicorn (install: pip install gunicorn)
 gunicorn -w 4 -b 127.0.0.1:5000 src.ecommerce_search.web.app:app
@@ -69,11 +77,11 @@ gunicorn -w 4 -b 127.0.0.1:5000 src.ecommerce_search.web.app:app
 waitress-serve --host=127.0.0.1 --port=5000 src.ecommerce_search.web.app:app
 ```
 
-**🌐 Open http://127.0.0.1:5000 in your browser**
+**🌐 Open <http://127.0.0.1:5000> in your browser**
 
 ## 📁 Project Structure
 
-```
+```text
 comp5112_gr7_project/
 ├── data/                          # Data storage
 │   └── ecommerce_research.db         # Main SQLite database
@@ -122,21 +130,26 @@ comp5112_gr7_project/
 ## Key Features
 
 ### Search Algorithms
-- **Keyword Matching**: Exact and partial keyword matching with configurable weights
+
+- **Keyword Matching**: Exact and partial keyword matching with configurable
+  weights
 - **TF-IDF**: Term Frequency-Inverse Document Frequency with vector similarity
 
 ### Evaluation Metrics
+
 - Precision@K, Recall@K, F1@K
 - NDCG@K (Normalized Discounted Cumulative Gain)
 - MAP (Mean Average Precision)
 - MRR (Mean Reciprocal Rank)
 
 ### Data Sources
+
 - **Real API Data**: 200+ Shopify stores (43,226 products)
 - **Social Media Data**: Reddit posts (9,000+ posts) with product discussions
 - **Database Storage**: SQLite database for scalable data management
 
 ### User Interfaces
+
 - **Web Application**: Modern browser-based interface
 - **Command Line**: Programmatic access and automation
 - **Python API**: Library for integration with other projects
@@ -144,12 +157,14 @@ comp5112_gr7_project/
 ## Data Collection
 
 ### Real API Data
+
 ```bash
 python scripts/data_collection/collect_real_ecommerce.py
 
 ```
 
 ### Social Media Data
+
 ```bash
 # Reddit and Twitter (requires API keys)
 python scripts/data_collection/real_social_media_scraper.py
@@ -158,18 +173,21 @@ python scripts/data_collection/real_social_media_scraper.py
 ## Analysis and Testing
 
 ### Extract Product Information
+
 ```bash
 # Extract product info from social media posts
 python scripts/analysis/extract_product_info.py --update --limit 1000
 ```
 
 ### Run Algorithm Comparison
+
 ```bash
 # Compare algorithms on different datasets
 python scripts/analysis/compare_datasets.py
 ```
 
 ### Test Algorithms
+
 ```bash
 # Simple algorithm comparison
 python scripts/testing/simple_algorithm_comparison.py
@@ -178,27 +196,34 @@ python scripts/testing/simple_algorithm_comparison.py
 ## 🌐 Web Interface
 
 ### Features Overview
+
 The web interface provides a modern, interactive dashboard for:
 
 #### **Data Management**
+
 - **Load Database Data**: Import products from API and social media datasets
 - **Dataset Selection**: Choose between API products or social media posts
 - **Data Statistics**: View dataset size, categories, and source distribution
 - **Real-time Status**: Monitor data loading progress
 
 #### **Algorithm Comparison**
+
 - **Side-by-Side Testing**: Compare Keyword Matching vs TF-IDF algorithms
-- **Performance Metrics**: View Precision@K, Recall@K, F1@K, and NDCG@K results
-- **Interactive Charts**: Beautiful line charts showing performance trends (K=1 to 10)
+- **Performance Metrics**: View Precision@K, Recall@K, F1@K, and NDCG@K
+  results
+- **Interactive Charts**: Beautiful line charts showing performance trends
+  (K=1 to 10)
 - **Statistical Analysis**: Comprehensive evaluation with multiple metrics
 
 #### **Interactive Search**
+
 - **Real-time Search**: Test search queries instantly
 - **Algorithm Selection**: Choose specific algorithms to test
 - **Result Comparison**: See results from different algorithms side-by-side
 - **Query History**: Track and compare different search queries
 
 #### **Performance Visualization**
+
 - **F1-Score Trends**: Performance across different K values
 - **Precision Analysis**: Accuracy of top-K results
 - **Recall Metrics**: Coverage of relevant items
@@ -207,11 +232,12 @@ The web interface provides a modern, interactive dashboard for:
 ### Quick Start Guide
 
 1. **Start the Application**:
+
    ```bash
    python src/ecommerce_search/web/app.py
    ```
 
-2. **Open Your Browser**: Navigate to http://127.0.0.1:5000
+2. **Open Your Browser**: Navigate to <http://127.0.0.1:5000>
 
 3. **Load Data**: Click "Load Database Data" to import your datasets
 
@@ -222,6 +248,7 @@ The web interface provides a modern, interactive dashboard for:
 ### Complete Workflow
 
 #### **Step 1: Data Setup**
+
 ```bash
 # Initialize database
 python scripts/utilities/database_initializer.py
@@ -232,49 +259,58 @@ python scripts/data_collection/social_media_scraper.py
 ```
 
 #### **Step 2: Start Web Interface**
+
 ```bash
 # Start the web application
 python src/ecommerce_search/web/app.py
 
-# Open browser to http://127.0.0.1:5000
+# Open browser to <http://127.0.0.1:5000>
 ```
 
 #### **Step 3: Load Data in Web Interface**
+
 1. Select dataset type (API products or Social Media posts)
 2. Set product limit (optional)
 3. Click "Load Database Data"
 4. Wait for data loading to complete
 
 #### **Step 4: Run Algorithm Comparison**
+
 1. Click "Run Comparison" button
 2. Wait for algorithms to process
 3. View performance metrics and charts
 4. Analyze F1-Score, Precision, Recall, and NDCG trends
 
 #### **Step 5: Interactive Search Testing**
+
 1. Enter search query in the search box
 2. Click "Search" to test algorithms
 3. Compare results from different algorithms
 4. Test various query types and formats
 
 ### Web Interface Screenshots
+
 - **Dashboard**: Clean, modern interface with data management tools
 - **Comparison Results**: Side-by-side algorithm performance with charts
 - **Search Interface**: Real-time search with instant results
 - **Performance Charts**: Interactive visualizations of algorithm metrics
 
-**🌐 Access at: http://127.0.0.1:5000**
+**🌐 Access at: <http://127.0.0.1:5000>**
 
 ## 📚 Documentation
 
-- **[Complete Setup and Usage Guide](docs/USAGE_GUIDE.md)** - Detailed setup and usage instructions
-- **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)** - Academic research approach
-- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Comprehensive project overview
+- **[Complete Setup and Usage Guide](docs/USAGE_GUIDE.md)** - Detailed setup
+  and usage instructions
+- **[Research Methodology](docs/RESEARCH_METHODOLOGY.md)** - Academic research
+  approach
+- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Comprehensive project
+  overview
 - **[Presentation Outline](docs/PRESENTATION_OUTLINE.md)** - PowerPoint presentation structure
 
 ## Configuration
 
 ### Environment Variables
+
 Create a `.env` file with your configuration:
 
 ```bash
@@ -286,14 +322,17 @@ nano .env
 ```
 
 Key variables:
+
 - `DATABASE_URL`: Database connection string
 - `SECRET_KEY`: Web application secret key
 - `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
 
 ### API Keys (Optional)
+
 For real data collection, you'll need API keys:
-- **Reddit**: https://www.reddit.com/prefs/apps
-- **Twitter**: https://developer.twitter.com/
+
+- **Reddit**: <https://www.reddit.com/prefs/apps>
+- **Twitter**: <https://developer.twitter.com/>
 
 ## 🧪 Testing
 
@@ -314,6 +353,7 @@ flake8 src/
 ### Web Interface Issues
 
 #### **Application Won't Start**
+
 ```bash
 # Check if port 5000 is already in use
 lsof -i :5000  # On macOS/Linux
@@ -324,16 +364,19 @@ python src/ecommerce_search/web/app.py --port 5001
 ```
 
 #### **No Data in Web Interface**
+
 1. **Initialize Database**: `python scripts/utilities/database_initializer.py`
 2. **Collect Data**: Run data collection scripts
 3. **Load Data**: Use "Load Database Data" button in web interface
 
 #### **Charts Not Displaying**
+
 - **JavaScript Issues**: Check browser console for errors
 - **Data Loading**: Ensure data is loaded before running comparisons
 - **Browser Compatibility**: Use modern browsers (Chrome, Firefox, Safari)
 
 #### **Search Not Working**
+
 - **Algorithm Initialization**: Run algorithm comparison first
 - **Data Availability**: Ensure products are loaded in database
 - **Query Format**: Try simple queries like "phone" or "laptop"
@@ -348,6 +391,7 @@ python src/ecommerce_search/web/app.py --port 5001
 ## 📈 Research Applications
 
 This system is designed for:
+
 - **Academic Research**: Algorithm comparison studies
 - **Industry Applications**: E-commerce search optimization
 - **Educational Purposes**: Learning about search algorithms

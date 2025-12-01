@@ -3,10 +3,12 @@
 ## First-Time Setup
 
 ### Prerequisites
+
 - Python 3.8+
 - Git
 
 ### Step 1: Clone and Install
+
 ```bash
 git clone <repository-url>
 cd comp5112_gr7_project
@@ -16,6 +18,7 @@ pip install -r requirements.txt
 ```
 
 ### Step 2: Initialize Database
+
 ```bash
 python scripts/utilities/database_initializer.py
 ```
@@ -23,6 +26,7 @@ python scripts/utilities/database_initializer.py
 This creates an empty database with the correct schema.
 
 ### Step 3: Configure Environment (Optional)
+
 Only needed if collecting real data:
 
 ```bash
@@ -31,10 +35,12 @@ cp env.template .env
 ```
 
 ### Step 4: Choose Data Source
+
 - **Quick Start**: Generate synthetic data (no API keys needed)
 - **Real Data**: Follow API setup instructions below
 
 ### Step 5: Customize Subreddit Configuration (Optional)
+
 The scraper uses a configuration file for subreddits. You can customize it:
 
 ```bash
@@ -44,6 +50,7 @@ cp config/subreddits.json.template config/subreddits.json
 ```
 
 The configuration file allows you to:
+
 - Add or remove subreddits
 - Organize by categories
 - Include metadata (subscriber count, description)
@@ -51,6 +58,7 @@ The configuration file allows you to:
 ## Quick Start
 
 ### 1. Installation
+
 ```bash
 git clone <repository-url>
 cd comp5112_gr7_project
@@ -60,6 +68,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Database Setup
+
 ```bash
 # Initialize database
 python scripts/utilities/database_initializer.py
@@ -70,6 +79,7 @@ python scripts/data_collection/social_media_scraper.py
 ```
 
 ### 3. Run the Application
+
 ```bash
 # Web interface (recommended)
 python -c "
@@ -88,6 +98,7 @@ python src/ecommerce_search/cli.py --help
 ## Command Line Interface
 
 ### Search Commands
+
 ```bash
 # Search for products
 python src/ecommerce_search/cli.py search "blue t-shirt"
@@ -100,6 +111,7 @@ python src/ecommerce_search/cli.py search "blue t-shirt" --limit 5
 ```
 
 ### Comparison Commands
+
 ```bash
 # Compare all algorithms
 python src/ecommerce_search/cli.py compare
@@ -109,6 +121,7 @@ python src/ecommerce_search/cli.py compare --queries "shoes" "clothing" "electro
 ```
 
 ### Database Commands
+
 ```bash
 # Show database information
 python src/ecommerce_search/cli.py db info
@@ -120,13 +133,15 @@ python src/ecommerce_search/cli.py db stats
 ## Web Interface
 
 ### Starting the Web Application
+
 ```bash
 python src/ecommerce_search/web/app.py
 ```
 
-Then open http://localhost:5000 in your browser.
+Then open <http://localhost:5000> in your browser.
 
 ### Features
+
 - **Data Management**: Load products from database
 - **Algorithm Comparison**: Run side-by-side algorithm comparisons
 - **Interactive Search**: Test search queries in real-time
@@ -135,6 +150,7 @@ Then open http://localhost:5000 in your browser.
 ## Python API
 
 ### Basic Usage
+
 ```python
 from ecommerce_search import KeywordSearch, TFIDFSearch
 
@@ -147,6 +163,7 @@ results = keyword_search.search("blue t-shirt", products, limit=10)
 ```
 
 ### Advanced Usage
+
 ```python
 from ecommerce_search.database import get_db_manager
 from ecommerce_search.evaluation import SearchMetrics
@@ -164,6 +181,7 @@ results = metrics.evaluate_algorithms([keyword_search, tfidf_search], products)
 ## Data Collection
 
 ### Real Data Collection
+
 ```bash
 # Collect from Shopify stores (no API key needed)
 python scripts/data_collection/ecommerce_api_collector.py
@@ -173,6 +191,7 @@ python scripts/data_collection/social_media_scraper.py
 ```
 
 ### Real API Data
+
 ```bash
 # Shopify Stores API (no API key required - public endpoints)
 python scripts/data_collection/ecommerce_api_collector.py
@@ -182,6 +201,7 @@ python scripts/data_collection/social_media_scraper.py
 ```
 
 ### Optional API Data (Not Currently Used)
+
 ```bash
 python scripts/data_collection/collect_real_ecommerce.py
 
@@ -190,11 +210,14 @@ python scripts/data_collection/collect_real_ecommerce.py
 ```
 
 ### API Key Setup
+
 1. Get API keys from:
-   - Reddit: https://www.reddit.com/prefs/apps
-   - Twitter: https://developer.twitter.com/
+
+   - Reddit: <https://www.reddit.com/prefs/apps>
+   - Twitter: <https://developer.twitter.com/>
 
 2. Add to `.env` file:
+
 ```bash
 REDDIT_CLIENT_ID_1=your_key_here
 REDDIT_CLIENT_SECRET_1=your_secret_here
@@ -204,6 +227,7 @@ TWITTER_BEARER_TOKEN=your_token_here
 ## Configuration
 
 ### Environment Variables
+
 Create a `.env` file with your configuration:
 
 ```bash
@@ -219,6 +243,7 @@ LOG_LEVEL=INFO
 ```
 
 ### Algorithm Configuration
+
 ```python
 # Keyword Matching
 keyword_search = KeywordSearch(
@@ -259,6 +284,7 @@ The following files are excluded from Git for size and privacy reasons:
 - `data/results/*` - Analysis results
 
 To recreate the dataset:
+
 1. Run database initialization (see above)
 2. Either generate sample data OR collect real data with API keys
 3. The database will be created locally in `data/` directory
