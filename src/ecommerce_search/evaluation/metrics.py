@@ -306,7 +306,7 @@ class RelevanceJudgment:
                 # Add some variation based on exact matches
                 if query.lower() in product_text.lower():
                     relevance += 0.3
-
+                
                 # Boost for social media specific fields
                 if 'product_name' in product and query.lower() in product['product_name'].lower():
                     relevance += 0.4
@@ -329,4 +329,146 @@ class RelevanceJudgment:
                             product_id = len(products)  # Fallback to length
                     self.add_judgment(query, product_id, relevance)
 
+    def create_social_media_judgments(self, queries: List[str], products: List[Dict[str, Any]]):
+        """
+        Create synthetic relevance judgments specifically for social media content.
+        This method accounts for the informal, conversational nature of social media posts.
 
+        Args:
+            queries: List of test queries
+            products: List of products to judge
+        """
+        import re
+        
+        # Social media specific patterns
+        informal_patterns = {
+            'amazing': ['amazing', 'awesome', 'incredible', 'fantastic', 'brilliant'],
+            'good': ['good', 'great', 'nice', 'decent', 'solid'],
+            'bad': ['bad', 'terrible', 'awful', 'horrible', 'disappointing'],
+            'recommend': ['recommend', 'suggest', 'advise', 'should buy', 'worth it'],
+            'review': ['review', 'opinion', 'experience', 'thoughts', 'impression']
+        }
+
+        for query in queries:
+            query_lower = query.lower()
+            query_terms = set(re.findall(r'\w+', query_lower))
+            
+            # Track relevance scores for this query
+            query_relevances = []
+
+            for product in products:
+                # Get all text content from social media post
+                post_text = ""
+                if 'title' in product and product['title']:
+                    post_text += str(product['title']) + " "
+                if 'description' in product and product.get('description'):
+                    post_text += str(product.get('description', '')) + " "
+                if 'content' in product and product.get('content'):
+                    post_text += str(product.get('content', '')) + " "
+                
+                post_text_lower = post_text.lower()
+                post_terms = set(re.findall(r'\w+', post_text_lower))
+
+                # Start with base relevance
+                relevance = 0.0
+
+                # 1. Exact phrase matching (highest priority for social media)
+                if query_lower in post_text_lower:
+                    relevance += 0.6
+
+                # 2. Product name matching (if extracted)
+                if 'product_name' in product and product.get('product_name'):
+                    product_name = str(product.get('product_name', '')).lower()
+                    if query_lower in product_name:
+                        relevance += 0.5
+                    # Partial matching in product name
+                    elif any(term in product_name for term in query_terms):
+                        relevance += 0.3
+
+                # 3. Brand matching
+                if 'brand' in product and product.get('brand'):
+                    brand = str(product.get('brand', '')).lower()
+                    if query_lower in brand:
+                        relevance += 0.4
+                    elif any(term in brand for term in query_terms):
+                        relevance += 0.2
+
+                # 4. Term overlap (balanced for social media)
+                if query_terms and post_terms:
+                    overlap = len(query_terms & post_terms)
+                    term_relevance = (overlap / len(query_terms)) * 0.4  # Increased weight
+                    relevance += term_relevance
+
+                # 5. Social media specific indicators
+                # Check for informal language patterns
+                for pattern_type, words in informal_patterns.items():
+                    if any(word in query_lower for word in words):
+                        if any(word in post_text_lower for word in words):
+                            relevance += 0.1
+
+                # 6. Content type boosts
+                if product.get('is_review', False):
+                    relevance += 0.2  # Reviews are more relevant
+                if product.get('is_recommendation', False):
+                    relevance += 0.3  # Recommendations are highly relevant
+                if product.get('is_complaint', False):
+                    relevance += 0.1  # Complaints can be relevant too
+
+                # 7. Engagement-based relevance
+                upvotes = product.get('upvotes', 0)
+                comments = product.get('comments_count', 0)
+                
+                # Popular posts get slight boost
+                if upvotes > 50:
+                    relevance += 0.1
+                elif upvotes > 10:
+                    relevance += 0.05
+                
+                # Posts with discussion get boost
+                if comments > 20:
+                    relevance += 0.1
+                elif comments > 5:
+                    relevance += 0.05
+
+                # 8. Sentiment relevance
+                sentiment = product.get('sentiment_score', 0)
+                if sentiment > 0.5:  # Very positive
+                    relevance += 0.1
+                elif sentiment > 0.2:  # Positive
+                    relevance += 0.05
+                elif sentiment < -0.5:  # Very negative
+                    relevance += 0.05  # Negative reviews can be relevant
+
+                # 9. Platform-specific relevance
+                platform = product.get('platform', '')
+                subreddit = product.get('subreddit', '')
+                
+                # Certain subreddits might be more relevant for product discussions
+                product_focused_subreddits = ['BuyItForLife', 'ProductPorn', 'deals', 'consumerism', 'gadgets']
+                if subreddit in product_focused_subreddits:
+                    relevance += 0.1
+
+                # Cap at 1.0
+                relevance = min(1.0, relevance)
+
+                if relevance > 0.05:  # Lower threshold for social media
+                    query_relevances.append((product, relevance))
+
+            # Apply realistic ranking distribution
+            query_relevances.sort(key=lambda x: x[1], reverse=True)
+            
+            # Create more realistic distribution for social media
+            for i, (product, relevance) in enumerate(query_relevances):
+                # Apply ranking penalty (more aggressive for social media)
+                rank_penalty = max(0.05, 1.0 - (i * 0.15))  # Steeper decline
+                final_relevance = relevance * rank_penalty
+                
+                # Balanced threshold for social media
+                if final_relevance >= 0.12:
+                    product_id = product.get('id', product.get('item_id'))
+                    if product_id is None:
+                        try:
+                            product_id = products.index(product)
+                        except ValueError:
+                            product_id = len(products)
+                    self.add_judgment(query, product_id, final_relevance)

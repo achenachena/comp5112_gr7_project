@@ -87,6 +87,7 @@ class UltraSimpleComparison:
                                     break
                         if product_id is not None:
                             retrieved_items.append(product_id)
+                    
 
                     # Calculate metrics for all K values (1-10)
                     if relevant_items and retrieved_items:

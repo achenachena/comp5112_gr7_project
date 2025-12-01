@@ -3,11 +3,16 @@ Product Information Extraction Utilities
 
 This module provides reusable product extraction functionality
 to avoid code duplication across different scrapers.
+
+Now includes hybrid approach for more robust product name extraction.
 """
 
 import re
 import string
+import logging
 from typing import Dict, Any, List, Optional
+
+logger = logging.getLogger(__name__)
 
 # Constants for product extraction
 PRODUCT_KEYWORDS = ['product', 'item', 'buy', 'purchase', 'review', 'recommend']
@@ -28,9 +33,20 @@ PRODUCT_TYPES = ['smartphone', 'laptop', 'headphones', 'shoes', 'book']
 class ProductExtractor:
     """Reusable product information extraction using NLP techniques."""
 
-    def __init__(self):
+    def __init__(self, use_hybrid: bool = True):
         """Initialize the product extractor with predefined patterns."""
+        self.use_hybrid = use_hybrid
         self._init_patterns()
+        
+        # Initialize hybrid extractor if requested
+        if self.use_hybrid:
+            try:
+                from .hybrid_product_extractor import HybridProductExtractor
+                self.hybrid_extractor = HybridProductExtractor()
+            except ImportError:
+                logger.warning("Hybrid extractor not available, falling back to basic approach")
+                self.use_hybrid = False
+                self.hybrid_extractor = None
 
     def _init_patterns(self):
         """Initialize all regex patterns and keyword lists."""
@@ -58,7 +74,11 @@ class ProductExtractor:
         if not text or not text.strip():
             return self._empty_result()
 
-        # Clean and normalize text
+        # Use hybrid approach if available
+        if self.use_hybrid and self.hybrid_extractor:
+            return self.hybrid_extractor.extract_product_info(text)
+
+        # Fallback to basic approach
         text_lower = text.lower()
 
         # Extract all components

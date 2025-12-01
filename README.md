@@ -42,35 +42,34 @@ cp env.template .env
 
 **Important**: Never commit the `.env` file or `data/*.db` files to the repository.
 
-### 4. Run the Application
+### 4. Run the Web Application
 
-#### Option A: Quick Start (Recommended)
+#### Option A: Direct Flask App (Recommended)
 ```bash
-# Use the startup script
-./scripts/web/start_web.sh
+# Start the web application directly
+python src/ecommerce_search/web/app.py
 ```
 
-#### Option B: Manual Start
+#### Option B: Using Flask CLI
 ```bash
-# Development mode
-python scripts/web/run_web.py
-
-# Or using Flask CLI
-export FLASK_APP=scripts/web/run_web.py
+# Set Flask environment variables
+export FLASK_APP=src/ecommerce_search/web/app.py
 export FLASK_ENV=development
+
+# Run the application
 flask run --host=127.0.0.1 --port=5000
 ```
 
 #### Option C: Production Mode
 ```bash
 # Using Gunicorn (install: pip install gunicorn)
-gunicorn -w 4 -b 127.0.0.1:5000 scripts.web.wsgi:application
+gunicorn -w 4 -b 127.0.0.1:5000 src.ecommerce_search.web.app:app
 
 # Using Waitress (install: pip install waitress)
-waitress-serve --host=127.0.0.1 --port=5000 scripts.web.wsgi:application
+waitress-serve --host=127.0.0.1 --port=5000 src.ecommerce_search.web.app:app
 ```
 
-**Then open http://127.0.0.1:5000 in your browser**
+**🌐 Open http://127.0.0.1:5000 in your browser**
 
 ## 📁 Project Structure
 
@@ -178,13 +177,93 @@ python scripts/testing/simple_algorithm_comparison.py
 
 ## 🌐 Web Interface
 
-The web interface provides:
-- **Data Management**: Load products from database
-- **Algorithm Comparison**: Run side-by-side algorithm comparisons
-- **Interactive Search**: Test search queries in real-time
-- **Performance Metrics**: View detailed evaluation results
+### Features Overview
+The web interface provides a modern, interactive dashboard for:
 
-Access at: **http://localhost:5000**
+#### **Data Management**
+- **Load Database Data**: Import products from API and social media datasets
+- **Dataset Selection**: Choose between API products or social media posts
+- **Data Statistics**: View dataset size, categories, and source distribution
+- **Real-time Status**: Monitor data loading progress
+
+#### **Algorithm Comparison**
+- **Side-by-Side Testing**: Compare Keyword Matching vs TF-IDF algorithms
+- **Performance Metrics**: View Precision@K, Recall@K, F1@K, and NDCG@K results
+- **Interactive Charts**: Beautiful line charts showing performance trends (K=1 to 10)
+- **Statistical Analysis**: Comprehensive evaluation with multiple metrics
+
+#### **Interactive Search**
+- **Real-time Search**: Test search queries instantly
+- **Algorithm Selection**: Choose specific algorithms to test
+- **Result Comparison**: See results from different algorithms side-by-side
+- **Query History**: Track and compare different search queries
+
+#### **Performance Visualization**
+- **F1-Score Trends**: Performance across different K values
+- **Precision Analysis**: Accuracy of top-K results
+- **Recall Metrics**: Coverage of relevant items
+- **NDCG Rankings**: Quality of result rankings
+
+### Quick Start Guide
+
+1. **Start the Application**:
+   ```bash
+   python src/ecommerce_search/web/app.py
+   ```
+
+2. **Open Your Browser**: Navigate to http://127.0.0.1:5000
+
+3. **Load Data**: Click "Load Database Data" to import your datasets
+
+4. **Run Comparison**: Click "Run Comparison" to test algorithms
+
+5. **Search Products**: Use the search box to test queries interactively
+
+### Complete Workflow
+
+#### **Step 1: Data Setup**
+```bash
+# Initialize database
+python scripts/utilities/database_initializer.py
+
+# Collect real data (optional - for fresh data)
+python scripts/data_collection/ecommerce_api_collector.py
+python scripts/data_collection/social_media_scraper.py
+```
+
+#### **Step 2: Start Web Interface**
+```bash
+# Start the web application
+python src/ecommerce_search/web/app.py
+
+# Open browser to http://127.0.0.1:5000
+```
+
+#### **Step 3: Load Data in Web Interface**
+1. Select dataset type (API products or Social Media posts)
+2. Set product limit (optional)
+3. Click "Load Database Data"
+4. Wait for data loading to complete
+
+#### **Step 4: Run Algorithm Comparison**
+1. Click "Run Comparison" button
+2. Wait for algorithms to process
+3. View performance metrics and charts
+4. Analyze F1-Score, Precision, Recall, and NDCG trends
+
+#### **Step 5: Interactive Search Testing**
+1. Enter search query in the search box
+2. Click "Search" to test algorithms
+3. Compare results from different algorithms
+4. Test various query types and formats
+
+### Web Interface Screenshots
+- **Dashboard**: Clean, modern interface with data management tools
+- **Comparison Results**: Side-by-side algorithm performance with charts
+- **Search Interface**: Real-time search with instant results
+- **Performance Charts**: Interactive visualizations of algorithm metrics
+
+**🌐 Access at: http://127.0.0.1:5000**
 
 ## 📚 Documentation
 
@@ -232,10 +311,39 @@ flake8 src/
 3. **Import errors**: Ensure virtual environment is activated
 4. **Port already in use**: Change port in web app configuration
 
+### Web Interface Issues
+
+#### **Application Won't Start**
+```bash
+# Check if port 5000 is already in use
+lsof -i :5000  # On macOS/Linux
+netstat -ano | findstr :5000  # On Windows
+
+# Use a different port
+python src/ecommerce_search/web/app.py --port 5001
+```
+
+#### **No Data in Web Interface**
+1. **Initialize Database**: `python scripts/utilities/database_initializer.py`
+2. **Collect Data**: Run data collection scripts
+3. **Load Data**: Use "Load Database Data" button in web interface
+
+#### **Charts Not Displaying**
+- **JavaScript Issues**: Check browser console for errors
+- **Data Loading**: Ensure data is loaded before running comparisons
+- **Browser Compatibility**: Use modern browsers (Chrome, Firefox, Safari)
+
+#### **Search Not Working**
+- **Algorithm Initialization**: Run algorithm comparison first
+- **Data Availability**: Ensure products are loaded in database
+- **Query Format**: Try simple queries like "phone" or "laptop"
+
 ### Getting Help
 
-- Check the logs in `logs/` directory
-- Check code quality: `flake8 src/`
+- **Check Logs**: Look for error messages in terminal output
+- **Browser Console**: Check for JavaScript errors (F12 → Console)
+- **Code Quality**: `flake8 src/` to check for syntax issues
+- **Database Status**: Verify database exists and contains data
 
 ## 📈 Research Applications
 
