@@ -72,19 +72,38 @@ class UltraSimpleComparison:
                     search_time = time.time() - algo_start
 
                     # Simple metrics calculation
-                    relevant_items = self.relevance_judge.get_relevant_items(query)
-                    # Use actual product IDs from search results
+                    # Use very low threshold (0.05) to match the synthetic judgment creation threshold
+                    relevant_items = self.relevance_judge.get_relevant_items(query, threshold=0.05)
+                    # Use actual product IDs from search results - must match judgment IDs exactly
+                    # The judgments use: product.get('id', product.get('item_id')) or index
                     retrieved_items = []
                     for result in search_results:
-                        # Try to get the product ID from the result
-                        product_id = result.get('id')
-                        if product_id is None:
-                            # If no ID, try to find the product in the original list
-                            for i, product in enumerate(products):
-                                if (product.get('title') == result.get('title') and
-                                    product.get('description') == result.get('description')):
+                        product_id = None
+                        
+                        # First, try to find the product in the original list to get its ID
+                        # This ensures we use the same ID format as the judgments
+                        for i, product in enumerate(products):
+                            # Match by comparing the product objects or key fields
+                            # Check if this is the same product
+                            is_match = False
+                            
+                            # Try matching by ID first (most reliable)
+                            if (product.get('id') is not None and 
+                                result.get('id') is not None and
+                                product.get('id') == result.get('id')):
+                                is_match = True
+                            # Try matching by title and description (fallback)
+                            elif (product.get('title') == result.get('title') and
+                                  product.get('description') == result.get('description')):
+                                is_match = True
+                            
+                            if is_match:
+                                # Use the same ID logic as judgments: id -> item_id -> index
+                                product_id = product.get('id', product.get('item_id'))
+                                if product_id is None:
                                     product_id = i
-                                    break
+                                break
+                        
                         if product_id is not None:
                             retrieved_items.append(product_id)
                     

@@ -18,74 +18,101 @@ def index():
     return render_template('index.html')
 
 
+def _convert_api_product(product):
+    """Convert API Product model to dict."""
+    return {
+        'id': product.external_id,
+        'title': product.title,
+        'description': product.description or '',
+        'category': product.category,
+        'price': {
+            'value': str(product.price_value),
+            'currency': product.price_currency
+        },
+        'brand': product.brand or '',
+        'condition': product.condition,
+        'source': product.source
+    }
+
+
+def _convert_social_product(product):
+    """Convert SocialMediaProduct model to dict."""
+    return {
+        'id': product.post_id,
+        'title': product.title,
+        'description': product.content or '',
+        'category': product.category or '',
+        'price': {
+            'value': str(product.price_mentioned or 0),
+            'currency': 'USD'
+        },
+        'brand': product.brand or '',
+        'platform': product.platform,
+        'subreddit': product.subreddit,
+        'upvotes': product.upvotes,
+        'comments_count': product.comments_count,
+        'post_date': product.post_date.isoformat() if product.post_date else None
+    }
+
+
 @api_bp.route('/load_data', methods=['POST'])
 def load_data():
     """Load data from database."""
     try:
         data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'No data provided'})
+            
         limit = data.get('limit', 1000)
         dataset = data.get('dataset', 'api')  # Default to API dataset
 
+        # Build products list inside the with block to ensure proper scoping
+        result_products = []
+        
         with current_app.db_manager.get_session() as session:
             if dataset == 'api':
+                # Verify we're querying the correct table (api_products)
+                # Product model maps to 'api_products' table
                 if limit:
                     db_products = session.query(Product).limit(limit).all()
                 else:
                     db_products = session.query(Product).all()
 
-                products = []
-                for product in db_products:
-                    products.append({
-                        'id': product.external_id,
-                        'title': product.title,
-                        'description': product.description or '',
-                        'category': product.category,
-                        'price': {
-                            'value': str(product.price_value),
-                            'currency': product.price_currency
-                        },
-                        'brand': product.brand or '',
-                        'condition': product.condition,
-                        'source': product.source
-                    })
-            else:  # social media dataset
+                result_products = [_convert_api_product(p) for p in db_products]
+                
+            elif dataset == 'social':  # social media dataset
+                # Verify we're querying the correct table (social_media_products)
+                # SocialMediaProduct model maps to 'social_media_products' table
                 if limit:
                     db_products = session.query(SocialMediaProduct).limit(limit).all()
                 else:
                     db_products = session.query(SocialMediaProduct).all()
 
-                products = []
-                for product in db_products:
-                    products.append({
-                        'id': product.post_id,
-                        'title': product.title,
-                        'description': product.content or '',
-                        'category': product.category or '',
-                        'price': {
-                            'value': str(product.price_mentioned or 0),
-                            'currency': 'USD'
-                        },
-                        'brand': product.brand or '',
-                        'platform': product.platform,
-                        'subreddit': product.subreddit,
-                        'upvotes': product.upvotes,
-                        'comments_count': product.comments_count,
-                        'post_date': product.post_date.isoformat() if product.post_date else None
-                    })
+                result_products = [_convert_social_product(p) for p in db_products]
+                
+            else:
+                return jsonify({'success': False, 'error': f'Invalid dataset: {dataset}. Use "api" or "social".'})
 
-        current_app.products = products
+        # Only set products if we successfully loaded them
+        current_app.products = result_products
         current_app.current_dataset = dataset
         db_info = current_app.db_manager.get_database_info()
 
         return jsonify({
             'success': True,
-            'count': len(products),
+            'count': len(result_products),
             'dataset': dataset,
             'db_info': db_info
         })
 
-    except (ValueError, KeyError, AttributeError) as e:
-        return jsonify({'success': False, 'error': str(e)})
+    except Exception as e:
+        import traceback
+        error_details = traceback.format_exc()
+        return jsonify({
+            'success': False, 
+            'error': f'Error loading data: {str(e)}',
+            'details': error_details
+        })
 
 
 @api_bp.route('/run_comparison', methods=['POST'])

@@ -303,15 +303,24 @@ class MultiAppRedditScraper(BaseScraper, RedditScraperMixin):
                         if len(posts) >= max_posts:
                             break
                             
-                except (AttributeError, KeyError) as e:
-                    logger.warning("Error with %s endpoint for r/%s: %s", endpoint_name, subreddit_name, str(e))
+                except Exception as e:
+                    error_msg = str(e)
+                    if '403' in error_msg or 'Forbidden' in error_msg:
+                        logger.warning("Rate limit hit on %s endpoint for r/%s. Waiting 30 seconds...", endpoint_name, subreddit_name)
+                        time.sleep(30)  # Wait longer on rate limit
+                        continue
+                    logger.warning("Error with %s endpoint for r/%s: %s", endpoint_name, subreddit_name, error_msg)
                     continue
                 
                 if len(posts) >= max_posts:
                     break
                     
-        except (AttributeError, KeyError) as e:
-            logger.error("Error scraping r/%s: %s", subreddit_name, str(e))
+        except Exception as e:
+            error_msg = str(e)
+            if '403' in error_msg or 'Forbidden' in error_msg:
+                logger.warning("Rate limit hit on r/%s. Waiting 60 seconds...", subreddit_name)
+                time.sleep(60)  # Wait longer on rate limit
+            logger.error("Error scraping r/%s: %s", subreddit_name, error_msg)
         
         return posts
     
@@ -408,8 +417,8 @@ class RealSocialMediaScraper(BaseScraper):
         logger.info("Saving %d %s posts to database...", len(posts), platform)
 
         try:
-            saved_count = self.db_operations.save_social_media_posts(posts, platform)
-            logger.info("Successfully saved %d/%d %s posts", saved_count, len(posts), platform)
+            saved_count, skipped_count = self.db_operations.save_social_media_posts(posts, platform)
+            logger.info("Successfully saved %d/%d %s posts (skipped %d duplicates)", saved_count, len(posts), platform, skipped_count)
 
         except (ValueError, KeyError) as e:
             logger.error("Error saving %s posts: %s", platform, str(e))
@@ -453,13 +462,33 @@ def main():
     print(f"Found credentials for: {len(reddit_credentials)} Reddit apps")
     print()
     
-    # Configuration - Reddit only with available apps for 50,000 posts
+    # Check current database count and calculate how many more posts are needed
+    from ecommerce_search.utils.database_operations import DatabaseOperations
+    db_ops = DatabaseOperations()
+    current_count = db_ops.get_posts_count()
+    target_total = 40000  # Target 40,000+ posts total
+    posts_needed = max(0, target_total - current_count)
+    
+    print(f"Current posts in database: {current_count:,}")
+    print(f"Target total: {target_total:,}")
+    print(f"Posts needed: {posts_needed:,}")
+    print()
+    
+    if posts_needed == 0:
+        print("Database already has 40,000+ posts!")
+        return
+    
+    # Add buffer to account for duplicates that will be skipped
+    # We'll try to collect 20% more than needed to account for duplicates
+    posts_to_collect = int(posts_needed * 1.2)
+    
+    # Configuration - Reddit only with available apps
     num_apps = len(reddit_credentials)
     config = ScrapingConfig(
         max_posts_per_platform={
-            'reddit': 50000
+            'reddit': posts_to_collect
         },
-        delay_range=(0.5, 1.5),  # Balanced delays
+        delay_range=(0.8, 2.0),  # Faster but still safe delays
         max_workers=num_apps,    # One per Reddit app
         batch_size=50,          # Larger batches
         num_reddit_apps=num_apps # Number of Reddit apps available
@@ -478,7 +507,19 @@ def main():
             print(f"{platform.title()}: {count} posts")
         
         total = sum(results.values())
-        print(f"\nTotal posts collected: {total}")
+        print(f"\nNew posts collected in this run: {total}")
+        
+        # Check final count
+        from ecommerce_search.utils.database_operations import DatabaseOperations
+        db_ops = DatabaseOperations()
+        final_count = db_ops.get_posts_count()
+        target_total = 40000
+        print(f"Total posts in database now: {final_count:,}")
+        if final_count >= target_total:
+            print(f"✓ Successfully reached target of {target_total:,}+ posts!")
+        else:
+            remaining = target_total - final_count
+            print(f"⚠ Still need {remaining:,} more posts to reach {target_total:,}")
         
         # Save summary
         summary = {

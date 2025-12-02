@@ -95,4 +95,15 @@ htmlcov/
 # Documentation builds
 docs/_build/
 site/
-comp5112_group7_tech_report.docx
+comp5112_group7_tech_report
+
+# Submission archives (generated files)
+comp5112_group7_source_code.zip
+dataset_export.zip
+dataset_export.tar.gz
+*.zip
+*.tar.gz
+*.tar
+
+# Dataset export directory (large data files for submission)
+dataset_export/

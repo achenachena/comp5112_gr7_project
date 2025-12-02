@@ -1,4 +1,4 @@
-# E-commerce Search Algorithm Comparison Project
+# Comparative Study of Search Algorithms in E-commerce
 
 A comprehensive framework for comparing search algorithms (Keyword Matching vs
 TF-IDF) using real e-commerce and social media data.

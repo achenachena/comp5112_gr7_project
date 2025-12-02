@@ -5,6 +5,7 @@ This module provides reusable database operations
 to reduce code duplication across different modules.
 """
 
+import json
 import logging
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime, timedelta
@@ -58,7 +59,6 @@ class DatabaseOperations:
                             post_id=post_data['post_id'],
                             platform=post_data['platform'],
                             subreddit=post_data.get('subreddit'),
-                            hashtag=post_data.get('hashtag'),
                             title=post_data['title'],
                             content=post_data['content'],
                             author=post_data['author'],
@@ -75,7 +75,7 @@ class DatabaseOperations:
                             sentiment_score=post_data.get('sentiment_score', 0.0),
                             is_review=post_data.get('is_review', False),
                             is_recommendation=post_data.get('is_recommendation', False),
-                            tags=post_data.get('tags')
+                            tags=json.dumps(post_data.get('tags')) if isinstance(post_data.get('tags'), list) else (post_data.get('tags') if post_data.get('tags') else None)
                         )
 
                         session.add(product)
